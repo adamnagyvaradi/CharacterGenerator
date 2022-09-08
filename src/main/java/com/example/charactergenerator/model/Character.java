@@ -169,6 +169,7 @@ public class Character {
                     new Skill("Stealth", "Dexterity"),
                     new Skill("Survival", "Wisdom")
             ));
+
         }
 
     public List<Skill> getSkills() {
