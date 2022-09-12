@@ -8,9 +8,15 @@ import java.util.List;
 @Service
 public class CharacterService {
 
- private CharacterRepository characterRepository;
+    private CharacterRepository characterRepository;
+
 
     public CharacterService(CharacterRepository characterRepository) {this.characterRepository= characterRepository;}
+
+    public Character getCharacter(){
+        return new Character("Nori", (byte) 2, (byte) 10, (byte) 10, (byte) 10, (byte) 10, (byte) 10,(byte) 10);
+    }
+
 
     public Character findByName(String charactername) {return characterRepository.findCharactersByName(charactername).orElseThrow();}
 
