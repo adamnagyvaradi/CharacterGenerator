@@ -14,22 +14,22 @@ public class Character {
 
     private String name;
 
-    private short hitPoints; // hit dice
+    private int hitPoints; // hit dice
 
-    private byte proficiencyBonus;
+    private int proficiencyBonus;
 
-    private byte strength;
+    private int strength;
 
-    private byte dexterity;
+    private int dexterity;
 
-    private byte constitution;
+    private int constitution;
 
 
-    private byte intelligence;
+    private int intelligence;
 
-    private byte wisdom;
+    private int wisdom;
 
-    private byte charisma;
+    private int charisma;
 
     @Transient
     private List<Skill> skills;
@@ -84,7 +84,7 @@ public class Character {
         this.name = name;
     }
 
-    public short getHitPoints() {
+    public int getHitPoints() {
         return hitPoints;
     }
 
@@ -92,7 +92,7 @@ public class Character {
         this.hitPoints = hitPoints;
     }
 
-    public byte getProficiencyBonus() {
+    public int getProficiencyBonus() {
         return proficiencyBonus;
     }
 
@@ -100,7 +100,7 @@ public class Character {
         this.proficiencyBonus = proficiencyBonus;
     }
 
-    public byte getStrength() {
+    public int getStrength() {
         return strength;
     }
 
@@ -108,7 +108,7 @@ public class Character {
         this.strength = strength;
     }
 
-    public byte getDexterity() {
+    public int getDexterity() {
         return dexterity;
     }
 
@@ -116,7 +116,7 @@ public class Character {
         this.dexterity = dexterity;
     }
 
-    public byte getConstitution() {
+    public int getConstitution() {
         return constitution;
     }
 
@@ -124,7 +124,7 @@ public class Character {
         this.constitution = constitution;
     }
 
-    public byte getIntelligence() {
+    public int getIntelligence() {
         return intelligence;
     }
 
@@ -132,7 +132,7 @@ public class Character {
         this.intelligence = intelligence;
     }
 
-    public byte getWisdom() {
+    public int getWisdom() {
         return wisdom;
     }
 
@@ -140,7 +140,7 @@ public class Character {
         this.wisdom = wisdom;
     }
 
-    public byte getCharisma() {
+    public int getCharisma() {
         return charisma;
     }
 
