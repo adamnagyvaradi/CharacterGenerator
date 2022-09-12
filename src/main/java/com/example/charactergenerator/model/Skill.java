@@ -9,7 +9,9 @@ public class Skill {
 
     private String modifier; // (Str, Dex...)
 
+    private int bonus;
     public Skill() {
+
     }
 
     public Skill(String name, String modifier) {
@@ -31,5 +33,13 @@ public class Skill {
 
     public String getModifier() {
         return modifier;
+    }
+
+    public void setBonus(int attribute){
+        this.bonus = ((attribute - 10) / 2);
+    }
+
+    public int getBonus() {
+        return bonus;
     }
 }

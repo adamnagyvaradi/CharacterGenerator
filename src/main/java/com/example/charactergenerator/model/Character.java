@@ -1,6 +1,8 @@
 package com.example.charactergenerator.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -29,8 +31,8 @@ public class Character {
 
     private byte charisma;
 
-    /*@Transient
-    private List<Skill> skills;*/
+    @Transient
+    private List<Skill> skills;
 
     /* private byte speed;
 
@@ -56,6 +58,9 @@ public class Character {
         this.intelligence = intelligence;
         this.wisdom = wisdom;
         this.charisma = charisma;
+        generateSkills();
+        setSkills();
+
     }
 
     public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
@@ -143,7 +148,43 @@ public class Character {
         this.charisma = charisma;
     }
 
-    /*public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }*/
+    private void generateSkills(){
+        this.skills = new ArrayList<>(Arrays.asList(
+                    new Skill("Acrobatics", "Dexterity"),
+                    new Skill("Animal Handling", "Wisdom"),
+                    new Skill("Arcana", "Intelligence"),
+                    new Skill("Athletics", "Strength"),
+                    new Skill("Deception", "Charisma"),
+                    new Skill("History", "Intelligence"),
+                    new Skill("Insight", "Wisdom"),
+                    new Skill("Intimidation", "Charisma"),
+                    new Skill("Investigation", "Intelligence"),
+                    new Skill("Medicine", "Wisdom"),
+                    new Skill("Nature", "Intelligence"),
+                    new Skill("Perception", "Wisdom"),
+                    new Skill("Performance", "Charisma"),
+                    new Skill("Persuasion", "Charisma"),
+                    new Skill("Religion", "Intelligence"),
+                    new Skill("Sleight of Hand", "Dexterity"),
+                    new Skill("Stealth", "Dexterity"),
+                    new Skill("Survival", "Wisdom")
+            ));
+        }
+
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
+    private void setSkills() {
+        for (Skill skill: skills) {
+            switch (skill.getModifier()) {
+                case "Dexterity" -> skill.setBonus(dexterity);
+                case "Wisdom" -> skill.setBonus(wisdom);
+                case "Intelligence" -> skill.setBonus(intelligence);
+                case "Charisma" -> skill.setBonus(charisma);
+                case "Constitution" -> skill.setBonus(constitution);
+                case "Strength" -> skill.setBonus(strength);
+            }
+        }
+    }
 }
