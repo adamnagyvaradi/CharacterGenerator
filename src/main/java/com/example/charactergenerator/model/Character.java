@@ -5,45 +5,39 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity(name = "Characters")
+@Entity(name = "characters")
 public class Character {
-
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private int hitPoints; // hit dice
+    private short hitPoints; // hit dice
 
-    private int proficiencyBonus;
+    private byte proficiencyBonus;
 
-    private int strength;
+    private byte strength;
 
-    private int dexterity;
+    private byte dexterity;
 
-    private int constitution;
+    private byte constitution;
 
 
-    private int intelligence;
+    private byte intelligence;
 
-    private int wisdom;
+    private byte wisdom;
 
-    private int charisma;
+    private byte charisma;
 
     @Transient
     private List<Skill> skills;
 
     /* private byte speed;
-
     private byte armor;
-
     private String characterClass; // List<String> features
-
     private String race;
-
     private String background;
-
     private List<String> equipment;*/
 
     public Character() {
@@ -84,7 +78,7 @@ public class Character {
         this.name = name;
     }
 
-    public int getHitPoints() {
+    public short getHitPoints() {
         return hitPoints;
     }
 
@@ -92,7 +86,7 @@ public class Character {
         this.hitPoints = hitPoints;
     }
 
-    public int getProficiencyBonus() {
+    public byte getProficiencyBonus() {
         return proficiencyBonus;
     }
 
@@ -100,7 +94,7 @@ public class Character {
         this.proficiencyBonus = proficiencyBonus;
     }
 
-    public int getStrength() {
+    public byte getStrength() {
         return strength;
     }
 
@@ -108,7 +102,7 @@ public class Character {
         this.strength = strength;
     }
 
-    public int getDexterity() {
+    public byte getDexterity() {
         return dexterity;
     }
 
@@ -116,7 +110,7 @@ public class Character {
         this.dexterity = dexterity;
     }
 
-    public int getConstitution() {
+    public byte getConstitution() {
         return constitution;
     }
 
@@ -124,7 +118,7 @@ public class Character {
         this.constitution = constitution;
     }
 
-    public int getIntelligence() {
+    public byte getIntelligence() {
         return intelligence;
     }
 
@@ -132,7 +126,7 @@ public class Character {
         this.intelligence = intelligence;
     }
 
-    public int getWisdom() {
+    public byte getWisdom() {
         return wisdom;
     }
 
@@ -140,7 +134,7 @@ public class Character {
         this.wisdom = wisdom;
     }
 
-    public int getCharisma() {
+    public byte getCharisma() {
         return charisma;
     }
 
@@ -150,27 +144,27 @@ public class Character {
 
     private void generateSkills(){
         this.skills = new ArrayList<>(Arrays.asList(
-                    new Skill("Acrobatics", "Dexterity"),
-                    new Skill("Animal Handling", "Wisdom"),
-                    new Skill("Arcana", "Intelligence"),
-                    new Skill("Athletics", "Strength"),
-                    new Skill("Deception", "Charisma"),
-                    new Skill("History", "Intelligence"),
-                    new Skill("Insight", "Wisdom"),
-                    new Skill("Intimidation", "Charisma"),
-                    new Skill("Investigation", "Intelligence"),
-                    new Skill("Medicine", "Wisdom"),
-                    new Skill("Nature", "Intelligence"),
-                    new Skill("Perception", "Wisdom"),
-                    new Skill("Performance", "Charisma"),
-                    new Skill("Persuasion", "Charisma"),
-                    new Skill("Religion", "Intelligence"),
-                    new Skill("Sleight of Hand", "Dexterity"),
-                    new Skill("Stealth", "Dexterity"),
-                    new Skill("Survival", "Wisdom")
-            ));
+                new Skill("Acrobatics", "Dexterity"),
+                new Skill("Animal Handling", "Wisdom"),
+                new Skill("Arcana", "Intelligence"),
+                new Skill("Athletics", "Strength"),
+                new Skill("Deception", "Charisma"),
+                new Skill("History", "Intelligence"),
+                new Skill("Insight", "Wisdom"),
+                new Skill("Intimidation", "Charisma"),
+                new Skill("Investigation", "Intelligence"),
+                new Skill("Medicine", "Wisdom"),
+                new Skill("Nature", "Intelligence"),
+                new Skill("Perception", "Wisdom"),
+                new Skill("Performance", "Charisma"),
+                new Skill("Persuasion", "Charisma"),
+                new Skill("Religion", "Intelligence"),
+                new Skill("Sleight of Hand", "Dexterity"),
+                new Skill("Stealth", "Dexterity"),
+                new Skill("Survival", "Wisdom")
+        ));
 
-        }
+    }
 
     public List<Skill> getSkills() {
         return skills;

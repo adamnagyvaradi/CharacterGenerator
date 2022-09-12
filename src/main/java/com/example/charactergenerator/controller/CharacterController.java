@@ -23,7 +23,7 @@ public class CharacterController {
 
         Character attributes = characterService.getCharacter();
 
-        model.addAttribute("attributes", attributes);
+        model.addAttribute("character", attributes);
 
         return "character";
     }

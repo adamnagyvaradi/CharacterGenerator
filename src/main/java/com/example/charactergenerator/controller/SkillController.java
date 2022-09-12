@@ -11,7 +11,7 @@ import java.util.List;
 @Controller
 public class SkillController {
 
-    /*@GetMapping(value = {"/sheet"})
+    @GetMapping(value = {"/skill"})
     public String getSkills(Model model) {
         // Service osztály kell hozzá
         List<Skill> skills = new ArrayList<>();
@@ -21,5 +21,5 @@ public class SkillController {
         model.addAttribute("attributes", skills);
 
         return "skill";
-    }*/
+    }
 }
