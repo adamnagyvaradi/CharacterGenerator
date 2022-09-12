@@ -13,7 +13,7 @@ public class CharacterController {
 
     @GetMapping(value = {"/sheet"})
     public String getAttributes(Model model){
-        // Service osztály kell hozzá
+
         List<Character> attributes = new ArrayList<>();
 
         Character character = new Character();
