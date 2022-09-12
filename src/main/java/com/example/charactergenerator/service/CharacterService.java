@@ -14,7 +14,7 @@ public class CharacterService {
     public CharacterService(CharacterRepository characterRepository) {this.characterRepository= characterRepository;}
 
     public Character getCharacter(){
-        return new Character("Nori", (byte) 2, (byte) 10, (byte) 10, (byte) 10, (byte) 10, (byte) 10,(byte) 10);
+        return new Character("Aboleth",(byte)2,(byte)21,(byte)9,(byte)15,(byte)18,(byte)15,(byte)18);
     }
 
 

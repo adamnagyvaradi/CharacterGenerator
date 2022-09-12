@@ -42,7 +42,7 @@
     <div class="container px-4 px-lg-5 mt-4">
         <div class="card">
             <div class="card-header">
-                <h1>Aboleth</h1>
+                <h1 th:text="${character.name}">Aboleth</h1>
             </div>
             <div class="card-body">
                 <div class="row text-center">
@@ -67,39 +67,58 @@
                     <div class="col-1">
                         <div class="card">
                             STR<br>
-                            21
+                            <span th:text="${character.strength}">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             DEX<br>
-                            9
+                            <span th:text="${character.dexterity}">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             CON<br>
-                            9
+                            <span th:text="${character.constitution}">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             INT<br>
-                            9
+                            <span th:text="${character.intelligence}">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             WIS<br>
-                            9
+                            <span th:text="${character.wisdom}">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             CHA<br>
-                            9
+                            <span th:text="${character.charisma}">21</span>
                         </div>
                     </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Modifier</th>
+                                <th>Bonus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="skill: ${character.skills}">
+                                <td th:text="${skill.name}"></td>
+                                <td th:text="${skill.modifier}"></td>
+                                <td th:text="${skill.bonus}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
