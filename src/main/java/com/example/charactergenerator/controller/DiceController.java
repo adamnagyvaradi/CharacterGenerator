@@ -50,7 +50,7 @@ public class DiceController {
         return "roller";
     }
 
-     /*@PostMapping(value = {"/roller"})
+     @PostMapping(value = {"/roller"})
      public String rolled(Model model, Roll roll) {
 
         List<Integer> rolled = diceService.rollDice(roll.getSides(),roll.getTimes());
@@ -58,8 +58,8 @@ public class DiceController {
         model.addAttribute("rolled", rolled);
 
          return "result";
-     }*/
-    @PostMapping(value = {"/roller"})
+     }
+    /*@PostMapping(value = {"/roller"})
     public String rollerCosted(@RequestParam int sides, @RequestParam int times, Model model){
         List<Integer> rolled = diceService.rollDice(sides, times);
 
@@ -68,7 +68,7 @@ public class DiceController {
         model.addAttribute("rolled", rolled);
 
         return "result";
-    }
+    }*/
 
 
 
