@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Entity
+@Entity(name = "characters")
 public class Character {
-
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,15 +34,10 @@ public class Character {
     private List<Skill> skills;
 
     /* private byte speed;
-
     private byte armor;
-
     private String characterClass; // List<String> features
-
     private String race;
-
     private String background;
-
     private List<String> equipment;*/
 
     public Character() {
@@ -150,27 +144,27 @@ public class Character {
 
     private void generateSkills(){
         this.skills = new ArrayList<>(Arrays.asList(
-                    new Skill("Acrobatics", "Dexterity"),
-                    new Skill("Animal Handling", "Wisdom"),
-                    new Skill("Arcana", "Intelligence"),
-                    new Skill("Athletics", "Strength"),
-                    new Skill("Deception", "Charisma"),
-                    new Skill("History", "Intelligence"),
-                    new Skill("Insight", "Wisdom"),
-                    new Skill("Intimidation", "Charisma"),
-                    new Skill("Investigation", "Intelligence"),
-                    new Skill("Medicine", "Wisdom"),
-                    new Skill("Nature", "Intelligence"),
-                    new Skill("Perception", "Wisdom"),
-                    new Skill("Performance", "Charisma"),
-                    new Skill("Persuasion", "Charisma"),
-                    new Skill("Religion", "Intelligence"),
-                    new Skill("Sleight of Hand", "Dexterity"),
-                    new Skill("Stealth", "Dexterity"),
-                    new Skill("Survival", "Wisdom")
-            ));
+                new Skill("Acrobatics", "Dexterity"),
+                new Skill("Animal Handling", "Wisdom"),
+                new Skill("Arcana", "Intelligence"),
+                new Skill("Athletics", "Strength"),
+                new Skill("Deception", "Charisma"),
+                new Skill("History", "Intelligence"),
+                new Skill("Insight", "Wisdom"),
+                new Skill("Intimidation", "Charisma"),
+                new Skill("Investigation", "Intelligence"),
+                new Skill("Medicine", "Wisdom"),
+                new Skill("Nature", "Intelligence"),
+                new Skill("Perception", "Wisdom"),
+                new Skill("Performance", "Charisma"),
+                new Skill("Persuasion", "Charisma"),
+                new Skill("Religion", "Intelligence"),
+                new Skill("Sleight of Hand", "Dexterity"),
+                new Skill("Stealth", "Dexterity"),
+                new Skill("Survival", "Wisdom")
+        ));
 
-        }
+    }
 
     public List<Skill> getSkills() {
         return skills;
