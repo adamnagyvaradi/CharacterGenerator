@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 public class DiceController {
 
-    private DiceService diceService;
+    private final DiceService diceService;
 
 
 
@@ -26,7 +26,7 @@ public class DiceController {
 
 
 
-    /*@GetMapping(value = {"/roller"})
+    @GetMapping(value = {"/roller"})
     public String loadDice(Model model){
         Dice d4 = diceService.loadD4();
         Dice d6 = diceService.loadD6();
@@ -48,19 +48,18 @@ public class DiceController {
         model.addAttribute("roll", roll);
 
         return "roller";
-    }*/
+    }
 
-    /* @PostMapping(value = {"/roller"})
+     /*@PostMapping(value = {"/roller"})
      public String rolled(Model model, Roll roll) {
 
-        diceService.adRolle(roll);
         List<Integer> rolled = diceService.rollDice(roll.getSides(),roll.getTimes());
 
         model.addAttribute("rolled", rolled);
 
          return "result";
      }*/
-   /* @PostMapping(value = {"/roller"})
+    @PostMapping(value = {"/roller"})
     public String rollerCosted(@RequestParam int sides, @RequestParam int times, Model model){
         List<Integer> rolled = diceService.rollDice(sides, times);
 
@@ -69,7 +68,7 @@ public class DiceController {
         model.addAttribute("rolled", rolled);
 
         return "result";
-    }*/
+    }
 
 
 
