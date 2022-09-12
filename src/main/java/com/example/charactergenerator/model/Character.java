@@ -22,14 +22,15 @@ public class Character {
 
     private byte constitution;
 
+
     private byte intelligence;
 
     private byte wisdom;
 
     private byte charisma;
 
-    @Transient
-    private List<Skill> skills;
+    /*@Transient
+    private List<Skill> skills;*/
 
     /* private byte speed;
 
@@ -142,7 +143,7 @@ public class Character {
         this.charisma = charisma;
     }
 
-    public void setSkills(List<Skill> skills) {
+    /*public void setSkills(List<Skill> skills) {
         this.skills = skills;
-    }
+    }*/
 }
