@@ -99,8 +99,6 @@ public class Character {
         this.attributes = attributes;
     }
 
-
-
     private void generateSkills(){
         this.skills = new ArrayList<>(Arrays.asList(
                 new Skill("Acrobatics", "Dexterity"),
@@ -122,7 +120,6 @@ public class Character {
                 new Skill("Stealth", "Dexterity"),
                 new Skill("Survival", "Wisdom")
         ));
-
     }
 
     public List<Skill> getSkills() {
@@ -135,7 +132,8 @@ public class Character {
     }
 
     private void setSkills() {
-        for (Skill skill: skills) {
+
+        /*skills.forEach(skill -> {
             switch (skill.getModifier()) {
                 case "Dexterity" -> skill.setBonus(getAttributeBonus("DEX"));
                 case "Wisdom" -> skill.setBonus(getAttributeBonus("WIS"));
@@ -143,6 +141,47 @@ public class Character {
                 case "Charisma" -> skill.setBonus(getAttributeBonus("CHA"));
                 case "Constitution" -> skill.setBonus(getAttributeBonus("CON"));
                 case "Strength" -> skill.setBonus(getAttributeBonus("STR"));
+            }
+        });*/
+
+        for (Skill skill: skills) {
+            switch (skill.getModifier()) {
+                case "Dexterity" -> {
+                    if(skill.isProficiency()){
+                        skill.setBonus(getAttributeBonus("DEX") + proficiencyBonus);
+                    }
+                    skill.setBonus(getAttributeBonus("DEX"));
+                }
+                case "Wisdom" -> {
+                    if(skill.isProficiency()){
+                        skill.setBonus(getAttributeBonus("WIS") + proficiencyBonus);
+                    }
+                    skill.setBonus(getAttributeBonus("WIS"));
+                }
+                case "Intelligence" -> {
+                    if(skill.isProficiency()){
+                        skill.setBonus(getAttributeBonus("INT") + proficiencyBonus);
+                    }
+                    skill.setBonus(getAttributeBonus("INT"));
+                }
+                case "Charisma" -> {
+                    if(skill.isProficiency()){
+                        skill.setBonus(getAttributeBonus("CHA") + proficiencyBonus);
+                    }
+                    skill.setBonus(getAttributeBonus("CHA"));
+                }
+                case "Constitution" -> {
+                    if(skill.isProficiency()){
+                        skill.setBonus(getAttributeBonus("CON") + proficiencyBonus);
+                    }
+                    skill.setBonus(getAttributeBonus("CON"));
+                }
+                case "Strength" -> {
+                    if(skill.isProficiency()){
+                        skill.setBonus(getAttributeBonus("STR") + proficiencyBonus);
+                    }
+                    skill.setBonus(getAttributeBonus("STR"));
+                }
             }
         }
     }
