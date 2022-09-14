@@ -27,6 +27,8 @@ public class CharacterController {
         System.out.println(character.getAttributes());
         System.out.println(character.getSkills());
 
+        character.setSkillProficiency("Survival");
+
         model.addAttribute("character", character);
 
         return "character";

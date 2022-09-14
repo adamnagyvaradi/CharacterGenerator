@@ -7,14 +7,14 @@ public class Skill {
 
     private boolean proficiency;
 
-    private String modifier; // (Str, Dex...)
+    private AttributeType modifier; // (Str, Dex...)
 
     private int bonus;
     public Skill() {
 
     }
 
-    public Skill(String name, String modifier) {
+    public Skill(String name, AttributeType modifier) {
         this.name = name;
         this.modifier = modifier;
     }
@@ -31,7 +31,7 @@ public class Skill {
         this.proficiency = proficiency;
     }
 
-    public String getModifier() {
+    public AttributeType getModifier() {
         return modifier;
     }
 
