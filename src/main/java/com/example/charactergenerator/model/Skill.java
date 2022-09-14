@@ -35,8 +35,8 @@ public class Skill {
         return modifier;
     }
 
-    public void setBonus(int attribute){
-        this.bonus = ((attribute - 10) / 2);
+    public void setBonus(int bonus){
+        this.bonus = bonus;
     }
 
     public int getBonus() {

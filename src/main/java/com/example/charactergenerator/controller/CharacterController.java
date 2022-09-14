@@ -5,6 +5,7 @@ import com.example.charactergenerator.service.CharacterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,20 @@ public class CharacterController {
     @GetMapping(value = {"/sheet"})
     public String getAttributes(Model model){
 
-        Character attributes = characterService.getCharacter();
+        Character character = characterService.findById(1);
 
-        model.addAttribute("character", attributes);
+        System.out.println(character.getAttributes());
+        System.out.println(character.getSkills());
+
+        model.addAttribute("character", character);
+
+        return "character";
+    }
+
+    @GetMapping(value = {"/character/{id}"})
+    public String showCharacterById(@PathVariable long id, Model model){
+        Character character = characterService.findById(id);
+        model.addAttribute("character",character);
 
         return "character";
     }
