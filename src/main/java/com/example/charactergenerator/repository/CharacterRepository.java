@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface CharacterRepository extends CrudRepository<Character,Long> {
 
     Optional<Character>findCharactersByName(String charactername);
+
+
 }

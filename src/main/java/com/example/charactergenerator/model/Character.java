@@ -1,9 +1,7 @@
 package com.example.charactergenerator.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity(name = "characters")
 public class Character {
@@ -17,18 +15,11 @@ public class Character {
 
     private byte proficiencyBonus;
 
-    private byte strength;
-
-    private byte dexterity;
-
-    private byte constitution;
-
-
-    private byte intelligence;
-
-    private byte wisdom;
-
-    private byte charisma;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "characters_attributes",
+        joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
+    @MapKeyColumn(name = "modifier")
+    Map<AttributeType, Byte> attributes = new EnumMap<>(AttributeType.class);
 
     @Transient
     private List<Skill> skills;
@@ -46,20 +37,26 @@ public class Character {
     public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma) {
         this.name = name;
         this.proficiencyBonus = proficiencyBonus;
-        this.strength = strength;
-        this.dexterity = dexterity;
-        this.constitution = constitution;
-        this.intelligence = intelligence;
-        this.wisdom = wisdom;
-        this.charisma = charisma;
-        generateSkills();
-        setSkills();
-
+        attributes.put(AttributeType.STR, strength);
+        attributes.put(AttributeType.DEX, dexterity);
+        attributes.put(AttributeType.CON, constitution);
+        attributes.put(AttributeType.INT, intelligence);
+        attributes.put(AttributeType.WIS, wisdom);
+        attributes.put(AttributeType.CHA, charisma);
     }
 
     public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
         this(name, proficiencyBonus, strength, dexterity, constitution, intelligence, wisdom, charisma);
         this.hitPoints = hp;
+    }
+
+    public byte getAttributeBonus(String attributeName){
+        byte attributeValue = getAttributeValue(attributeName);
+        return AttributeType.valueOf(attributeName).getBonus(attributeValue);
+    }
+
+    public byte getAttributeValue(String attributeName){
+        return attributes.get(AttributeType.valueOf(attributeName));
     }
 
     public Long getId() {
@@ -94,53 +91,15 @@ public class Character {
         this.proficiencyBonus = proficiencyBonus;
     }
 
-    public byte getStrength() {
-        return strength;
+    public Map<AttributeType, Byte> getAttributes(){
+        return attributes;
     }
 
-    public void setStrength(byte strength) {
-        this.strength = strength;
+    public void setAttributes(Map<AttributeType, Byte> attributes){
+        this.attributes = attributes;
     }
 
-    public byte getDexterity() {
-        return dexterity;
-    }
 
-    public void setDexterity(byte dexterity) {
-        this.dexterity = dexterity;
-    }
-
-    public byte getConstitution() {
-        return constitution;
-    }
-
-    public void setConstitution(byte constitution) {
-        this.constitution = constitution;
-    }
-
-    public byte getIntelligence() {
-        return intelligence;
-    }
-
-    public void setIntelligence(byte intelligence) {
-        this.intelligence = intelligence;
-    }
-
-    public byte getWisdom() {
-        return wisdom;
-    }
-
-    public void setWisdom(byte wisdom) {
-        this.wisdom = wisdom;
-    }
-
-    public byte getCharisma() {
-        return charisma;
-    }
-
-    public void setCharisma(byte charisma) {
-        this.charisma = charisma;
-    }
 
     private void generateSkills(){
         this.skills = new ArrayList<>(Arrays.asList(
@@ -167,18 +126,23 @@ public class Character {
     }
 
     public List<Skill> getSkills() {
+        if (skills == null){
+            generateSkills();
+            setSkills();
+        }
+
         return skills;
     }
 
     private void setSkills() {
         for (Skill skill: skills) {
             switch (skill.getModifier()) {
-                case "Dexterity" -> skill.setBonus(dexterity);
-                case "Wisdom" -> skill.setBonus(wisdom);
-                case "Intelligence" -> skill.setBonus(intelligence);
-                case "Charisma" -> skill.setBonus(charisma);
-                case "Constitution" -> skill.setBonus(constitution);
-                case "Strength" -> skill.setBonus(strength);
+                case "Dexterity" -> skill.setBonus(getAttributeBonus("DEX"));
+                case "Wisdom" -> skill.setBonus(getAttributeBonus("WIS"));
+                case "Intelligence" -> skill.setBonus(getAttributeBonus("INT"));
+                case "Charisma" -> skill.setBonus(getAttributeBonus("CHA"));
+                case "Constitution" -> skill.setBonus(getAttributeBonus("CON"));
+                case "Strength" -> skill.setBonus(getAttributeBonus("STR"));
             }
         }
     }

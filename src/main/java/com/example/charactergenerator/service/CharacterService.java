@@ -10,18 +10,20 @@ public class CharacterService {
 
     private CharacterRepository characterRepository;
 
-
-    public CharacterService(CharacterRepository characterRepository) {this.characterRepository= characterRepository;}
-
-    public Character getCharacter(){
-        return new Character("Aboleth",(byte)2,(byte)21,(byte)9,(byte)15,(byte)18,(byte)15,(byte)18);
+    public CharacterService(CharacterRepository characterRepository) {
+        this.characterRepository= characterRepository;
     }
 
+    public Character findByName(String characterName) {
+        return characterRepository.findCharactersByName(characterName).orElseThrow();
+    }
 
-    public Character findByName(String charactername) {return characterRepository.findCharactersByName(charactername).orElseThrow();}
+    public Character findById(long id){
+        return characterRepository.findById(id).orElseThrow();
+    }
 
     public List<Character>getAllCharacter(){return (List<Character>) characterRepository.findAll();}
 
-    public void newCharacter(Character character) {characterRepository.save(character);}
+    public void save(Character character) {characterRepository.save(character);}
 
 }
