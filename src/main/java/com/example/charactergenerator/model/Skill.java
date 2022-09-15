@@ -2,22 +2,20 @@ package com.example.charactergenerator.model;
 
 
 public class Skill {
-    private String name;
+    private SkillType skillType;
     private boolean proficiency;
-    private AttributeType modifier; // (Str, Dex...)
     private Character character;
     public Skill() {
 
     }
 
-    public Skill(String name, AttributeType modifier, Character character) {
-        this.name = name;
-        this.modifier = modifier;
+    public Skill(SkillType skillType, Character character) {
+        this.skillType = skillType;
         this.character = character;
     }
 
     public String getName() {
-        return name;
+        return skillType.getName();
     }
 
     public boolean isProficiency() {
@@ -29,20 +27,10 @@ public class Skill {
     }
 
     public AttributeType getModifier() {
-        return modifier;
+        return skillType.getModifier();
     }
 
     public byte getBonus() {
-        return character.getAttributeBonus(modifier);
+        return character.getAttributeBonus(getModifier());
     }
-
-    /*public List<Skill> getSkills() {
-        if (skills == null){
-            generateSkills();
-            setSkills();
-        }
-
-        return skills;
-    }*/
-
 }

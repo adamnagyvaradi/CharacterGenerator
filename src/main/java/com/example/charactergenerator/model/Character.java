@@ -111,29 +111,8 @@ public class Character {
         this.attributes = attributes;
     }
 
-
-
     private void generateSkills(){
-        this.skills = new ArrayList<>(Arrays.asList(
-                new Skill("Acrobatics", AttributeType.DEX, this),
-                new Skill("Animal Handling", AttributeType.WIS, this),
-                new Skill("Arcana", AttributeType.INT, this),
-                new Skill("Athletics", AttributeType.STR, this),
-                new Skill("Deception", AttributeType.CHA, this),
-                new Skill("History", AttributeType.INT, this),
-                new Skill("Insight", AttributeType.WIS, this),
-                new Skill("Intimidation", AttributeType.CHA, this),
-                new Skill("Investigation", AttributeType.INT, this),
-                new Skill("Medicine", AttributeType.WIS, this),
-                new Skill("Nature", AttributeType.INT, this),
-                new Skill("Perception", AttributeType.WIS, this),
-                new Skill("Performance", AttributeType.CHA,this),
-                new Skill("Persuasion", AttributeType.CHA,this),
-                new Skill("Religion", AttributeType.INT,this),
-                new Skill("Sleight of Hand", AttributeType.DEX,this),
-                new Skill("Stealth", AttributeType.DEX,this),
-                new Skill("Survival", AttributeType.WIS,this)));
-
+        this.skills = SkillType.getSkillList(this);
     }
 
     public List<Skill> getSkills() {
