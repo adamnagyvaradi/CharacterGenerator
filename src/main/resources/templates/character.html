@@ -49,19 +49,25 @@
                     <div class="col-auto">
                         <div class="card">
                             <span>Armor class</span>
-                            <span>17</span>
+                            <span th:text="${character.armorClass}">17</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             <span>HP</span>
-                            <span>17</span>
+                            <span th:text="${character.hitPoints}">17</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             <span>Speed</span>
-                            <span>10 ft.</span>
+                            <span th:text="${character.speed}">10 ft.</span>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="card">
+                            <span>Proficiency</span>
+                            <span th:text="${'+' + character.proficiencyBonus}">2</span>
                         </div>
                     </div>
                     <div class="col-1">
@@ -75,36 +81,41 @@
                     <div class="col-1">
                         <div class="card">
                             DEX<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('DEX') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('DEX')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('DEX')} + ')'">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             CON<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('CON') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('CON')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('CON')} + ')'">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             INT<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('INT') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('INT')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('INT')} + ')'">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             WIS<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('WIS') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('WIS')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('WIS')} + ')'">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             CHA<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('CHA') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('CHA')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('CHA')} + ')'">21</span>
                         </div>
                     </div>
                 </div>
@@ -123,7 +134,9 @@
                             <tr th:each="skill: ${character.skills}">
                                 <td th:text="${skill.name}"></td>
                                 <td th:text="${skill.modifier}"></td>
-                                <td th:text="${skill.getBonus()}"></td>
+                                <td>
+                                    <button class="btn align-self-center btn-outline-dark btn-sm" th:text="${'('+ skill.bonusSign + skill.bonus + ')'}">(0)</button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

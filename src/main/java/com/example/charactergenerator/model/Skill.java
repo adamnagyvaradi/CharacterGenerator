@@ -33,4 +33,8 @@ public class Skill {
     public byte getBonus() {
         return character.getAttributeBonus(getModifier());
     }
+
+    public String getBonusSign(){
+        return getBonus() > 0 ? "+" : "";
+    }
 }
