@@ -1,6 +1,8 @@
 package com.example.charactergenerator.model;
 
 
+import java.util.List;
+
 public class Skill {
 
     private String name;
@@ -10,6 +12,9 @@ public class Skill {
     private AttributeType modifier; // (Str, Dex...)
 
     private int bonus;
+
+    private Character character;
+
     public Skill() {
 
     }
@@ -42,4 +47,14 @@ public class Skill {
     public int getBonus() {
         return bonus;
     }
+
+    /*public List<Skill> getSkills() {
+        if (skills == null){
+            generateSkills();
+            setSkills();
+        }
+
+        return skills;
+    }*/
+
 }
