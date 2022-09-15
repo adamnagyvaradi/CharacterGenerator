@@ -8,34 +8,33 @@ public class Character {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
+    private byte armorClass;
     private short hitPoints; // hit dice
-
+    private byte speed;
     private byte proficiencyBonus;
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_attributes",
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
     @MapKeyColumn(name = "modifier")
     Map<AttributeType, Byte> attributes = new EnumMap<>(AttributeType.class);
-
     @Transient
     private List<Skill> skills;
-
-    /* private byte speed;
-    private byte armor;
+    /*
     private String characterClass; // List<String> features
     private String race;
     private String background;
-    private List<String> equipment;*/
+    private List<String> equipment;
+    */
 
     public Character() {
     }
 
-    public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma) {
+    public Character(String name, byte armorClass, short hitPoints, byte speed, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma) {
         this.name = name;
+        this.armorClass = armorClass;
+        this.hitPoints = hitPoints;
+        this.speed = speed;
         this.proficiencyBonus = proficiencyBonus;
         attributes.put(AttributeType.STR, strength);
         attributes.put(AttributeType.DEX, dexterity);
@@ -45,10 +44,10 @@ public class Character {
         attributes.put(AttributeType.CHA, charisma);
     }
 
-    public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
+    /*public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
         this(name, proficiencyBonus, strength, dexterity, constitution, intelligence, wisdom, charisma);
         this.hitPoints = hp;
-    }
+    }*/
 
     public byte getAttributeBonus(AttributeType attributeType){
         byte attributeValue = getAttributeValue(attributeType);
@@ -87,12 +86,28 @@ public class Character {
         this.name = name;
     }
 
+    public byte getArmorClass() {
+        return armorClass;
+    }
+
+    public void setArmorClass(byte armorClass) {
+        this.armorClass = armorClass;
+    }
+
     public short getHitPoints() {
         return hitPoints;
     }
 
     public void setHitPoints(short hitPoints) {
         this.hitPoints = hitPoints;
+    }
+
+    public byte getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(byte speed) {
+        this.speed = speed;
     }
 
     public byte getProficiencyBonus() {
@@ -122,28 +137,4 @@ public class Character {
 
         return skills;
     }
-
-    /*public void setSkillProficiency(String name){
-        getSkills();
-        for (Skill skill: skills){
-            if (skill.getName().equals(name)){
-                skill.setProficiency(true);
-                AttributeType modifier = skill.getModifier();
-                skill.setBonus(modifier.getBonus(attributes.get(modifier)) + proficiencyBonus);
-            }
-        }
-    }*/
-
-    /*private void setSkills() {
-        for (Skill skill: skills) {
-            switch (skill.getModifier()) {
-                case DEX -> skill.setBonus(getAttributeBonus("DEX"));
-                case WIS -> skill.setBonus(getAttributeBonus("WIS"));
-                case INT -> skill.setBonus(getAttributeBonus("INT"));
-                case CHA -> skill.setBonus(getAttributeBonus("CHA"));
-                case CON -> skill.setBonus(getAttributeBonus("CON"));
-                case STR-> skill.setBonus(getAttributeBonus("STR"));
-            }
-        }
-    }*/
 }
