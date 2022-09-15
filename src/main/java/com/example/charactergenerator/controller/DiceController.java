@@ -26,7 +26,7 @@ public class DiceController {
 
 
 
-    @GetMapping(value = {"/roller"})
+    @GetMapping(value = {"/sheet1"})
     public String loadDice(Model model){
         Dice d4 = diceService.loadD4();
         Dice d6 = diceService.loadD6();
@@ -47,7 +47,7 @@ public class DiceController {
         model.addAttribute("d100", d100);
         model.addAttribute("roll", roll);
 
-        return "roller";
+        return "character";
     }
 
      @PostMapping(value = {"/roller"})
