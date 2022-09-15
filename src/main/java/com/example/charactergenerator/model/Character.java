@@ -139,7 +139,8 @@ public class Character {
             switch (skill.getModifier()) {
                 case "Dexterity" -> skill.setBonus(getAttributeBonus("DEX"));
                 case "Wisdom" -> skill.setBonus(getAttributeBonus("WIS"));
-                case "Intelligence" -> skill.setBonus(getAttributeBonus("INT"));
+                case "Intelligence" -> skill.setBonus(getAttributeBonus(
+                        "INT"));
                 case "Charisma" -> skill.setBonus(getAttributeBonus("CHA"));
                 case "Constitution" -> skill.setBonus(getAttributeBonus("CON"));
                 case "Strength" -> skill.setBonus(getAttributeBonus("STR"));
