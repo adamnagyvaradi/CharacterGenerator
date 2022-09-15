@@ -122,7 +122,7 @@
                             <tr th:each="skill: ${character.skills}">
                                 <td th:text="${skill.name}"></td>
                                 <td th:text="${skill.modifier}"></td>
-                                <td th:text="${skill.bonus}"></td>
+                                <td th:text="${skill.getBonus()}"></td>
                             </tr>
                             </tbody>
                         </table>
