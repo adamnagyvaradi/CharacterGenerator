@@ -29,7 +29,7 @@ public class CharacterService {
     public void save(Character character) {characterRepository.save(character);}
 
     public void update(Character character, CharacterDto characterDto) {
-        character.setName(character.getName());
+        character.setName(characterDto.getName());
         character.setAttributeValue(AttributeType.STR, characterDto.getStrength());
         character.setAttributeValue(AttributeType.DEX, characterDto.getDexterity());
         character.setAttributeValue(AttributeType.CON, characterDto.getConstitution());
