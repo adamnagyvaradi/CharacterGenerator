@@ -1,8 +1,6 @@
 package com.example.charactergenerator.model;
 
 
-import java.util.List;
-
 public class Skill {
     private String name;
     private boolean proficiency;
