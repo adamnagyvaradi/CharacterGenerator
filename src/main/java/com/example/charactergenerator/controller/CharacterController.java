@@ -2,18 +2,18 @@ package com.example.charactergenerator.controller;
 
 import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.service.CharacterService;
+import com.example.charactergenerator.service.Searchservice;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class CharacterController {
 
     private CharacterService characterService;
+    private Searchservice searchservice;
 
 
     public CharacterController(CharacterService characterService){
@@ -33,9 +33,16 @@ public class CharacterController {
     }
 
     @GetMapping(value = {"/character/{id}"})
-    public String showCharacterById(@PathVariable long id, Model model){
+    public String showCharacterById(@PathVariable long id, Model model, String keyword){
         Character character = characterService.findById(id);
         model.addAttribute("character",character);
+
+        if (keyword != null) {
+            model.addAttribute("character", searchservice.findByKeyword(keyword));
+        }
+        else {
+            model.addAttribute("character",characterService.findById(id));
+        }
 
         return "character";
     }

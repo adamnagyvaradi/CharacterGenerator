@@ -24,4 +24,5 @@ public class CharacterHelper implements ApplicationRunner {
         Character otherCharacter = characterService.findByName("Aboleth");
         System.out.println(otherCharacter.getAttributes());
     }
+
 }
