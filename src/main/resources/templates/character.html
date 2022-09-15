@@ -127,11 +127,79 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="col">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editOfCharacter">
+                            Edit
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="editOfCharacter" tabindex="-1" aria-labelledby="editOfCharacterLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form th:action="@{/character/update}" th:object="${characterDto}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editOfCharacterLaber">Edit <span th:text="${character.name}">Character</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="mb-3 row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{name}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="strength" class="col-sm-2 col-form-label">STR</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{strength}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dexterity" class="col-sm-2 col-form-label">DEX</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{dexterity}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="constitution" class="col-sm-2 col-form-label">CON</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{constitution}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="intelligence" class="col-sm-2 col-form-label">INT</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{intelligence}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="wisdom" class="col-sm-2 col-form-label">WIS</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{wisdom}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="charisma" class="col-sm-2 col-form-label">CHA</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{charisma}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
