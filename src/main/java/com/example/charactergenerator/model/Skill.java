@@ -4,24 +4,18 @@ package com.example.charactergenerator.model;
 import java.util.List;
 
 public class Skill {
-
     private String name;
-
     private boolean proficiency;
-
     private AttributeType modifier; // (Str, Dex...)
-
-    private int bonus;
-
     private Character character;
-
     public Skill() {
 
     }
 
-    public Skill(String name, AttributeType modifier) {
+    public Skill(String name, AttributeType modifier, Character character) {
         this.name = name;
         this.modifier = modifier;
+        this.character = character;
     }
 
     public String getName() {
@@ -40,12 +34,8 @@ public class Skill {
         return modifier;
     }
 
-    public void setBonus(int bonus){
-        this.bonus = bonus;
-    }
-
-    public int getBonus() {
-        return bonus;
+    public byte getBonus() {
+        return character.getAttributeBonus(modifier);
     }
 
     /*public List<Skill> getSkills() {

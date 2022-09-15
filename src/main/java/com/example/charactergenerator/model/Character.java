@@ -115,37 +115,36 @@ public class Character {
 
     private void generateSkills(){
         this.skills = new ArrayList<>(Arrays.asList(
-                new Skill("Acrobatics", AttributeType.DEX),
-                new Skill("Animal Handling", AttributeType.WIS),
-                new Skill("Arcana", AttributeType.INT),
-                new Skill("Athletics", AttributeType.STR),
-                new Skill("Deception", AttributeType.CHA),
-                new Skill("History", AttributeType.INT),
-                new Skill("Insight", AttributeType.WIS),
-                new Skill("Intimidation", AttributeType.CHA),
-                new Skill("Investigation", AttributeType.INT),
-                new Skill("Medicine", AttributeType.WIS),
-                new Skill("Nature", AttributeType.INT),
-                new Skill("Perception", AttributeType.WIS),
-                new Skill("Performance", AttributeType.CHA),
-                new Skill("Persuasion", AttributeType.CHA),
-                new Skill("Religion", AttributeType.INT),
-                new Skill("Sleight of Hand", AttributeType.DEX),
-                new Skill("Stealth", AttributeType.DEX),
-                new Skill("Survival", AttributeType.WIS)));
+                new Skill("Acrobatics", AttributeType.DEX, this),
+                new Skill("Animal Handling", AttributeType.WIS, this),
+                new Skill("Arcana", AttributeType.INT, this),
+                new Skill("Athletics", AttributeType.STR, this),
+                new Skill("Deception", AttributeType.CHA, this),
+                new Skill("History", AttributeType.INT, this),
+                new Skill("Insight", AttributeType.WIS, this),
+                new Skill("Intimidation", AttributeType.CHA, this),
+                new Skill("Investigation", AttributeType.INT, this),
+                new Skill("Medicine", AttributeType.WIS, this),
+                new Skill("Nature", AttributeType.INT, this),
+                new Skill("Perception", AttributeType.WIS, this),
+                new Skill("Performance", AttributeType.CHA,this),
+                new Skill("Persuasion", AttributeType.CHA,this),
+                new Skill("Religion", AttributeType.INT,this),
+                new Skill("Sleight of Hand", AttributeType.DEX,this),
+                new Skill("Stealth", AttributeType.DEX,this),
+                new Skill("Survival", AttributeType.WIS,this)));
 
     }
 
     public List<Skill> getSkills() {
         if (skills == null){
             generateSkills();
-            setSkills();
         }
 
         return skills;
     }
 
-    public void setSkillProficiency(String name){
+    /*public void setSkillProficiency(String name){
         getSkills();
         for (Skill skill: skills){
             if (skill.getName().equals(name)){
@@ -154,9 +153,9 @@ public class Character {
                 skill.setBonus(modifier.getBonus(attributes.get(modifier)) + proficiencyBonus);
             }
         }
-    }
+    }*/
 
-    private void setSkills() {
+    /*private void setSkills() {
         for (Skill skill: skills) {
             switch (skill.getModifier()) {
                 case DEX -> skill.setBonus(getAttributeBonus("DEX"));
@@ -167,5 +166,5 @@ public class Character {
                 case STR-> skill.setBonus(getAttributeBonus("STR"));
             }
         }
-    }
+    }*/
 }
