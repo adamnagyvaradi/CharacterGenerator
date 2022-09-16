@@ -133,95 +133,91 @@
     </div>
 </section>
 
-<table>
-    <tr>
-        <th>Dice</th>
-    <tr>
-</table>
+<div class="container px-4 px-lg-5 mt-4">
+    <div class="dice">
+        <div class="dice-header">
+            <h1>Dice</h1>
+        </div>
+    </div>
+    <hr>
 
-<form data-th-action="@{/sheet}" data-th-object="${roll}" method="post">
-    <table>
-        <tr>d
-            <label>
-                <input type="number" data-th-field="*{sides}"/>
-            </label></tr>
-        <tr>Times<label>
-            <input type="number" data-th-field="*{times}"/>
-        </label>
-        </tr>
-        <tr colspan="2"><button type="submit">Roll</button></tr>
-    </table>
-</form>
+    <div class="dice-body">
+        <div class="row text-left">
+            <div class="col">
+                <form data-th-action="@{/sheet?sides={s}(s=${d4.sides})}" method="post">
+                    <table class="table table-striped">
+                        <tr>d<span data-th-text="${d4.sides}"></span></tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=${d6.sides})}" method="post">
+                    <table class="table table-striped">
+                        <tr>d<span data-th-text="${d6.sides}"></span></tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=${d8.sides})}" method="post">
+                    <table class="table table-striped">
+                        <tr>d<span data-th-text="${d8.sides}"></span></tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=${d10.sides})}" method="post">
+                    <table class="table table-striped">
+                        <tr>d<span data-th-text="${d10.sides}"></span></tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=${d12.sides})}" method="post">
+                    <table class="table table-striped">
+                        <tr>d<span data-th-text="${d12.sides}"></span></tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=${d20.sides})}" method="post">
+                    <table class="table table-striped">
+                        <tr>d<span data-th-text="${d20.sides}"></span></tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=${d100.sides})}" method="post" >
+                    <table class="table table-striped">
+                        <tr>d<span data-th-text="${d100.sides}"></span></tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+            </div>
 
-<form data-th-action="@{/sheet?sides={s}(s=${d4.sides})}" method="post">
-    <table>
-        <tr>d<span data-th-text="${d4.sides}"></span></tr>
-        <tr><label>
-            <input type="number" data-th-name="times"/>
-        </label></tr>
-        <tr colspan="2"><button type="submit">Roll</button></tr>
-    </table>
-</form>
+            <div class="col">
+                You rolled
+                <p data-th-text="${rolled}"></p>
+            </div>
 
-<form data-th-action="@{/sheet?sides={s}(s=${d6.sides})}" method="post">
-    <table>
-        <tr>d<span data-th-text="${d6.sides}"></span></tr>
-        <tr><label>
-            <input type="number" data-th-name="times"/>
-        </label></tr>
-        <tr colspan="2"><button type="submit">Roll</button></tr>
-    </table>
-</form>
+        </div>
+    </div>
+</div>
 
-<form data-th-action="@{/sheet?sides={s}(s=${d8.sides})}" method="post">
-    <table>
-        <tr>d<span data-th-text="${d8.sides}"></span></tr>
-        <tr><label>
-            <input type="number" data-th-name="times"/>
-        </label></tr>
-        <tr colspan="2"><button type="submit">Roll</button></tr>
-    </table>
-</form>
-
-<form data-th-action="@{/sheet?sides={s}(s=${d10.sides})}" method="post">
-    <table>
-        <tr>d<span data-th-text="${d10.sides}"></span></tr>
-        <tr><label>
-            <input type="number" data-th-name="times"/>
-        </label></tr>
-        <tr colspan="2"><button type="submit">Roll</button></tr>
-    </table>
-</form>
-
-<form data-th-action="@{/sheet?sides={s}(s=${d12.sides})}" method="post">
-    <table>
-        <tr>d<span data-th-text="${d12.sides}"></span></tr>
-        <tr><label>
-            <input type="number" data-th-name="times"/>
-        </label></tr>
-        <tr colspan="2"><button type="submit">Roll</button></tr>
-    </table>
-</form>
-
-<form data-th-action="@{/sheet?sides={s}(s=${d20.sides})}" method="post">
-    <table>
-        <tr>d<span data-th-text="${d20.sides}"></span></tr>
-        <tr><label>
-            <input type="number" data-th-name="times"/>
-        </label></tr>
-        <tr colspan="2"><button type="submit">Roll</button></tr>
-    </table>
-</form>
-
-<form data-th-action="@{/sheet?sides={s}(s=${d100.sides})}" method="post" >
-    <table>
-        <tr>d<span data-th-text="${d100.sides}"></span></tr>
-        <tr><label>
-            <input type="number" data-th-name="times"/>
-        </label></tr>
-        <tr colspan="2"><button type="submit">Roll</button></tr>
-    </table>
-</form>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
