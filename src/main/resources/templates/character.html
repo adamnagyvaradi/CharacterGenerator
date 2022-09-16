@@ -164,63 +164,63 @@
     <div class="dice-body">
         <div class="row text-left">
             <div class="col">
-                <form data-th-action="@{/sheet?sides={s}(s=${d4.sides})}" method="post">
+                <form data-th-action="@{/sheet?sides={s}(s=4)}" method="post">
                     <table class="table table-striped">
-                        <tr>d<span data-th-text="${d4.sides}"></span></tr>
+                        <tr>d4</tr>
                         <tr><label>
                             <input type="number" data-th-name="times"/>
                         </label></tr>
                         <tr colspan="2"><button type="submit">Roll</button></tr>
                     </table>
                 </form>
-                <form data-th-action="@{/sheet?sides={s}(s=${d6.sides})}" method="post">
+                <form data-th-action="@{/sheet?sides={s}(s=6)}" method="post">
                     <table class="table table-striped">
-                        <tr>d<span data-th-text="${d6.sides}"></span></tr>
+                        <tr>d6</tr>
                         <tr><label>
                             <input type="number" data-th-name="times"/>
                         </label></tr>
                         <tr colspan="2"><button type="submit">Roll</button></tr>
                     </table>
                 </form>
-                <form data-th-action="@{/sheet?sides={s}(s=${d8.sides})}" method="post">
+                <form data-th-action="@{/sheet?sides={s}(s=8)}" method="post">
                     <table class="table table-striped">
-                        <tr>d<span data-th-text="${d8.sides}"></span></tr>
+                        <tr>d8</tr>
                         <tr><label>
                             <input type="number" data-th-name="times"/>
                         </label></tr>
                         <tr colspan="2"><button type="submit">Roll</button></tr>
                     </table>
                 </form>
-                <form data-th-action="@{/sheet?sides={s}(s=${d10.sides})}" method="post">
+                <form data-th-action="@{/sheet?sides={s}(s=10)}" method="post">
                     <table class="table table-striped">
-                        <tr>d<span data-th-text="${d10.sides}"></span></tr>
+                        <tr>d10</tr>
                         <tr><label>
                             <input type="number" data-th-name="times"/>
                         </label></tr>
                         <tr colspan="2"><button type="submit">Roll</button></tr>
                     </table>
                 </form>
-                <form data-th-action="@{/sheet?sides={s}(s=${d12.sides})}" method="post">
+                <form data-th-action="@{/sheet?sides={s}(s=12)}" method="post">
                     <table class="table table-striped">
-                        <tr>d<span data-th-text="${d12.sides}"></span></tr>
+                        <tr>d12</tr>
                         <tr><label>
                             <input type="number" data-th-name="times"/>
                         </label></tr>
                         <tr colspan="2"><button type="submit">Roll</button></tr>
                     </table>
                 </form>
-                <form data-th-action="@{/sheet?sides={s}(s=${d20.sides})}" method="post">
+                <form data-th-action="@{/sheet?sides={s}(s=20)}" method="post">
                     <table class="table table-striped">
-                        <tr>d<span data-th-text="${d20.sides}"></span></tr>
+                        <tr>d20</tr>
                         <tr><label>
                             <input type="number" data-th-name="times"/>
                         </label></tr>
                         <tr colspan="2"><button type="submit">Roll</button></tr>
                     </table>
                 </form>
-                <form data-th-action="@{/sheet?sides={s}(s=${d100.sides})}" method="post" >
+                <form data-th-action="@{/sheet?sides={s}(s=100)}" method="post" >
                     <table class="table table-striped">
-                        <tr>d<span data-th-text="${d100.sides}"></span></tr>
+                        <tr>d100</tr>
                         <tr><label>
                             <input type="number" data-th-name="times"/>
                         </label></tr>

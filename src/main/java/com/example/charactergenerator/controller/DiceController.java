@@ -1,5 +1,6 @@
 package com.example.charactergenerator.controller;
 
+import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.model.Dice;
 import com.example.charactergenerator.model.Roll;
@@ -28,64 +29,18 @@ public class DiceController {
         this.characterService = characterService;
     }
 
-
-
-    @GetMapping(value = {"/sheet1"})
-    public String loadDice(Model model){
-        Dice d4 = diceService.loadD4();
-        Dice d6 = diceService.loadD6();
-        Dice d8 = diceService.loadD8();
-        Dice d10 = diceService.loadD10();
-        Dice d12 = diceService.loadD12();
-        Dice d20 = diceService.loadD20();
-        Dice d100 = diceService.loadD100();
-
-
-        model.addAttribute("d4", d4);
-        model.addAttribute("d6", d6);
-        model.addAttribute("d8", d8);
-        model.addAttribute("d10", d10);
-        model.addAttribute("d12", d12);
-        model.addAttribute("d20", d20);
-        model.addAttribute("d100", d100);
-
-        return "character";
-    }
-
-     /*@PostMapping(value = {"/roller"})
-     public String rolled(Model model, Roll roll) {
-
-        List<Integer> rolled = diceService.rollDice(roll.getSides(),roll.getTimes());
-
-        model.addAttribute("rolled", rolled);
-
-         return "result";
-     }*/
     @PostMapping(value = {"/sheet"})
     public String rollerCosted(@RequestParam int sides, @RequestParam int times, Model model){
         List<Integer> rolled = diceService.rollDice(sides, times);
 
         Character character = characterService.findById(1);
+        CharacterDto characterDto = new CharacterDto(character);
+        model.addAttribute(character);
+        model.addAttribute(characterDto);
 
         model.addAttribute("rolled", rolled);
         model.addAttribute("character", character);
 
-        Dice d4 = diceService.loadD4();
-        Dice d6 = diceService.loadD6();
-        Dice d8 = diceService.loadD8();
-        Dice d10 = diceService.loadD10();
-        Dice d12 = diceService.loadD12();
-        Dice d20 = diceService.loadD20();
-        Dice d100 = diceService.loadD100();
-
-
-        model.addAttribute("d4", d4);
-        model.addAttribute("d6", d6);
-        model.addAttribute("d8", d8);
-        model.addAttribute("d10", d10);
-        model.addAttribute("d12", d12);
-        model.addAttribute("d20", d20);
-        model.addAttribute("d100", d100);
 
         return "character";
     }

@@ -32,16 +32,7 @@ public class CharacterController {
         CharacterDto characterDto = new CharacterDto(character);
         model.addAttribute(character);
         model.addAttribute(characterDto);
-
-        model.addAttribute("d4", diceService.loadD4());
-        model.addAttribute("d6", diceService.loadD6());
-        model.addAttribute("d8", diceService.loadD8());
-        model.addAttribute("d10", diceService.loadD10());
-        model.addAttribute("d12", diceService.loadD12());
-        model.addAttribute("d20", diceService.loadD20());
-        model.addAttribute("d100", diceService.loadD100());
-
-        model.addAttribute("roll", new Roll());
+        model.addAttribute("rolled", "");
 
         return "character";
     }
