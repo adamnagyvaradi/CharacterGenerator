@@ -7,6 +7,10 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Component
 public class CharacterHelper implements ApplicationRunner {
     private CharacterService characterService;
@@ -18,11 +22,23 @@ public class CharacterHelper implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Character character = new Character("Aboleth",(byte)2,(byte)21,(byte)9,(byte)15,(byte)18,(byte)15,(byte)18);
-        characterService.save(character);
+        saveCharacters();
+    }
 
-        Character otherCharacter = characterService.findByName("Aboleth");
-        System.out.println(otherCharacter.getAttributes());
+    private void saveCharacters(){
+        getCharacters().forEach(character -> characterService.save(character));
+    }
+
+    private List<Character> getCharacters(){
+        return new ArrayList<>(Arrays.asList(
+                new Character("Aboleth",(byte)17, (short)135,(byte)10,(byte)2,(byte)21,(byte)9,(byte)15,(byte)18,(byte)15,(byte)18),
+                new Character("Acolyte",(byte)10, (short)9,(byte)30,(byte)2,(byte)10,(byte)10,(byte)10,(byte)10,(byte)14,(byte)11),
+                new Character("Air Elemental",(byte)15, (short)90,(byte)0,(byte)3,(byte)14,(byte)20,(byte)14,(byte)6,(byte)10,(byte)6),
+                new Character("Allosaurus",(byte)13, (short)51,(byte)60,(byte)2,(byte)19,(byte)13,(byte)17,(byte)2,(byte)12,(byte)5),
+                new Character("Animated Armor",(byte)18, (short)33,(byte)25,(byte)2,(byte)14,(byte)11,(byte)13,(byte)1,(byte)3,(byte)1),
+                new Character("Ankheg",(byte)14, (short) 39,(byte)30,(byte)2,(byte)17,(byte)11,(byte)13,(byte)1,(byte)13,(byte)6),
+                new Character("Ankylosaurus",(byte)15, (short)68, (byte)30,(byte)2,(byte)19,(byte)11,(byte)15,(byte)2,(byte)12,(byte)5)
+        ));
     }
 
 }

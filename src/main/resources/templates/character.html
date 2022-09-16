@@ -7,7 +7,7 @@
     <meta name="author" content="" />
     <title>RPG Project</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/assets/spiked-dragon-head.png" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -54,61 +54,73 @@
                     <div class="col-auto">
                         <div class="card">
                             <span>Armor class</span>
-                            <span>17</span>
+                            <span th:text="${character.armorClass}">17</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             <span>HP</span>
-                            <span>17</span>
+                            <span th:text="${character.hitPoints}">17</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             <span>Speed</span>
-                            <span>10 ft.</span>
+                            <span th:text="${character.speed}">10 ft.</span>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="card">
+                            <span>Proficiency</span>
+                            <span th:text="${'+' + character.proficiencyBonus}">2</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             STR<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('STR') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('STR')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('STR') + ')'}">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             DEX<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('DEX') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('DEX')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('DEX')} + ')'">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             CON<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('CON') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('CON')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('CON')} + ')'">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             INT<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('INT') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('INT')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('INT')} + ')'">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             WIS<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('WIS') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('WIS')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('WIS')} + ')'">21</span>
                         </div>
                     </div>
                     <div class="col-1">
                         <div class="card">
                             CHA<br>
+                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('CHA') + ')'}"
+                                    style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('CHA')}">21</span>
-                            <span th:text="${'(' + character.getAttributeBonus('CHA')} + ')'">21</span>
                         </div>
                     </div>
                 </div>
@@ -127,16 +139,86 @@
                             <tr th:each="skill: ${character.skills}">
                                 <td th:text="${skill.name}"></td>
                                 <td th:text="${skill.modifier}"></td>
-                                <td th:text="${skill.bonus}"></td>
+                                <td>
+                                    <button class="btn align-self-center btn-outline-dark btn-sm" th:text="${'('+ skill.bonusSign + skill.bonus + ')'}">(0)</button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editOfCharacter">
+                            Edit
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="editOfCharacter" tabindex="-1" aria-labelledby="editOfCharacterLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form th:action="@{/character/update}" th:object="${characterDto}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editOfCharacterLaber">Edit <span th:text="${character.name}">Character</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="mb-3 row">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{name}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="strength" class="col-sm-2 col-form-label">STR</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{strength}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dexterity" class="col-sm-2 col-form-label">DEX</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{dexterity}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="constitution" class="col-sm-2 col-form-label">CON</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{constitution}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="intelligence" class="col-sm-2 col-form-label">INT</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{intelligence}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="wisdom" class="col-sm-2 col-form-label">WIS</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{wisdom}">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="charisma" class="col-sm-2 col-form-label">CHA</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{charisma}">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
