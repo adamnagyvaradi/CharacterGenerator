@@ -31,13 +31,13 @@ public class CharacterHelper implements ApplicationRunner {
 
     private List<Character> getCharacters(){
         return new ArrayList<>(Arrays.asList(
-                new Character("Aboleth",(byte)17, (short)135,(byte)10,(byte)2,(byte)21,(byte)9,(byte)15,(byte)18,(byte)15,(byte)18),
-                new Character("Acolyte",(byte)10, (short)9,(byte)30,(byte)2,(byte)10,(byte)10,(byte)10,(byte)10,(byte)14,(byte)11),
-                new Character("Air Elemental",(byte)15, (short)90,(byte)0,(byte)3,(byte)14,(byte)20,(byte)14,(byte)6,(byte)10,(byte)6),
-                new Character("Allosaurus",(byte)13, (short)51,(byte)60,(byte)2,(byte)19,(byte)13,(byte)17,(byte)2,(byte)12,(byte)5),
-                new Character("Animated Armor",(byte)18, (short)33,(byte)25,(byte)2,(byte)14,(byte)11,(byte)13,(byte)1,(byte)3,(byte)1),
-                new Character("Ankheg",(byte)14, (short) 39,(byte)30,(byte)2,(byte)17,(byte)11,(byte)13,(byte)1,(byte)13,(byte)6),
-                new Character("Ankylosaurus",(byte)15, (short)68, (byte)30,(byte)2,(byte)19,(byte)11,(byte)15,(byte)2,(byte)12,(byte)5)
+                new Character("Aboleth",17, 135,10,2,21,9,15,18,15,18),
+                new Character("Acolyte",10, 9,30,2,10,10,10,10,14,11),
+                new Character("Air Elemental",15, 90,0,3,14,20,14,6,10,6),
+                new Character("Allosaurus",13, 51,60,2,19,13,17,2,12,5),
+                new Character("Animated Armor",18, 33,25,2,14,11,13,1,3,1),
+                new Character("Ankheg",14,  39,30,2,17,11,13,1,13,6),
+                new Character("Ankylosaurus",15, 68, 30,2,19,11,15,2,12,5)
         ));
     }
 }

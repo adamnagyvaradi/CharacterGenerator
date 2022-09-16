@@ -48,11 +48,6 @@ public class Character {
         this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)proficiencyBonus,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma);
     }
 
-    /*public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
-        this(name, proficiencyBonus, strength, dexterity, constitution, intelligence, wisdom, charisma);
-        this.hitPoints = hp;
-    }*/
-
     public byte getAttributeBonus(AttributeType attributeType){
         byte attributeValue = getAttributeValue(attributeType);
         return attributeType.getBonus(attributeValue);
