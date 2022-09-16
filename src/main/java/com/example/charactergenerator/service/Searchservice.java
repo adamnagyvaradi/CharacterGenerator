@@ -13,7 +13,7 @@ public class Searchservice {
     @Autowired
     private SearchRepository searchRepository;
 
-    public List<Character>findByName(String keyword){
-        return searchRepository.findByKeyword(keyword);
+    public List<Character>findByName(String charactername){
+        return searchRepository.findCharactersByNameContains(charactername);
     };
 }
