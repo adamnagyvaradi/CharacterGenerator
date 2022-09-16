@@ -20,12 +20,12 @@ public class SearchController {
 
     @GetMapping("/search")
     public String searchcaracter(Model model, String keyword, long id) {
-        model.addAttribute("Character",characterService.findById(id));
+
         if (keyword != null) {
-            model.addAttribute("character", searchservice.findByKeyword(keyword));
+            model.addAttribute("characters", searchservice.findByName(keyword));
         }
         else {
-            model.addAttribute("character",characterService.getAllCharacter());
+            model.addAttribute("characters",characterService.getAllCharacter());
         }
         return "search";
     }

@@ -38,7 +38,7 @@ public class CharacterController {
         model.addAttribute("character",character);
 
         if (keyword != null) {
-            model.addAttribute("character", searchservice.findByKeyword(keyword));
+            model.addAttribute("character", searchservice.findByName(keyword));
         }
         else {
             model.addAttribute("character",characterService.findById(id));
