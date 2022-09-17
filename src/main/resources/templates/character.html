@@ -40,6 +40,7 @@
 <!-- Section-->
 <section class="pb-5">
     <div class="container px-4 px-lg-5 mt-4">
+        <div class="row" id="messagePlaceHolder"></div>
         <div class="card">
             <div class="card-header">
                 <h1 th:text="${character.name}">Aboleth</h1>
@@ -73,7 +74,8 @@
                     <div class="col-1">
                         <div class="card">
                             STR<br>
-                            <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('STR') + ')'}"
+                            <button class="btn align-self-center btn-outline-dark" th:onclick="getRoll([[${'d20+' + character.getAttributeBonus('STR')}]])"
+                                    th:text="${'(' + character.getAttributeBonus('STR') + ')'}"
                                     style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('STR')}">21</span>
                         </div>
@@ -220,5 +222,8 @@
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Roll js -->
+<script src="/js/roll.js"></script>
+
 </body>
 </html>
