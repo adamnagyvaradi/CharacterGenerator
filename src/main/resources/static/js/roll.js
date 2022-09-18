@@ -1,22 +1,31 @@
 //targetId ahova az eredményt akarom kiírni, messageId ahova a detailst akarom kiírni
 function getRoll(rollDefinition){
     getServerData("http://localhost:8080/api/roll/" + rollDefinition).then(
-        roll => alert(roll)
+        roll => message(roll)
     );
 }
 
-const messagePlaceHolder = document.getElementById("messagePlaceHolder");
+const message = (roll) => {
+    const wrapper = document.querySelector(".toast-container");
+    const randomUUID = crypto.randomUUID();
 
-const alert = (message) => {
-    const wrapper = document.createElement('div')
-    wrapper.innerHTML = [
-        `<div class="alert alert-success alert-dismissible fade show" role="alert">`,
-        `   <div>${message.details}</div>`,
-        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-        '</div>'
+    wrapper.innerHTML += [
+        `<div id="${randomUUID}" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">`,
+        `    <div class="toast-header">`,
+        `        <strong class="me-auto">d20 Roll</strong>`,
+        `        <button type="button" class="btn-close" onclick="removeElement('${randomUUID}')" aria-label="Close"></button>`,
+        `    </div>`,
+        `    <div class="toast-body">`,
+        `       ${roll.details}`,
+        `    </div>`,
+        `</div>`
     ].join('')
 
-    messagePlaceHolder.append(wrapper)
+    const toastList = document.querySelectorAll(".toast");
+
+    if(toastList.length === 6){
+        removeElement(toastList[0].id);
+    }
 }
 
 function getServerData(url) {
@@ -32,6 +41,10 @@ function getServerData(url) {
     )
 }
 
+function removeElement(id){
+    const element = document.getElementById(id);
+    element.remove();
+}
 
 
 
