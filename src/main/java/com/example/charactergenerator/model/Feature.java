@@ -14,9 +14,6 @@ public class Feature {
 
     private String description;
 
-    @ManyToMany
-    private List<Character> characters;
-
     public Feature(){}
 
     public Feature(String name, String description) {
@@ -40,11 +37,4 @@ public class Feature {
         this.description = description;
     }
 
-    public List<Character> getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
-    }
 }
