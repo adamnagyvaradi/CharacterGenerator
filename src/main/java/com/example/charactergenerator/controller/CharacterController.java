@@ -2,7 +2,10 @@ package com.example.charactergenerator.controller;
 
 import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.Character;
+import com.example.charactergenerator.model.Dice;
+import com.example.charactergenerator.model.Roll;
 import com.example.charactergenerator.service.CharacterService;
+import com.example.charactergenerator.service.DiceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +17,14 @@ public class CharacterController {
 
     private CharacterService characterService;
 
+    private DiceService diceService;
 
-    public CharacterController(CharacterService characterService){
+
+    public CharacterController(CharacterService characterService, DiceService diceService){
         this.characterService = characterService;
+        this.diceService = diceService;
     }
+
     @GetMapping(value = {"/sheet"})
     public String getAttributes(Model model){
 
@@ -25,6 +32,7 @@ public class CharacterController {
         CharacterDto characterDto = new CharacterDto(character);
         model.addAttribute(character);
         model.addAttribute(characterDto);
+        model.addAttribute("rolled", "");
 
         return "character";
     }
