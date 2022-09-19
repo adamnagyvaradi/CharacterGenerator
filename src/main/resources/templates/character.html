@@ -73,7 +73,7 @@
                     <div class="col-1">
                         <div class="card">
                             STR<br>
-                            <button class="btn align-self-center btn-outline-dark" th:onclick="getRoll([[${'d20+' + character.getAttributeBonus('STR')}]])"
+                            <button class="btn align-self-center btn-outline-dark" th:onclick="getRoll([[${character.getAttributeBonusRollDescription('STR')}]])"
                                     th:text="${'(' + character.getAttributeBonus('STR') + ')'}"
                                     style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('STR')}">21</span>
@@ -83,6 +83,7 @@
                         <div class="card">
                             DEX<br>
                             <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('DEX') + ')'}"
+                                    th:onclick="getRoll([[${character.getAttributeBonusRollDescription('DEX')}]])"
                                     style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('DEX')}">21</span>
                         </div>
@@ -91,6 +92,7 @@
                         <div class="card">
                             CON<br>
                             <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('CON') + ')'}"
+                                    th:onclick="getRoll([[${character.getAttributeBonusRollDescription('CON')}]])"
                                     style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('CON')}">21</span>
                         </div>
@@ -99,6 +101,7 @@
                         <div class="card">
                             INT<br>
                             <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('INT') + ')'}"
+                                    th:onclick="getRoll([[${character.getAttributeBonusRollDescription('INT')}]])"
                                     style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('INT')}">21</span>
                         </div>
@@ -107,6 +110,7 @@
                         <div class="card">
                             WIS<br>
                             <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('WIS') + ')'}"
+                                    th:onclick="getRoll([[${character.getAttributeBonusRollDescription('WIS')}]])"
                                     style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('WIS')}">21</span>
                         </div>
@@ -115,6 +119,7 @@
                         <div class="card">
                             CHA<br>
                             <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('CHA') + ')'}"
+                                    th:onclick="getRoll([[${character.getAttributeBonusRollDescription('CHA')}]])"
                                     style="padding: 0.05rem 0.8rem;">21</button>
                             <span th:text="${character.getAttributeValue('CHA')}">21</span>
                         </div>
@@ -136,7 +141,8 @@
                                 <td th:text="${skill.name}"></td>
                                 <td th:text="${skill.modifier}"></td>
                                 <td>
-                                    <button class="btn align-self-center btn-outline-dark btn-sm" th:text="${'('+ skill.bonusSign + skill.bonus + ')'}">(0)</button>
+                                    <button class="btn align-self-center btn-outline-dark btn-sm" th:onclick="getRoll([[${'d20' + skill.bonusSign + skill.bonus}]])"
+                                            th:text="${'('+ skill.bonusSign + skill.bonus + ')'}">(0)</button>
                                 </td>
                             </tr>
                             </tbody>
