@@ -40,4 +40,5 @@ public class CharacterHelper implements ApplicationRunner {
                 new Character("Ankylosaurus",(byte)15, (short)68, (byte)30,(byte)2,(byte)19,(byte)11,(byte)15,(byte)2,(byte)12,(byte)5)
         ));
     }
+
 }
