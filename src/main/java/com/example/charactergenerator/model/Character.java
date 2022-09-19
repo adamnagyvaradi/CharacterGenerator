@@ -20,6 +20,9 @@ public class Character {
     Map<AttributeType, Byte> attributes = new EnumMap<>(AttributeType.class);
     @Transient
     private List<Skill> skills;
+
+    @ManyToMany
+    private List<Feature> features;
     /*
     private String characterClass; // List<String> features
     private String race;
