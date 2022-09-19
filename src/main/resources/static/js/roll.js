@@ -1,18 +1,18 @@
 //targetId ahova az eredményt akarom kiírni, messageId ahova a detailst akarom kiírni
 function getRoll(rollDefinition){
     getServerData("http://localhost:8080/api/roll/" + rollDefinition).then(
-        roll => message(roll)
+        roll => message(roll, rollDefinition)
     );
 }
 
-const message = (roll) => {
+const message = (roll, rollDefinition) => {
     const wrapper = document.querySelector(".toast-container");
     const randomUUID = crypto.randomUUID();
 
     wrapper.innerHTML += [
         `<div id="${randomUUID}" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">`,
         `    <div class="toast-header">`,
-        `        <strong class="me-auto">d20 Roll</strong>`,
+        `        <strong class="me-auto">${rollDefinition}</strong>`,
         `        <button type="button" class="btn-close" onclick="removeElement('${randomUUID}')" aria-label="Close"></button>`,
         `    </div>`,
         `    <div class="toast-body">`,

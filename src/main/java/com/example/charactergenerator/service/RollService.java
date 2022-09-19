@@ -19,7 +19,7 @@ public class RollService {
 
         RollDto roll = generateRoll(sides,times);
 
-        if (bonus > 0){
+        if (bonus != 0){
             char bonusSign = rollDescription.charAt(bonusSignIndex);
             if (bonusSign == '+'){
                 roll.setResult((short)(roll.getResult() + bonus));
@@ -61,7 +61,7 @@ public class RollService {
 
     private int getBonus(String rollDescription, int bonusSignIndex){
         if (bonusSignIndex > 0){
-            return Integer.parseInt(rollDescription.substring(bonusSignIndex));
+            return Integer.parseInt(rollDescription.substring(bonusSignIndex + 1));
         }
 
         return 0;

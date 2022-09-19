@@ -81,6 +81,18 @@ public class Character {
         attributes.put(attributeType,value);
     }
 
+    public String getAttributeBonusRollDescription(String attributeName){
+        String rollDesciption = "d20";
+        int bonus = getAttributeBonus(attributeName);
+        if (bonus > 0){
+            rollDesciption += "+" + bonus;
+        }else if (bonus < 0){
+            rollDesciption += bonus;
+        }
+
+        return rollDesciption;
+    }
+
     public Long getId() {
         return id;
     }
