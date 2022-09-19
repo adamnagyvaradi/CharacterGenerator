@@ -49,25 +49,25 @@ public class Character {
         this.hitPoints = hp;
     }*/
 
-    public byte getAttributeBonus(AttributeType attributeType){
+    public byte getAttributeBonus(AttributeType attributeType) {
         byte attributeValue = getAttributeValue(attributeType);
         return attributeType.getBonus(attributeValue);
     }
 
-    public byte getAttributeBonus(String attributeName){
+    public byte getAttributeBonus(String attributeName) {
         return getAttributeBonus(AttributeType.valueOf(attributeName));
     }
 
-    public byte getAttributeValue(AttributeType attributeType){
+    public byte getAttributeValue(AttributeType attributeType) {
         return attributes.get(attributeType);
     }
 
-    public byte getAttributeValue(String attributeName){
+    public byte getAttributeValue(String attributeName) {
         return getAttributeValue(AttributeType.valueOf(attributeName));
     }
 
-    public void setAttributeValue(AttributeType attributeType, byte value){
-        attributes.put(attributeType,value);
+    public void setAttributeValue(AttributeType attributeType, byte value) {
+        attributes.put(attributeType, value);
     }
 
     public Long getId() {
