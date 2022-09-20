@@ -23,4 +23,13 @@ public enum ArmorType {
     public AttributeType getModifier() {
         return modifier;
     }
+
+
+
+    public byte getAttributeBonus(ArmorType LIGHT, ArmorType MEDIUM, ArmorType HEAVY){
+        //return (byte)(modifierValue - 10 < 0 ? (modifierValue - 11) / 2 : (modifierValue - 10) / 2);
+
+
+        return 0;
+    }
 }
