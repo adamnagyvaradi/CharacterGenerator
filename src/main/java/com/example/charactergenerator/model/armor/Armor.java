@@ -8,19 +8,24 @@ public class Armor {
 
     private byte armorValue;
 
+    private Character character;
+
     public Armor(String name) {
     }
 
     public Armor() {
     }
 
+    public Armor(String name, ArmorType armorType, byte armorValue) {
+        Name = name;
+        this.armorType = armorType;
+        this.armorValue = armorValue;
+    }
+
     public String getName() {
         return Name;
     }
 
-    public void setName(String name) {
-        Name = name;
-    }
 
     public ArmorType getArmorType() {
         return armorType;
@@ -36,5 +41,18 @@ public class Armor {
 
     public void setArmorValue(byte armorValue) {
         this.armorValue = armorValue;
+    }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
+
+    public byte getBonus(){
+        //getCharacter().
+        return 0;
     }
 }
