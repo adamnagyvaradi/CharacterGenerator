@@ -1,4 +1,4 @@
-package com.example.charactergenerator.model.armor;
+package com.example.charactergenerator.model;
 
 public class Armor {
 
@@ -10,16 +10,15 @@ public class Armor {
 
     private Character character;
 
-    public Armor(String name) {
-    }
 
     public Armor() {
     }
 
-    public Armor(String name, ArmorType armorType, byte armorValue) {
+    public Armor(String name, ArmorType armorType, byte armorValue, Character character) {
         Name = name;
         this.armorType = armorType;
         this.armorValue = armorValue;
+        this.character = character;
     }
 
     public String getName() {
@@ -52,7 +51,20 @@ public class Armor {
     }
 
     public byte getBonus(){
-        //getCharacter().
+        getCharacter().getAttributeBonus(AttributeType.DEX);
         return 0;
+    }
+
+    public byte getArmorClass(Armor armor){
+        if (armor.getArmorType().equals(ArmorType.HEAVY)){
+            return armor.getArmorValue();
+        } else if (armor.getArmorType().equals(ArmorType.MEDIUM)) {
+            if (armor.getBonus() >= 2){
+                return (byte) (armor.getArmorValue() + 2);
+            }
+            return (byte) (armor.getArmorValue() + armor.getBonus());
+        } else {
+            return (byte) (armor.getArmorValue() + armor.getBonus());
+        }
     }
 }

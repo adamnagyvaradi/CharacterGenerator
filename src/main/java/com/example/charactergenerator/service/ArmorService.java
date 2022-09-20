@@ -1,15 +1,8 @@
 package com.example.charactergenerator.service;
 
-import com.example.charactergenerator.model.armor.Armor;
-import com.example.charactergenerator.model.armor.ArmorType;
+import com.example.charactergenerator.model.Armor;
+import com.example.charactergenerator.model.ArmorType;
 
 public class ArmorService {
-    public byte getArmorClass(Armor armor){
-        if (armor.getArmorType().equals(ArmorType.HEAVY)){
-            return armor.getArmorValue();
-        } else if (armor.getArmorType().equals(ArmorType.MEDIUM)) {
 
-        }
-        return 0;
-    }
 }
