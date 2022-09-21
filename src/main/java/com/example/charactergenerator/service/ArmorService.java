@@ -18,7 +18,7 @@ public class ArmorService {
     Character character5 = new Character("Scale mail", ArmorType.MEDIUM, (byte) 1);
     Character character6 = new Character("Breastplate", ArmorType.MEDIUM, (byte) 3);
     Character character7 = new Character("Ring mail", ArmorType.HEAVY, (byte) 0);
-    Character character8 = new Character("Chain mail\t", ArmorType.HEAVY, (byte) 1);
+    Character character8 = new Character("Chain mail", ArmorType.HEAVY, (byte) 1);
     Character character9 = new Character("Splint", ArmorType.HEAVY, (byte) 3);
 
 
