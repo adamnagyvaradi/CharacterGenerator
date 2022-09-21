@@ -13,6 +13,9 @@ public class Character {
     private short hitPoints; // hit dice
     private byte speed;
     private byte challengeRating;
+
+    private Armor armor;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_attributes",
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
@@ -149,6 +152,14 @@ public class Character {
             default -> throw new IllegalStateException("Unexpected value: " + challengeRating);};
         }
 
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
 
     public Map<AttributeType, Byte> getAttributes(){
         return attributes;
