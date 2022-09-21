@@ -13,6 +13,9 @@ public class Character {
     private short hitPoints; // hit dice
     private byte speed;
     private byte proficiencyBonus;
+
+    private Armor armor;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_attributes",
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
@@ -27,7 +30,7 @@ public class Character {
     private List<String> equipment;
     */
 
-    public Character() {
+    public Character(String padded, ArmorType light, byte b) {
     }
 
     public Character(String name, byte armorClass, short hitPoints, byte speed, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma) {
@@ -42,6 +45,10 @@ public class Character {
         attributes.put(AttributeType.INT, intelligence);
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
+    }
+
+    public Character() {
+
     }
 
     /*public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
@@ -116,6 +123,14 @@ public class Character {
 
     public void setProficiencyBonus(byte proficiencyBonus) {
         this.proficiencyBonus = proficiencyBonus;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 
     public Map<AttributeType, Byte> getAttributes(){
