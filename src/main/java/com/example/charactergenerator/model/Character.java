@@ -56,10 +56,9 @@ public class Character {
 
     }
 
-    /*public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
-        this(name, proficiencyBonus, strength, dexterity, constitution, intelligence, wisdom, charisma);
-        this.hitPoints = hp;
-    }*/
+    public Character(String name, int armorClass, int hitPoints, int speed, int proficiencyBonus, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma){
+        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)proficiencyBonus,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma);
+    }
 
     public byte getAttributeBonus(AttributeType attributeType){
         byte attributeValue = getAttributeValue(attributeType);
@@ -80,6 +79,18 @@ public class Character {
 
     public void setAttributeValue(AttributeType attributeType, byte value){
         attributes.put(attributeType,value);
+    }
+
+    public String getAttributeBonusRollDescription(String attributeName){
+        String rollDesciption = "d20";
+        int bonus = getAttributeBonus(attributeName);
+        if (bonus > 0){
+            rollDesciption += "+" + bonus;
+        }else if (bonus < 0){
+            rollDesciption += bonus;
+        }
+
+        return rollDesciption;
     }
 
     public Long getId() {
