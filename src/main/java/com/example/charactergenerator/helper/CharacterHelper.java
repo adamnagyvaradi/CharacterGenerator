@@ -3,6 +3,7 @@ package com.example.charactergenerator.helper;
 import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.model.CharacterType;
 import com.example.charactergenerator.service.CharacterService;
+import com.example.charactergenerator.model.CharacterType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

@@ -33,10 +33,10 @@ public class Character {
     public Character() {
 
     }
-    public Character(String aboleth, byte b, short i, byte b1, byte b2, byte b3, byte b4, byte b5, byte b6, byte b7, byte b8, byte b9, byte b10) {
+
+    public Character(String name, int armorClass, int hitPoints, int speed, int challangeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType){
+        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challangeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType);
     }
-
-
 
     public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, com.example.charactergenerator.model.CharacterType characterType) {
         this.name = name;
@@ -56,9 +56,7 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int proficiencyBonus, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma){
-        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)proficiencyBonus,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma);
-    }
+
 
     public byte getAttributeBonus(AttributeType attributeType){
         byte attributeValue = getAttributeValue(attributeType);
