@@ -12,7 +12,7 @@ public class Character {
     private byte armorClass;
     private short hitPoints; // hit dice
     private byte speed;
-    private byte proficiencyBonus;
+    private byte challengeRating;
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_attributes",
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
@@ -20,6 +20,9 @@ public class Character {
     Map<AttributeType, Byte> attributes = new EnumMap<>(AttributeType.class);
     @Transient
     private List<Skill> skills;
+
+    @Enumerated(EnumType.STRING)
+    private CharacterType CharacterType;
     /*
     private String characterClass; // List<String> features
     private String race;
@@ -28,20 +31,29 @@ public class Character {
     */
 
     public Character() {
+
+    }
+    public Character(String aboleth, byte b, short i, byte b1, byte b2, byte b3, byte b4, byte b5, byte b6, byte b7, byte b8, byte b9, byte b10) {
     }
 
-    public Character(String name, byte armorClass, short hitPoints, byte speed, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma) {
+
+
+    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, com.example.charactergenerator.model.CharacterType characterType) {
         this.name = name;
         this.armorClass = armorClass;
         this.hitPoints = hitPoints;
         this.speed = speed;
-        this.proficiencyBonus = proficiencyBonus;
+        this.challengeRating = challengeRating;
+        CharacterType = characterType;
         attributes.put(AttributeType.STR, strength);
         attributes.put(AttributeType.DEX, dexterity);
         attributes.put(AttributeType.CON, constitution);
         attributes.put(AttributeType.INT, intelligence);
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
+
+
+
     }
 
     /*public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
@@ -110,13 +122,27 @@ public class Character {
         this.speed = speed;
     }
 
-    public byte getProficiencyBonus() {
-        return proficiencyBonus;
+    public byte getChallengeRating() {
+        return challengeRating;
     }
 
-    public void setProficiencyBonus(byte proficiencyBonus) {
-        this.proficiencyBonus = proficiencyBonus;
+    public void setChallengeRating(byte challengeRating) {
+        this.challengeRating = challengeRating;
     }
+
+    public byte getProficiencyBonus() {
+        return switch (challengeRating) {
+            case 0, 1, 2, 3, 4 ->  2;
+            case 5, 6, 7, 8 -> 3;
+            case 9, 10, 11, 12 -> 4;
+            case 13, 14, 15, 16 -> 5;
+            case 17, 18, 19, 20 -> 6;
+            case 21, 22, 23, 24 -> 7;
+            case 25, 26, 27, 28 -> 8;
+            case 29, 30 -> 9;
+            default -> throw new IllegalStateException("Unexpected value: " + challengeRating);};
+        }
+
 
     public Map<AttributeType, Byte> getAttributes(){
         return attributes;
@@ -137,4 +163,14 @@ public class Character {
 
         return skills;
     }
+    public com.example.charactergenerator.model.CharacterType getCharacterType() {
+        return CharacterType;
+    }
+
+    public void setCharacterType(com.example.charactergenerator.model.CharacterType characterType) {
+        CharacterType = characterType;
+    }
+
+
+
 }

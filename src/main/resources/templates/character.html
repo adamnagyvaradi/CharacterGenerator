@@ -36,10 +36,10 @@
         -->
     </div>
 </nav>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Addnew </button>
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Addnew </button>
 <form th:action="@{/search}" method="get">
     <input id="txtSearch" type="text" name="keyword">
-    <button type="submit">Search</button>
+    <button type="submit">Search</button>-->
 </form>
 <!-- Header-->
 <!-- Section-->
@@ -51,7 +51,7 @@
             </div>
             <div class="card-body">
                 <div class="row text-center">
-                    <div class="col-auto">
+                    <div class="col">
                         <div class="card">
                             <span>Armor class</span>
                             <span th:text="${character.armorClass}">17</span>
@@ -69,7 +69,13 @@
                             <span th:text="${character.speed}">10 ft.</span>
                         </div>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-1">
+                        <div class="card">
+                            <span>CR</span>
+                            <span th:text="${character.challengeRating}">2</span>
+                        </div>
+                    </div>
+                    <div class="col px-3">
                         <div class="card">
                             <span>Proficiency</span>
                             <span th:text="${'+' + character.proficiencyBonus}">2</span>
