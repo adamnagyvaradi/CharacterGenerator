@@ -30,7 +30,7 @@ public class Character {
     private List<String> equipment;
     */
 
-    public Character(String padded, ArmorType light, byte b) {
+    public Character(String arnmorName, ArmorType light, byte b) {
     }
 
     public Character(String name, byte armorClass, short hitPoints, byte speed, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma) {
