@@ -10,15 +10,18 @@ public class Armor {
 
     private Character character;
 
+    private boolean equipped;
+
 
     public Armor() {
     }
 
-    public Armor(String name, ArmorType armorType, byte armorValue, Character character) {
+    public Armor(String name, ArmorType armorType, byte armorValue, Character character, boolean equipped) {
         Name = name;
         this.armorType = armorType;
         this.armorValue = armorValue;
         this.character = character;
+        this.equipped = equipped;
     }
 
     public String getName() {
