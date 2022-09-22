@@ -14,7 +14,9 @@ public class Character {
     private byte speed;
     private byte proficiencyBonus;
 
-
+    @ManyToOne
+    @JoinColumn (name = "armor_id")
+    private Armor armor;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_attributes",
@@ -30,8 +32,6 @@ public class Character {
     private List<String> equipment;
     */
 
-    public Character(String armorName, ArmorType light, byte b) {
-    }
 
     public Character(String name, byte armorClass, short hitPoints, byte speed, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma) {
         this.name = name;
@@ -94,7 +94,11 @@ public class Character {
     }
 
     public byte getArmorClass() {
-        return armorClass;
+        if (armor == null) {
+            return armorClass;
+        }
+
+        return armor.getArmorValue(getAttributeValue(AttributeType.DEX));
     }
 
     public void setArmorClass(byte armorClass) {
@@ -123,6 +127,14 @@ public class Character {
 
     public void setProficiencyBonus(byte proficiencyBonus) {
         this.proficiencyBonus = proficiencyBonus;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 
     public Map<AttributeType, Byte> getAttributes(){
