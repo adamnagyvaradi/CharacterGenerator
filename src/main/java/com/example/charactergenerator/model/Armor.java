@@ -1,14 +1,21 @@
 package com.example.charactergenerator.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Armor {
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private long id;
     private String Name;
 
     private ArmorType armorType;
 
     private byte armorValue;
-
-    private Character character;
 
     private boolean equipped;
 
@@ -16,11 +23,10 @@ public class Armor {
     public Armor() {
     }
 
-    public Armor(String name, ArmorType armorType, byte armorValue, Character character, boolean equipped) {
+    public Armor(String name, ArmorType armorType, byte armorValue, boolean equipped) {
         Name = name;
         this.armorType = armorType;
         this.armorValue = armorValue;
-        this.character = character;
         this.equipped = equipped;
     }
 
@@ -45,29 +51,22 @@ public class Armor {
         this.armorValue = armorValue;
     }
 
-    public Character getCharacter() {
-        return character;
+    public byte getArmorValue(byte dexBonus) {
+        return getArmorClass(dexBonus);
     }
 
-    public void setCharacter(Character character) {
-        this.character = character;
-    }
 
-    public byte getBonus(){
-        getCharacter().getAttributeBonus(AttributeType.DEX);
-        return 0;
-    }
-
-    public byte getArmorClass(Armor armor){
-        if (armor.getArmorType().equals(ArmorType.HEAVY)){
-            return armor.getArmorValue();
-        } else if (armor.getArmorType().equals(ArmorType.MEDIUM)) {
-            if (armor.getBonus() >= 2){
-                return (byte) (armor.getArmorValue() + 2);
+    public byte getArmorClass(byte dexBonus){
+        if (armorType.equals(ArmorType.HEAVY)){
+            return armorValue;
+        } else if (armorType.equals(ArmorType.MEDIUM)) {
+            if (dexBonus >= 2){
+                return (byte) (armorValue + 2);
             }
-            return (byte) (armor.getArmorValue() + armor.getBonus());
+            return (byte) (armorValue + dexBonus);
         } else {
-            return (byte) (armor.getArmorValue() + armor.getBonus());
+            return (byte) (armorValue + dexBonus);
         }
     }
+
 }
