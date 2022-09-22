@@ -170,6 +170,92 @@
         </div>
     </div>
 </section>
+<!--
+<div class="container px-4 px-lg-5 mt-4">
+    <div class="dice">
+        <div class="dice-header">
+            <h1>Dice</h1>
+        </div>
+    </div>
+    <hr>
+
+    <div class="dice-body">
+        <div class="row text-left">
+            <div class="col">
+                <form data-th-action="@{/sheet?sides={s}(s=4)}" method="post">
+                    <table class="table table-striped">
+                        <tr>d4</tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=6)}" method="post">
+                    <table class="table table-striped">
+                        <tr>d6</tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=8)}" method="post">
+                    <table class="table table-striped">
+                        <tr>d8</tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=10)}" method="post">
+                    <table class="table table-striped">
+                        <tr>d10</tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=12)}" method="post">
+                    <table class="table table-striped">
+                        <tr>d12</tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=20)}" method="post">
+                    <table class="table table-striped">
+                        <tr>d20</tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+                <form data-th-action="@{/sheet?sides={s}(s=100)}" method="post" >
+                    <table class="table table-striped">
+                        <tr>d100</tr>
+                        <tr><label>
+                            <input type="number" data-th-name="times"/>
+                        </label></tr>
+                        <tr colspan="2"><button type="submit">Roll</button></tr>
+                    </table>
+                </form>
+            </div>
+
+            <div class="col">
+                You rolled
+                <p data-th-text="${rolled}"></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+-->
 <!-- Modal -->
 <div class="modal fade" id="editOfCharacter" tabindex="-1" aria-labelledby="editOfCharacterLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -232,6 +318,7 @@
         </div>
     </div>
 </div>
+
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
