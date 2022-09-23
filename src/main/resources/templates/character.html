@@ -138,7 +138,7 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6 overflow-auto">
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -173,8 +173,10 @@
     <!-- Custom roll -->
 
     <div class="container px-4 px-lg-5 mt-4">
-        <div class="row">
-            <div class="col-1"><input type="text" class="form-control" name="times" id="times"></div>
+        <div class="row input-group">
+            <div class="col-auto" >
+                <input type="text" class="form-control" style="width: 100px;" name="times" id="times" placeholder="Times">
+            </div>
             <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d4')">d4</button></div>
             <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d6')">d6</button></div>
             <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d8')">d8</button></div>
