@@ -1,4 +1,13 @@
 //targetId ahova az eredményt akarom kiírni, messageId ahova a detailst akarom kiírni
+function getCustomRoll(diceDefinition){
+    const times = document.getElementById("times");
+    if (times){
+        getRoll(times.value + diceDefinition);
+    }else{
+        getRoll(diceDefinition);
+    }
+}
+
 function getRoll(rollDefinition){
     getServerData("http://localhost:8080/api/roll/" + rollDefinition).then(
         roll => message(roll, rollDefinition)

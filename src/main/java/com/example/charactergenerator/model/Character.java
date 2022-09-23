@@ -34,8 +34,8 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int challangeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType){
-        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challangeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType);
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType){
+        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType);
     }
 
     public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, com.example.charactergenerator.model.CharacterType characterType) {
@@ -51,9 +51,6 @@ public class Character {
         attributes.put(AttributeType.INT, intelligence);
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
-
-
-
     }
 
 
