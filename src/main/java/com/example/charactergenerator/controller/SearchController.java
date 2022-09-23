@@ -21,7 +21,8 @@ public class SearchController {
 
 
     @GetMapping("/search")
-    public String searchcaracter(Model model, @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword) {
+    public String searchcaracter(Model model,
+       @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword) {
 
         if (!keyword.isBlank()) {
             model.addAttribute("characters", searchservice.findByName(keyword));
