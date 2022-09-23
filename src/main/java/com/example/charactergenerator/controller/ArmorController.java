@@ -18,7 +18,7 @@ public class ArmorController {
 
     @GetMapping(value = {"/character/{armor}"})
     public String getArmorbyCharacter(Model model){
-        //List<Armor> allArmors = ArmorService.
+       // List<Armor> allArmors = armorService.
 
 
         return "character";
