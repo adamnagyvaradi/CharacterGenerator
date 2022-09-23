@@ -11,7 +11,7 @@ public class Armor {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    private String Name;
+    private String name;
 
     private ArmorType armorType;
 
@@ -24,16 +24,31 @@ public class Armor {
     }
 
     public Armor(String name, ArmorType armorType, byte armorValue, boolean equipped) {
-        Name = name;
+        this.name = name;
         this.armorType = armorType;
         this.armorValue = armorValue;
         this.equipped = equipped;
     }
 
-    public String getName() {
-        return Name;
+    public Armor(long id, String name, ArmorType armorType, byte armorValue, boolean equipped) {
+        this.id = id;
+        this.name = name;
+        this.armorType = armorType;
+        this.armorValue = armorValue;
+        this.equipped = equipped;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public ArmorType getArmorType() {
         return armorType;
