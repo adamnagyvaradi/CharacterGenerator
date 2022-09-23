@@ -50,6 +50,23 @@ public class ArmorService {
 
         return (List<Character>) characterRepository.findAll();
 
+
+
+    }
+
+    @Transactional
+    public void addArmorToCharacters () {
+        List<Character> newCharacters = getNewCharacters();
+
+        List<Armor> armors = (List<Armor>) armorRepository.saveAll(Arrays.asList( new Armor("Padded", ArmorType.LIGHT, (byte) 11),
+                                            new Armor("Chain shirt", ArmorType.MEDIUM, (byte) 13),
+                                            new Armor("Splint", ArmorType.HEAVY, (byte) 17)));
+
+
+        for (Character character : newCharacters) {
+            character.setArmor(armors.get((int) (Math.random() * 3)));
+
+        }
     }
 
     @Transactional
