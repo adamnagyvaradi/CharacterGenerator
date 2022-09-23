@@ -152,7 +152,8 @@
                                 <td th:text="${skill.name}"></td>
                                 <td th:text="${skill.modifier}"></td>
                                 <td>
-                                    <button class="btn align-self-center btn-outline-dark btn-sm" th:onclick="getRoll([[${'d20' + skill.bonusSign + skill.bonus}]])"
+                                    <button class="btn align-self-center btn-outline-dark btn-sm"
+                                            th:onclick="getRoll([[${'d20' + skill.bonusSign + skill.bonus}]])"
                                             th:text="${'('+ skill.bonusSign + skill.bonus + ')'}">(0)</button>
                                 </td>
                             </tr>
