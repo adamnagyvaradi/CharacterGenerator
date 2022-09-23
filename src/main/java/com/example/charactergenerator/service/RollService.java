@@ -6,21 +6,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class RollService {
 
-    public RollDto roll(String rollDescription){
-        int dIndex = rollDescription.indexOf('d');
+    public RollDto roll(String rollDefinition){
+        int dIndex = rollDefinition.indexOf('d');
 
-        int bonusSignIndex = getBonusSignIndex(rollDescription);
+        int bonusSignIndex = getBonusSignIndex(rollDefinition);
 
-        int sides = getSides(rollDescription,dIndex,bonusSignIndex);
+        int sides = getSides(rollDefinition,dIndex,bonusSignIndex);
 
-        int times = getTimes(rollDescription, dIndex);
+        int times = getTimes(rollDefinition, dIndex);
 
-        int bonus = getBonus(rollDescription, bonusSignIndex);
+        int bonus = getBonus(rollDefinition, bonusSignIndex);
 
         RollDto roll = generateRoll(sides,times);
 
         if (bonus != 0){
-            char bonusSign = rollDescription.charAt(bonusSignIndex);
+            char bonusSign = rollDefinition.charAt(bonusSignIndex);
             if (bonusSign == '+'){
                 roll.setResult((short)(roll.getResult() + bonus));
             }else{
