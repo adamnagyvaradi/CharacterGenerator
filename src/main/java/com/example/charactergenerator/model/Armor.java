@@ -1,9 +1,6 @@
 package com.example.charactergenerator.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Armor {
@@ -13,29 +10,27 @@ public class Armor {
     private long id;
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private ArmorType armorType;
 
     private byte armorValue;
 
-    private boolean equipped;
 
 
     public Armor() {
     }
 
-    public Armor(String name, ArmorType armorType, byte armorValue, boolean equipped) {
+    public Armor(String name, ArmorType armorType, byte armorValue) {
         this.name = name;
         this.armorType = armorType;
         this.armorValue = armorValue;
-        this.equipped = equipped;
     }
 
-    public Armor(long id, String name, ArmorType armorType, byte armorValue, boolean equipped) {
+    public Armor(long id, String name, ArmorType armorType, byte armorValue) {
         this.id = id;
         this.name = name;
         this.armorType = armorType;
         this.armorValue = armorValue;
-        this.equipped = equipped;
     }
 
     public long getId() {
