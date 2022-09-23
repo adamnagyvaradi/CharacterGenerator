@@ -70,7 +70,7 @@ public class RollService {
     private int getSides(String rollDescription, int dIndex, int bonusSignIndex){
         int endIndex;
         if (bonusSignIndex == - 1){
-            endIndex = rollDescription.length() - 1;
+            endIndex = rollDescription.length();
         }else{
             endIndex = bonusSignIndex;
         }
