@@ -47,7 +47,7 @@ public class ArmorService {
                             (byte) 12, (byte) 8, (byte) 11, (byte) 8, CharacterType.HUMANOID)
             ));
         }
-        ;
+
         return (List<Character>) characterRepository.findAll();
 
 
