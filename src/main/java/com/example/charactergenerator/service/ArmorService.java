@@ -50,8 +50,6 @@ public class ArmorService {
 
         return (List<Character>) characterRepository.findAll();
 
-
-
     }
 
     @Transactional
