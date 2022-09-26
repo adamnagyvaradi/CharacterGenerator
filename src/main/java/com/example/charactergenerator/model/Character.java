@@ -22,7 +22,7 @@ public class Character {
     private List<Skill> skills;
 
     @Enumerated(EnumType.STRING)
-    private CharacterType CharacterType;
+    private CharacterType characterType;
     /*
     private String characterClass; // List<String> features
     private String race;
@@ -44,7 +44,7 @@ public class Character {
         this.hitPoints = hitPoints;
         this.speed = speed;
         this.challengeRating = challengeRating;
-        CharacterType = characterType;
+        this.characterType = characterType;
         attributes.put(AttributeType.STR, strength);
         attributes.put(AttributeType.DEX, dexterity);
         attributes.put(AttributeType.CON, constitution);
@@ -77,15 +77,15 @@ public class Character {
     }
 
     public String getAttributeBonusRollDescription(String attributeName){
-        String rollDesciption = "d20";
+        String rollDescription = "d20";
         int bonus = getAttributeBonus(attributeName);
         if (bonus > 0){
-            rollDesciption += "+" + bonus;
+            rollDescription += "+" + bonus;
         }else if (bonus < 0){
-            rollDesciption += bonus;
+            rollDescription += bonus;
         }
 
-        return rollDesciption;
+        return rollDescription;
     }
 
     public Long getId() {
@@ -170,11 +170,11 @@ public class Character {
         return skills;
     }
     public com.example.charactergenerator.model.CharacterType getCharacterType() {
-        return CharacterType;
+        return characterType;
     }
 
     public void setCharacterType(com.example.charactergenerator.model.CharacterType characterType) {
-        CharacterType = characterType;
+        this.characterType = characterType;
     }
 
 
