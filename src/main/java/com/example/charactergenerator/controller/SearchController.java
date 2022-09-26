@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SearchController {
     @Autowired
-    private SearchService searchservice;
+    private SearchService searchService;
     @Autowired
     private CharacterService characterService;
 
 
     @GetMapping("/search")
-    public String searchcaracter(Model model,
+    public String searchCharacter(Model model,
        @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword) {
 
         if (!keyword.isBlank()) {
-            model.addAttribute("characters", searchservice.findByName(keyword));
+            model.addAttribute("characters", searchService.findByName(keyword));
         }
         else {
             model.addAttribute("characters",characterService.getAllCharacter());
