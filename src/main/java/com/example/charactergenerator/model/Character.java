@@ -23,6 +23,12 @@ public class Character {
 
     @Enumerated(EnumType.STRING)
     private CharacterType characterType;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "characters_proficiencies",
+        joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
+    private List<SkillType> proficiencies = new ArrayList<>();
+
     /*
     private String characterClass; // List<String> features
     private String race;
@@ -34,11 +40,11 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType){
-        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType);
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, List<SkillType> proficiencies){
+        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
     }
 
-    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, com.example.charactergenerator.model.CharacterType characterType) {
+    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, List<SkillType> proficiencies) {
         this.name = name;
         this.armorClass = armorClass;
         this.hitPoints = hitPoints;
@@ -51,6 +57,7 @@ public class Character {
         attributes.put(AttributeType.INT, intelligence);
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
+        this.proficiencies = proficiencies;
     }
 
 
@@ -169,14 +176,19 @@ public class Character {
 
         return skills;
     }
-    public com.example.charactergenerator.model.CharacterType getCharacterType() {
+    public CharacterType getCharacterType() {
         return characterType;
     }
 
-    public void setCharacterType(com.example.charactergenerator.model.CharacterType characterType) {
+    public void setCharacterType(CharacterType characterType) {
         this.characterType = characterType;
     }
 
+    public List<SkillType> getProficiency() {
+        return proficiencies;
+    }
 
-
+    public void setProficiency(List<SkillType> proficiencies) {
+        this.proficiencies = proficiencies;
+    }
 }

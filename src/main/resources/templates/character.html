@@ -142,6 +142,7 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th>Prof</th>
                                 <th>Name</th>
                                 <th>Modifier</th>
                                 <th>Bonus</th>
@@ -149,6 +150,8 @@
                             </thead>
                             <tbody>
                             <tr th:each="skill: ${character.skills}">
+                                <td th:if="${skill.proficiency}"><i class="bi bi-circle-fill"></i></td>
+                                <td th:unless="${skill.proficiency}"><i class="bi bi-circle"></i></td>
                                 <td th:text="${skill.name}"></td>
                                 <td th:text="${skill.modifier}"></td>
                                 <td>
