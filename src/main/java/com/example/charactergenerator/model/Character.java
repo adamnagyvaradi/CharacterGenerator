@@ -6,7 +6,7 @@ import java.util.*;
 @Entity(name = "characters")
 public class Character {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private byte armorClass;
@@ -15,7 +15,7 @@ public class Character {
     private byte challengeRating;
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_attributes",
-        joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "modifier")
     Map<AttributeType, Byte> attributes = new EnumMap<>(AttributeType.class);
     @Transient
@@ -23,6 +23,11 @@ public class Character {
 
     @Enumerated(EnumType.STRING)
     private CharacterType CharacterType;
+
+    private boolean isCaster;
+
+    @Transient
+    private int[] slots;
     /*
     private String characterClass; // List<String> features
     private String race;
@@ -34,8 +39,8 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType){
-        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType);
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType) {
+        this(name, (byte) armorClass, (short) hitPoints, (byte) speed, (byte) challengeRating, (byte) strength, (byte) dexterity, (byte) constitution, (byte) intelligence, (byte) wisdom, (byte) charisma, characterType);
     }
 
     public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, com.example.charactergenerator.model.CharacterType characterType) {
@@ -54,34 +59,33 @@ public class Character {
     }
 
 
-
-    public byte getAttributeBonus(AttributeType attributeType){
+    public byte getAttributeBonus(AttributeType attributeType) {
         byte attributeValue = getAttributeValue(attributeType);
         return attributeType.getBonus(attributeValue);
     }
 
-    public byte getAttributeBonus(String attributeName){
+    public byte getAttributeBonus(String attributeName) {
         return getAttributeBonus(AttributeType.valueOf(attributeName));
     }
 
-    public byte getAttributeValue(AttributeType attributeType){
+    public byte getAttributeValue(AttributeType attributeType) {
         return attributes.get(attributeType);
     }
 
-    public byte getAttributeValue(String attributeName){
+    public byte getAttributeValue(String attributeName) {
         return getAttributeValue(AttributeType.valueOf(attributeName));
     }
 
-    public void setAttributeValue(AttributeType attributeType, byte value){
-        attributes.put(attributeType,value);
+    public void setAttributeValue(AttributeType attributeType, byte value) {
+        attributes.put(attributeType, value);
     }
 
-    public String getAttributeBonusRollDescription(String attributeName){
+    public String getAttributeBonusRollDescription(String attributeName) {
         String rollDesciption = "d20";
         int bonus = getAttributeBonus(attributeName);
-        if (bonus > 0){
+        if (bonus > 0) {
             rollDesciption += "+" + bonus;
-        }else if (bonus < 0){
+        } else if (bonus < 0) {
             rollDesciption += bonus;
         }
 
@@ -138,7 +142,7 @@ public class Character {
 
     public byte getProficiencyBonus() {
         return switch (challengeRating) {
-            case 0, 1, 2, 3, 4 ->  2;
+            case 0, 1, 2, 3, 4 -> 2;
             case 5, 6, 7, 8 -> 3;
             case 9, 10, 11, 12 -> 4;
             case 13, 14, 15, 16 -> 5;
@@ -146,29 +150,31 @@ public class Character {
             case 21, 22, 23, 24 -> 7;
             case 25, 26, 27, 28 -> 8;
             case 29, 30 -> 9;
-            default -> throw new IllegalStateException("Unexpected value: " + challengeRating);};
-        }
+            default -> throw new IllegalStateException("Unexpected value: " + challengeRating);
+        };
+    }
 
 
-    public Map<AttributeType, Byte> getAttributes(){
+    public Map<AttributeType, Byte> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(Map<AttributeType, Byte> attributes){
+    public void setAttributes(Map<AttributeType, Byte> attributes) {
         this.attributes = attributes;
     }
 
-    private void generateSkills(){
+    private void generateSkills() {
         this.skills = SkillType.getSkillList(this);
     }
 
     public List<Skill> getSkills() {
-        if (skills == null){
+        if (skills == null) {
             generateSkills();
         }
 
         return skills;
     }
+
     public com.example.charactergenerator.model.CharacterType getCharacterType() {
         return CharacterType;
     }
@@ -177,6 +183,133 @@ public class Character {
         CharacterType = characterType;
     }
 
+    public void setCaster(boolean caster) {
+        isCaster = caster;
+    }
 
-
+    public void assignSlots(int level) {
+        if (isCaster && level > 0 && level <= 20) {
+            int[] spellSlots = new int[9];
+            switch (level) {
+                case 1 -> spellSlots[0] = 2;
+                case 2 -> spellSlots[0] = 3;
+                case 3 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 2;
+                }
+                case 4 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                }
+                case 5 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 2;
+                }
+                case 6 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                }
+                case 7 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 1;
+                }
+                case 8 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 2;
+                }
+                case 9 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 1;
+                }
+                case 10 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 2;
+                }
+                case 11, 12 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 2;
+                    spellSlots[5] = 1;
+                }
+                case 13, 14 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 2;
+                    spellSlots[5] = 1;
+                    spellSlots[6] = 1;
+                }
+                case 15, 16 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 2;
+                    spellSlots[5] = 1;
+                    spellSlots[6] = 1;
+                    spellSlots[7] = 1;
+                }
+                case 17 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 2;
+                    spellSlots[5] = 1;
+                    spellSlots[6] = 1;
+                    spellSlots[7] = 1;
+                    spellSlots[8] = 1;
+                }
+                case 18 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 3;
+                    spellSlots[5] = 1;
+                    spellSlots[6] = 1;
+                    spellSlots[7] = 1;
+                    spellSlots[8] = 1;
+                }
+                case 19 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 3;
+                    spellSlots[5] = 2;
+                    spellSlots[6] = 1;
+                    spellSlots[7] = 1;
+                    spellSlots[8] = 1;
+                }
+                case 20 -> {
+                    spellSlots[0] = 4;
+                    spellSlots[1] = 3;
+                    spellSlots[2] = 3;
+                    spellSlots[3] = 3;
+                    spellSlots[4] = 3;
+                    spellSlots[5] = 2;
+                    spellSlots[6] = 2;
+                    spellSlots[7] = 1;
+                    spellSlots[8] = 1;
+                }
+            }
+            slots = spellSlots;
+        }
+    }
 }
