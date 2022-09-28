@@ -14,6 +14,8 @@ public class Character {
     private byte speed;
     private byte challengeRating;
 
+    @ManyToOne
+    @JoinColumn (name = "armor_id")
     private Armor armor;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -112,7 +114,11 @@ public class Character {
     }
 
     public byte getArmorClass() {
-        return armorClass;
+        if (armor == null) {
+            return armorClass;
+        }
+
+        return armor.getArmorValue(getAttributeValue(AttributeType.DEX));
     }
 
     public void setArmorClass(byte armorClass) {
