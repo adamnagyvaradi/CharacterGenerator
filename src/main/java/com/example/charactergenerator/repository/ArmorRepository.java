@@ -1,4 +1,8 @@
 package com.example.charactergenerator.repository;
 
-public interface ArmorRepository {
+import com.example.charactergenerator.model.Armor;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ArmorRepository extends CrudRepository<Armor,Long> {
+
 }
