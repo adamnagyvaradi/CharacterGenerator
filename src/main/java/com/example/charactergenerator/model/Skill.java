@@ -34,4 +34,14 @@ public class Skill {
     public String getBonusSign(){
         return getBonus() > 0 ? "+" : "";
     }
+
+    public String getRollDefinition(){
+        if (getBonus() < 0) {
+            return "d20" + getBonus();
+        }else if (getBonus()> 0){
+            return "d20+" + getBonus();
+        }else{
+            return "d20";
+        }
+    }
 }

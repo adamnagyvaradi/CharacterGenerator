@@ -156,7 +156,7 @@
                                 <td th:text="${skill.modifier}"></td>
                                 <td>
                                     <button class="btn align-self-center btn-outline-dark btn-sm"
-                                            th:onclick="getRoll([[${'d20' + skill.bonusSign + skill.bonus}]])"
+                                            th:onclick="getRoll([[${skill.rollDefinition}]])"
                                             th:text="${'('+ skill.bonusSign + skill.bonus + ')'}">(0)</button>
                                 </td>
                             </tr>
