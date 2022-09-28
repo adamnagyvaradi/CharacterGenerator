@@ -31,7 +31,7 @@ public class SpellCaster {
         this.slots = slots;
     }
 
-    public void assignSlots(int level){
+  /*  public void assignSlots(int level){
         int[] spellSlots = new int[10];
 
         switch (level) {
@@ -167,6 +167,6 @@ public class SpellCaster {
 
         slots = spellSlots;
 
-     }
+     }*/
 
 }
