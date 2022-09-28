@@ -32,12 +32,6 @@ public class Character {
 
     @Transient
     private int[] slots;
-    /*
-    private String characterClass; // List<String> features
-    private String race;
-    private String background;
-    private List<String> equipment;
-    */
 
     public Character() {
 
