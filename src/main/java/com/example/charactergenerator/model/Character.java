@@ -21,6 +21,10 @@ public class Character {
     @Transient
     private List<Skill> skills;
 
+    @ManyToOne
+    @JoinColumn (name = "armor_id")
+    private Armor armor;
+
     @Enumerated(EnumType.STRING)
     private CharacterType CharacterType;
 

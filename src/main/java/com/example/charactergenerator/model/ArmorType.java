@@ -1,4 +1,4 @@
-package com.example.charactergenerator.model.armor;
+package com.example.charactergenerator.model;
 
 public enum ArmorType {
 
