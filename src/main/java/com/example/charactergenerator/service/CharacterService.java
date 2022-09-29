@@ -20,8 +20,6 @@ public class CharacterService {
         return characterRepository.findCharactersByName(characterName).orElseThrow();
     }
 
-
-
     public Character findById(long id){
         return characterRepository.findById(id).orElseThrow();
     }
@@ -40,5 +38,9 @@ public class CharacterService {
         character.setAttributeValue(AttributeType.CHA, characterDto.getCharisma());
 
         save(character);
+    }
+
+    public List<Character> findAll() {
+        return (List<Character>) characterRepository.findAll();
     }
 }
