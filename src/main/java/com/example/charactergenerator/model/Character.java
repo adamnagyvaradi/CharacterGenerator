@@ -26,10 +26,6 @@ public class Character {
     @Transient
     private List<Skill> skills;
 
-    @ManyToOne
-    @JoinColumn (name = "armor_id")
-    private Armor armor;
-
     @Enumerated(EnumType.STRING)
     private CharacterType characterType;
 
@@ -37,14 +33,6 @@ public class Character {
     @CollectionTable(name = "characters_proficiencies",
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
     private List<SkillType> proficiencies = new ArrayList<>();
-
-    /*
-    private String characterClass; // List<String> features
-    private String race;
-    private String background;
-    private List<String> equipment;
-    */
-    private CharacterType CharacterType;
 
     private boolean isCaster;
 
@@ -218,7 +206,7 @@ public class Character {
     }
 
     public com.example.charactergenerator.model.CharacterType getCharacterType() {
-        return CharacterType;
+        return characterType;
     }
 
     public void setCharacterType(CharacterType characterType) {
