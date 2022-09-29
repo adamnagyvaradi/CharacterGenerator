@@ -56,9 +56,19 @@ public class ArmorService {
     public void addArmorToCharacters () {
         List<Character> newCharacters = getNewCharacters();
 
-        List<Armor> armors = (List<Armor>) armorRepository.saveAll(Arrays.asList( new Armor("Padded", ArmorType.LIGHT, (byte) 11),
-                                            new Armor("Chain shirt", ArmorType.MEDIUM, (byte) 13),
-                                            new Armor("Splint", ArmorType.HEAVY, (byte) 17)));
+        List<Armor> armors = (List<Armor>) armorRepository.saveAll(Arrays.asList(
+                new Armor("Padded", ArmorType.LIGHT, (byte) 11),
+                new Armor("Leather", ArmorType.LIGHT, (byte) 11),
+                new Armor("Studded leather", ArmorType.LIGHT, (byte) 12),
+                new Armor("Hide", ArmorType.MEDIUM, (byte) 12),
+                new Armor("Chain shirt", ArmorType.MEDIUM, (byte) 13),
+                new Armor("Scale mail", ArmorType.MEDIUM, (byte) 14),
+                new Armor("Breastplate", ArmorType.MEDIUM, (byte) 14),
+                new Armor("Half plate", ArmorType.MEDIUM, (byte) 15),
+                new Armor("Ring mail", ArmorType.HEAVY, (byte) 14),
+                new Armor("Chain mail", ArmorType.HEAVY, (byte) 16),
+                new Armor("Splint", ArmorType.HEAVY, (byte) 17),
+                new Armor("Plate", ArmorType.HEAVY, (byte) 18)));
 
 
         for (Character character : newCharacters) {
