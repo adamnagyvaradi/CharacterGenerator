@@ -1,7 +1,12 @@
 package com.example.charactergenerator.dto;
 
-import com.example.charactergenerator.model.AttributeType;
+import com.example.charactergenerator.model.*;
 import com.example.charactergenerator.model.Character;
+
+import javax.persistence.*;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 public class CharacterDto {
     private long id;
@@ -12,6 +17,26 @@ public class CharacterDto {
     private byte intelligence;
     private byte wisdom;
     private byte charisma;
+
+    private byte armorClass;
+
+    private short hitPoints;
+
+    private byte speed;
+
+    private byte challengeRating;
+
+    Map<AttributeType, Byte> attributes = new EnumMap<>(AttributeType.class);
+
+    private List<Skill> skills;
+
+    private Armor armor;
+
+    private CharacterType CharacterType;
+
+    private boolean isCaster;
+
+    private int[] slots;
 
     public CharacterDto() {
     }
