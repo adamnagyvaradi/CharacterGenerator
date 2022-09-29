@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CharacterRepository extends CrudRepository<Character,Long> {
 
-    Optional<Character>findCharactersByName(String charactername);
+    Optional<Character>findCharactersByName(String characterName);
 
 }
