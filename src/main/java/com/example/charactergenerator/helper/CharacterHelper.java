@@ -20,6 +20,7 @@ public class CharacterHelper implements ApplicationRunner {
 
     private ArmorService armorService;
 
+
     @Autowired
     public void setArmorRepository(ArmorService armorService) {
         this.armorService = armorService;
@@ -42,6 +43,15 @@ public class CharacterHelper implements ApplicationRunner {
 
     private void saveArmors(){
         armorService.saveAll(getAllArmors());
+    }
+
+    public Armor getArmorByName(String name){
+        for (Armor armor : getAllArmors()) {
+            if (armor.getName().equals(name)) {
+                return armor;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     private List<Character> getCharacters(){
@@ -69,7 +79,7 @@ public class CharacterHelper implements ApplicationRunner {
                 new Character("Bandit", 10, 7, 8, 4, 4, 4, 8,
                         11, 4, 4, CharacterType.HUMANOID,new ArrayList<>()),
                 new Character("Bandit Captain", 10, 7, 8, 4, 4, 4, 8,
-                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>()),
+                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>()).setArmor(getArmorByName("Chain shirt")),
                 new Character("Drow Inquisitor", 10, 7, 8, 4, 4, 4, 8,
                         11, 4, 4,  CharacterType.HUMANOID, new ArrayList<>()),
                 new Character("Grimlock", 11, 11, 30, 2, 16, 12, 12,
@@ -83,19 +93,19 @@ public class CharacterHelper implements ApplicationRunner {
 
     public List<Armor> getAllArmors() {
 
-        return new ArrayList<>(Arrays.asList( new Armor("Padded", ArmorType.LIGHT, (byte) 11),
-                new Armor("Padded", ArmorType.LIGHT, (byte) 11),
-                new Armor("Leather", ArmorType.LIGHT, (byte) 11),
-                new Armor("Studded leather", ArmorType.LIGHT, (byte) 12),
-                new Armor("Hide", ArmorType.MEDIUM, (byte) 12),
-                new Armor("Chain shirt", ArmorType.MEDIUM, (byte) 13),
-                new Armor("Scale mail", ArmorType.MEDIUM, (byte) 14),
-                new Armor("Breastplate", ArmorType.MEDIUM, (byte) 14),
-                new Armor("Half plate", ArmorType.MEDIUM, (byte) 15),
-                new Armor("Ring mail", ArmorType.HEAVY, (byte) 14),
-                new Armor("Chain mail", ArmorType.HEAVY, (byte) 16),
-                new Armor("Splint", ArmorType.HEAVY, (byte) 17),
-                new Armor("Plate", ArmorType.HEAVY, (byte) 18)));
+        return new ArrayList<>(Arrays.asList(
+                new Armor(1,"Padded", ArmorType.LIGHT, (byte) 11),
+                new Armor(3,"Leather", ArmorType.LIGHT, (byte) 11),
+                new Armor(4, "Studded leather", ArmorType.LIGHT, (byte) 12),
+                new Armor(5,"Hide", ArmorType.MEDIUM, (byte) 12),
+                new Armor(6,"Chain shirt", ArmorType.MEDIUM, (byte) 13),
+                new Armor(7,"Scale mail", ArmorType.MEDIUM, (byte) 14),
+                new Armor(8,"Breastplate", ArmorType.MEDIUM, (byte) 14),
+                new Armor(9,"Half plate", ArmorType.MEDIUM, (byte) 15),
+                new Armor(10,"Ring mail", ArmorType.HEAVY, (byte) 14),
+                new Armor(11,"Chain mail", ArmorType.HEAVY, (byte) 16),
+                new Armor(12,"Splint", ArmorType.HEAVY, (byte) 17),
+                new Armor(13,"Plate", ArmorType.HEAVY, (byte) 18)));
     }
 
 }

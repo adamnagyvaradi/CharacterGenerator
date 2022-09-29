@@ -28,4 +28,8 @@ public class ArmorService {
         armorRepository.saveAll(armors);
     }
 
+    public List<Armor> findAll(){
+        return (List<Armor>) armorRepository.findAll();
+    }
+
 }

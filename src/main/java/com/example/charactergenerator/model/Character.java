@@ -121,7 +121,7 @@ public class Character {
             return armorClass;
         }
 
-        return armor.getArmorValue(getAttributeValue(AttributeType.DEX));
+        return armor.getArmorValue(getAttributeBonus(AttributeType.DEX));
     }
 
     public void setArmorClass(byte armorClass) {
@@ -170,8 +170,9 @@ public class Character {
         return armor;
     }
 
-    public void setArmor(Armor armor) {
+    public Character setArmor(Armor armor) {
         this.armor = armor;
+        return this;
     }
 
     public Map<AttributeType, Byte> getAttributes(){
