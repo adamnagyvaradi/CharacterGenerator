@@ -107,7 +107,10 @@ public class Character {
     }
 
     public byte getArmorClass() {
-        return armorClass;
+        if (armor == null){
+            return armorClass;
+        }
+        return armor.getArmorClass(getAttributeBonus(AttributeType.DEX));
     }
 
     public void setArmorClass(byte armorClass) {
@@ -159,6 +162,26 @@ public class Character {
 
     public void setAttributes(Map<AttributeType, Byte> attributes) {
         this.attributes = attributes;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+
+    public boolean isCaster() {
+        return isCaster;
+    }
+
+    public int[] getSlots() {
+        return slots;
+    }
+
+    public void setSlots(int[] slots) {
+        this.slots = slots;
     }
 
     private void generateSkills() {
