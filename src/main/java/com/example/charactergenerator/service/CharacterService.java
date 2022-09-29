@@ -3,6 +3,7 @@ package com.example.charactergenerator.service;
 import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.AttributeType;
 import com.example.charactergenerator.model.Character;
+import com.example.charactergenerator.repository.ArmorRepository;
 import com.example.charactergenerator.repository.CharacterRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,8 @@ import java.util.List;
 public class CharacterService {
 
     private CharacterRepository characterRepository;
+
+    private ArmorRepository armorRepository;
 
     public CharacterService(CharacterRepository characterRepository) {
         this.characterRepository= characterRepository;

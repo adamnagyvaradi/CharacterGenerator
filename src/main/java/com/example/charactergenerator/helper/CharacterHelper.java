@@ -1,9 +1,10 @@
 package com.example.charactergenerator.helper;
 
+import com.example.charactergenerator.model.*;
 import com.example.charactergenerator.model.Character;
-import com.example.charactergenerator.model.SkillType;
+import com.example.charactergenerator.repository.ArmorRepository;
+import com.example.charactergenerator.service.ArmorService;
 import com.example.charactergenerator.service.CharacterService;
-import com.example.charactergenerator.model.CharacterType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,6 +18,13 @@ import java.util.List;
 public class CharacterHelper implements ApplicationRunner {
     private CharacterService characterService;
 
+    private ArmorService armorService;
+
+    @Autowired
+    public void setArmorRepository(ArmorService armorService) {
+        this.armorService = armorService;
+    }
+
     @Autowired
     public void setCharacterService(CharacterService characterService) {
         this.characterService = characterService;
@@ -24,11 +32,16 @@ public class CharacterHelper implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        saveArmors();
         saveCharacters();
     }
 
     private void saveCharacters(){
         getCharacters().forEach(character -> characterService.save(character));
+    }
+
+    private void saveArmors(){
+        armorService.saveAll(getAllArmors());
     }
 
     private List<Character> getCharacters(){
@@ -46,8 +59,43 @@ public class CharacterHelper implements ApplicationRunner {
                 new Character("Ankheg",14, 39, 30, 10,
                         17, 11, 13, 1, 13, 6,CharacterType.MONSTROSITY, new ArrayList<>()),
                 new Character("Ankylosaurus",15, 68, 30, 16,
-                        19,11,15,2,12,5,CharacterType.BEAST, new ArrayList<>())
+                        19,11,15,2,12,5,CharacterType.BEAST, new ArrayList<>()),
+                new Character("Hobgoblin", 10, 7, 8, 4, 4, 4, 8,
+                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>()),
+                new Character("Giant Skeleton", 10, 7, 8, 4, 4, 4,  8,
+                        11, 4, 4, CharacterType.UNDEAD, new ArrayList<>()),
+                new Character("Aarakocra", 10, 7, 8, 4, 4, 4, 8,
+                        11, 4, 4, CharacterType.ABERRATION, new ArrayList<>()),
+                new Character("Bandit", 10, 7, 8, 4, 4, 4, 8,
+                        11, 4, 4, CharacterType.HUMANOID,new ArrayList<>()),
+                new Character("Bandit Captain", 10, 7, 8, 4, 4, 4, 8,
+                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>()),
+                new Character("Drow Inquisitor", 10, 7, 8, 4, 4, 4, 8,
+                        11, 4, 4,  CharacterType.HUMANOID, new ArrayList<>()),
+                new Character("Grimlock", 11, 11, 30, 2, 16, 12, 12,
+                        9, 8, 6, CharacterType.BEAST, new ArrayList<>()),
+                new Character("Merfolk", 11, 11, 10, 2, 10, 13, 12,
+                        11, 11, 12, CharacterType.HUMANOID, new ArrayList<>()),
+                new Character("Tribal Warrior", 12, 11, 30, 2, 13, 11,
+                        12, 8, 11, 8, CharacterType.HUMANOID, new ArrayList<>())
         ));
+    }
+
+    public List<Armor> getAllArmors() {
+
+        return new ArrayList<>(Arrays.asList( new Armor("Padded", ArmorType.LIGHT, (byte) 11),
+                new Armor("Padded", ArmorType.LIGHT, (byte) 11),
+                new Armor("Leather", ArmorType.LIGHT, (byte) 11),
+                new Armor("Studded leather", ArmorType.LIGHT, (byte) 12),
+                new Armor("Hide", ArmorType.MEDIUM, (byte) 12),
+                new Armor("Chain shirt", ArmorType.MEDIUM, (byte) 13),
+                new Armor("Scale mail", ArmorType.MEDIUM, (byte) 14),
+                new Armor("Breastplate", ArmorType.MEDIUM, (byte) 14),
+                new Armor("Half plate", ArmorType.MEDIUM, (byte) 15),
+                new Armor("Ring mail", ArmorType.HEAVY, (byte) 14),
+                new Armor("Chain mail", ArmorType.HEAVY, (byte) 16),
+                new Armor("Splint", ArmorType.HEAVY, (byte) 17),
+                new Armor("Plate", ArmorType.HEAVY, (byte) 18)));
     }
 
 }
