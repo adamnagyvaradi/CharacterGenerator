@@ -21,7 +21,7 @@ public class ArmorController {
 
     @GetMapping(value = {"/test"})
     public String getArmorbyCharacter(Model model){
-       armorService.addArmorToCharacters();
+       //armorService.addArmorToCharacters();
 
 
         return "character";

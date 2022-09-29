@@ -1,4 +1,4 @@
 package com.example.charactergenerator.model;
 
-public class Weapon {
+public class RangedWeapon {
 }
