@@ -20,6 +20,10 @@ public class CharacterService {
         return characterRepository.findCharactersByName(characterName).orElseThrow();
     }
 
+    public List<Character> findAllByNameContains(String keyword){
+        return characterRepository.findAllByNameContains(keyword);
+    }
+
     public Character findById(long id){
         return characterRepository.findById(id).orElseThrow();
     }

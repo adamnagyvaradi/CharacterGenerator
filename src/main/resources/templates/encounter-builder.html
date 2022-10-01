@@ -22,7 +22,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-            <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/encounter/build}">Encounter</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/encounter/builder}">Encounter</a></li>
         </ul>
         <!--
         <form class="d-flex">
@@ -44,27 +44,50 @@
       <div class="col-8">
         <div class="row">
           <div class="col">
-            <!-- keresés -->
+            <form class="row g-3" th:action="@{/search}" method="get">
+              <div class="col">
+                <label for="txtSearch" class="visually-hidden">Search</label>
+                <input type="text" class="form-control" id="txtSearch" name="keyword" placeholder="Search">
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-dark mb-3">Search</button>
+              </div>
+            </form>
           </div>
         </div>
         <div class="row">
-          <div class="col">
+          <div class="col overflow-auto">
             <table class="table table-striped">
               <thead>
 
               </thead>
               <tbody>
                 <tr th:each="character: ${characters}">
-
                   <td th:text="${character.name}"></td>
-
+                  <td style="width: 45px">
+                    <form th:action="@{/encounter/builder/character/add/{id}(id=${character.id})}" method="post">
+                      <button class="btn btn-dark btn-sm">+</button>
+                    </form>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <div class="col-4"></div>
+      <div class="col-4">
+        <div class="row">
+          <div class="col overflow-auto" style="max-height: 75vh">
+            <table class="table table-striped">
+              <tbody>
+                <tr th:each="character: ${charactersCart}">
+                  <td th:text="${character.name}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

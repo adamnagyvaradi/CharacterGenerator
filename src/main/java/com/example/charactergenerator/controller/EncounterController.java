@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,14 +28,29 @@ public class EncounterController {
         this.encounterService = encounterService;
     }
 
-    @GetMapping("/encounter/build")
-    public String showEncounterBuilder(Model model){
-        List<Character> characters = characterService.findAll();
-        List<Character> charactersCart = encounterService.getAllCharacter();
+    @GetMapping("/encounter/builder")
+    public String showEncounterBuilder(Model model,
+                                       @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword){
+        List<Character> characters;
+
+        if(keyword.isBlank()){
+            characters = characterService.findAllByNameContains(keyword);
+        }else{
+            characters = characterService.findAll();
+        }
 
         model.addAttribute("characters",characters);
-        model.addAttribute("charactersCart",charactersCart);
+        model.addAttribute("charactersCart",encounterService.getAllCharacter());
 
         return "encounter-builder";
     }
+
+    @PostMapping("/encounter/builder/character/add/{id}")
+    public String addCharacterIntoBuilder(@PathVariable long id){
+        encounterService.addCharacter(id);
+
+        return "redirect:/encounter/builder";
+    }
+
+
 }
