@@ -1,14 +1,10 @@
 package com.example.charactergenerator.repository;
 
 
-
 import com.example.charactergenerator.model.Character;
-import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 
@@ -18,6 +14,6 @@ public interface SearchRepository extends JpaRepository<Character,Long> {
     //@Query("SELECT characters FROM characters WHERE characters.name LIKE %?1%")
     List<Character> findByKeyword(@Param("keyword") String keyword);*/
 
-    List<Character> findCharactersByNameContains(String charactername);
+    List<Character> findCharactersByNameContains(String characterName);
 }
 

@@ -142,6 +142,7 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th>Prof</th>
                                 <th>Name</th>
                                 <th>Modifier</th>
                                 <th>Bonus</th>
@@ -149,11 +150,13 @@
                             </thead>
                             <tbody>
                             <tr th:each="skill: ${character.skills}">
+                                <td th:if="${skill.proficiency}"><i class="bi bi-circle-fill"></i></td>
+                                <td th:unless="${skill.proficiency}"><i class="bi bi-circle"></i></td>
                                 <td th:text="${skill.name}"></td>
                                 <td th:text="${skill.modifier}"></td>
                                 <td>
                                     <button class="btn align-self-center btn-outline-dark btn-sm"
-                                            th:onclick="getRoll([[${'d20' + skill.bonusSign + skill.bonus}]])"
+                                            th:onclick="getRoll([[${skill.rollDefinition}]])"
                                             th:text="${'('+ skill.bonusSign + skill.bonus + ')'}">(0)</button>
                                 </td>
                             </tr>
@@ -182,98 +185,13 @@
             <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d6')">d6</button></div>
             <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d8')">d8</button></div>
             <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d10')">d10</button></div>
+            <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d12')">d12</button></div>
             <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d20')">d20</button></div>
             <div class="col-auto"><button class="btn btn-dark" onclick="getCustomRoll('d100')">d100</button></div>
         </div>
     </div>
 </section>
 
-<!--
-<div class="container px-4 px-lg-5 mt-4">
-    <div class="dice">
-        <div class="dice-header">
-            <h1>Dice</h1>
-        </div>
-    </div>
-    <hr>
-
-    <div class="dice-body">
-        <div class="row text-left">
-            <div class="col">
-                <form data-th-action="@{/sheet?sides={s}(s=4)}" method="post">
-                    <table class="table table-striped">
-                        <tr>d4</tr>
-                        <tr><label>
-                            <input type="number" data-th-name="times"/>
-                        </label></tr>
-                        <tr colspan="2"><button type="submit">Roll</button></tr>
-                    </table>
-                </form>
-                <form data-th-action="@{/sheet?sides={s}(s=6)}" method="post">
-                    <table class="table table-striped">
-                        <tr>d6</tr>
-                        <tr><label>
-                            <input type="number" data-th-name="times"/>
-                        </label></tr>
-                        <tr colspan="2"><button type="submit">Roll</button></tr>
-                    </table>
-                </form>
-                <form data-th-action="@{/sheet?sides={s}(s=8)}" method="post">
-                    <table class="table table-striped">
-                        <tr>d8</tr>
-                        <tr><label>
-                            <input type="number" data-th-name="times"/>
-                        </label></tr>
-                        <tr colspan="2"><button type="submit">Roll</button></tr>
-                    </table>
-                </form>
-                <form data-th-action="@{/sheet?sides={s}(s=10)}" method="post">
-                    <table class="table table-striped">
-                        <tr>d10</tr>
-                        <tr><label>
-                            <input type="number" data-th-name="times"/>
-                        </label></tr>
-                        <tr colspan="2"><button type="submit">Roll</button></tr>
-                    </table>
-                </form>
-                <form data-th-action="@{/sheet?sides={s}(s=12)}" method="post">
-                    <table class="table table-striped">
-                        <tr>d12</tr>
-                        <tr><label>
-                            <input type="number" data-th-name="times"/>
-                        </label></tr>
-                        <tr colspan="2"><button type="submit">Roll</button></tr>
-                    </table>
-                </form>
-                <form data-th-action="@{/sheet?sides={s}(s=20)}" method="post">
-                    <table class="table table-striped">
-                        <tr>d20</tr>
-                        <tr><label>
-                            <input type="number" data-th-name="times"/>
-                        </label></tr>
-                        <tr colspan="2"><button type="submit">Roll</button></tr>
-                    </table>
-                </form>
-                <form data-th-action="@{/sheet?sides={s}(s=100)}" method="post" >
-                    <table class="table table-striped">
-                        <tr>d100</tr>
-                        <tr><label>
-                            <input type="number" data-th-name="times"/>
-                        </label></tr>
-                        <tr colspan="2"><button type="submit">Roll</button></tr>
-                    </table>
-                </form>
-            </div>
-
-            <div class="col">
-                You rolled
-                <p data-th-text="${rolled}"></p>
-            </div>
-
-        </div>
-    </div>
-</div>
--->
 <!-- Modal -->
 <div class="modal fade" id="editOfCharacter" tabindex="-1" aria-labelledby="editOfCharacterLabel" aria-hidden="true">
     <div class="modal-dialog">

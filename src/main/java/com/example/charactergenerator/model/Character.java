@@ -6,13 +6,18 @@ import java.util.*;
 @Entity(name = "characters")
 public class Character {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private byte armorClass;
     private short hitPoints; // hit dice
     private byte speed;
     private byte challengeRating;
+
+    @ManyToOne
+    @JoinColumn (name = "armor_id")
+    private Armor armor;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_attributes",
             joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
@@ -21,12 +26,13 @@ public class Character {
     @Transient
     private List<Skill> skills;
 
-    @ManyToOne
-    @JoinColumn (name = "armor_id")
-    private Armor armor;
-
     @Enumerated(EnumType.STRING)
-    private CharacterType CharacterType;
+    private CharacterType characterType;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "characters_proficiencies",
+        joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
+    private List<SkillType> proficiencies = new ArrayList<>();
 
     private boolean isCaster;
 
@@ -37,53 +43,55 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType) {
-        this(name, (byte) armorClass, (short) hitPoints, (byte) speed, (byte) challengeRating, (byte) strength, (byte) dexterity, (byte) constitution, (byte) intelligence, (byte) wisdom, (byte) charisma, characterType);
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, List<SkillType> proficiencies){
+        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
     }
 
-    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, com.example.charactergenerator.model.CharacterType characterType) {
+    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, List<SkillType> proficiencies) {
         this.name = name;
         this.armorClass = armorClass;
         this.hitPoints = hitPoints;
         this.speed = speed;
         this.challengeRating = challengeRating;
-        CharacterType = characterType;
+        this.characterType = characterType;
         attributes.put(AttributeType.STR, strength);
         attributes.put(AttributeType.DEX, dexterity);
         attributes.put(AttributeType.CON, constitution);
         attributes.put(AttributeType.INT, intelligence);
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
+        this.proficiencies = proficiencies;
     }
 
 
-    public byte getAttributeBonus(AttributeType attributeType) {
+
+    public byte getAttributeBonus(AttributeType attributeType){
         byte attributeValue = getAttributeValue(attributeType);
         return attributeType.getBonus(attributeValue);
     }
 
-    public byte getAttributeBonus(String attributeName) {
+    public byte getAttributeBonus(String attributeName){
         return getAttributeBonus(AttributeType.valueOf(attributeName));
     }
 
-    public byte getAttributeValue(AttributeType attributeType) {
+    public byte getAttributeValue(AttributeType attributeType){
         return attributes.get(attributeType);
     }
 
-    public byte getAttributeValue(String attributeName) {
+    public byte getAttributeValue(String attributeName){
         return getAttributeValue(AttributeType.valueOf(attributeName));
     }
 
-    public void setAttributeValue(AttributeType attributeType, byte value) {
-        attributes.put(attributeType, value);
+    public void setAttributeValue(AttributeType attributeType, byte value){
+        attributes.put(attributeType,value);
     }
 
-    public String getAttributeBonusRollDescription(String attributeName) {
+    public String getAttributeBonusRollDescription(String attributeName){
         String rollDesciption = "d20";
         int bonus = getAttributeBonus(attributeName);
-        if (bonus > 0) {
+        if (bonus > 0){
             rollDesciption += "+" + bonus;
-        } else if (bonus < 0) {
+        }else if (bonus < 0){
             rollDesciption += bonus;
         }
 
@@ -168,6 +176,11 @@ public class Character {
         return armor;
     }
 
+    public Character equipArmor(Armor armor) {
+        this.armor = armor;
+        return this;
+    }
+
     public void setArmor(Armor armor) {
         this.armor = armor;
     }
@@ -189,7 +202,7 @@ public class Character {
     }
 
     public List<Skill> getSkills() {
-        if (skills == null) {
+        if (skills == null){
             generateSkills();
         }
 
@@ -197,17 +210,23 @@ public class Character {
     }
 
     public com.example.charactergenerator.model.CharacterType getCharacterType() {
-        return CharacterType;
+        return characterType;
     }
 
-    public void setCharacterType(com.example.charactergenerator.model.CharacterType characterType) {
-        CharacterType = characterType;
+    public void setCharacterType(CharacterType characterType) {
+        this.characterType = characterType;
     }
 
+    public List<SkillType> getProficiency() {
+        return proficiencies;
+    }
     public void setCaster(boolean caster) {
         isCaster = caster;
     }
 
+    public void setProficiency(List<SkillType> proficiencies) {
+        this.proficiencies = proficiencies;
+    }
     public void assignSlots(int level) {
         if (isCaster && level > 0 && level <= 20) {
             int[] spellSlots;
