@@ -3,7 +3,6 @@ package com.example.charactergenerator.service;
 import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.AttributeType;
 import com.example.charactergenerator.model.Character;
-import com.example.charactergenerator.repository.ArmorRepository;
 import com.example.charactergenerator.repository.CharacterRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +12,16 @@ public class CharacterService {
 
     private CharacterRepository characterRepository;
 
-    private ArmorRepository armorRepository;
-
     public CharacterService(CharacterRepository characterRepository) {
         this.characterRepository= characterRepository;
     }
 
     public Character findByName(String characterName) {
         return characterRepository.findCharactersByName(characterName).orElseThrow();
+    }
+
+    public List<Character> findAllByNameContains(String keyword){
+        return characterRepository.findAllByNameContains(keyword);
     }
 
     public Character findById(long id){
@@ -41,5 +42,9 @@ public class CharacterService {
         character.setAttributeValue(AttributeType.CHA, characterDto.getCharisma());
 
         save(character);
+    }
+
+    public List<Character> findAll() {
+        return (List<Character>) characterRepository.findAll();
     }
 }
