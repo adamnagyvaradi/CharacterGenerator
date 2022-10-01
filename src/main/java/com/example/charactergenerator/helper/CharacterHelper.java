@@ -79,7 +79,7 @@ public class CharacterHelper implements ApplicationRunner {
                 new Character("Bandit", 10, 7, 8, 4, 4, 4, 8,
                         11, 4, 4, CharacterType.HUMANOID,new ArrayList<>()),
                 new Character("Bandit Captain", 10, 7, 8, 4, 4, 4, 8,
-                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>()).equipArmor(getArmorByName("Leather")),
+                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>()).equipArmor(getArmorByName("Plate")),
                 new Character("Drow Inquisitor", 10, 7, 8, 4, 4, 4, 8,
                         11, 4, 4,  CharacterType.HUMANOID, new ArrayList<>()),
                 new Character("Grimlock", 11, 11, 30, 2, 16, 12, 12,

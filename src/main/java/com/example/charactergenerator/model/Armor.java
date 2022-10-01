@@ -16,7 +16,6 @@ public class Armor {
     private byte armorValue;
 
 
-
     public Armor() {
     }
 

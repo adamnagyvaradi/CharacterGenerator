@@ -18,6 +18,14 @@ public class Character {
     @JoinColumn (name = "armor_id")
     private Armor armor;
 
+    @ManyToOne
+    @JoinColumn (name = "meleeWeapon_id")
+    private MeleeWeapon meleeWeapon;
+
+    @ManyToOne
+    @JoinColumn(name = "rangedWeapon_id")
+    private RangedWeapon rangedWeapon;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_attributes",
             joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
@@ -62,8 +70,6 @@ public class Character {
         attributes.put(AttributeType.CHA, charisma);
         this.proficiencies = proficiencies;
     }
-
-
 
     public byte getAttributeBonus(AttributeType attributeType){
         byte attributeValue = getAttributeValue(attributeType);
@@ -176,13 +182,14 @@ public class Character {
         return armor;
     }
 
-    public Character equipArmor(Armor armor) {
-        this.armor = armor;
-        return this;
-    }
 
     public void setArmor(Armor armor) {
         this.armor = armor;
+    }
+
+    public Character equipArmor(Armor armor) {
+        this.armor = armor;
+        return this;
     }
 
     public boolean isCaster() {
@@ -220,8 +227,25 @@ public class Character {
     public List<SkillType> getProficiency() {
         return proficiencies;
     }
+
     public void setCaster(boolean caster) {
         isCaster = caster;
+    }
+
+    public MeleeWeapon getMeleeWeapon() {
+        return meleeWeapon;
+    }
+
+    public void setMeleeWeapon(MeleeWeapon meleeWeapon) {
+        this.meleeWeapon = meleeWeapon;
+    }
+
+    public RangedWeapon getRangedWeapon() {
+        return rangedWeapon;
+    }
+
+    public void setRangedWeapon(RangedWeapon rangedWeapon) {
+        this.rangedWeapon = rangedWeapon;
     }
 
     public void setProficiency(List<SkillType> proficiencies) {
