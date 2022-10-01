@@ -34,9 +34,9 @@ public class EncounterController {
         List<Character> characters;
 
         if(keyword.isBlank()){
-            characters = characterService.findAllByNameContains(keyword);
-        }else{
             characters = characterService.findAll();
+        }else{
+            characters = characterService.findAllByNameContains(keyword);
         }
 
         model.addAttribute("characters",characters);

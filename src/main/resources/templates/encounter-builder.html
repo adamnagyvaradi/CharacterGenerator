@@ -44,7 +44,7 @@
       <div class="col-8">
         <div class="row">
           <div class="col">
-            <form class="row g-3" th:action="@{/search}" method="get">
+            <form class="row g-3" th:action="@{/encounter/builder}" method="get">
               <div class="col">
                 <label for="txtSearch" class="visually-hidden">Search</label>
                 <input type="text" class="form-control" id="txtSearch" name="keyword" placeholder="Search">
@@ -59,56 +59,97 @@
           <div class="col overflow-auto">
 
             <!-- accordion -->
-            <div class="accordion" id="accordionExample">
-              <div class="accordion-item">
-                <div class="row accordion-header" id="headingOne" style="padding: 0.5rem 0.7rem;">
+            <div class="accordion" id="character-list">
+              <div class="accordion-item" th:each="character: ${characters}">
+                <div class="row accordion-header" id="headingOne" th:id="${'heading-character-'+ character.id}" style="padding: 0.5rem 0.7rem;">
                   <div class="col-auto" style="padding: 0.25rem 0.7rem">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                            aria-expanded="false" aria-controls="collapseOne" style="padding: 0 0;">
+                    <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseOne" th:data-bs-target="${'#collapse-character-' + character.id}"
+                            aria-expanded="false" aria-controls="collapseOne" th:aria-controls="${'collapse-character-' + character.id}" style="padding: 0 0;">
                     </button>
                   </div>
                   <div class="col">
-                    Name
+                    <span th:text="${character.name}"></span>
                   </div>
                   <div class="col">
-                    Hp
+                    <span th:text="${character.hitPoints}"></span> HP
                   </div>
                   <div class="col">
-                    challenge rate
+                    <span th:text="${character.challengeRating}"></span> CR
                   </div>
                   <div class="col">
-                    type
+                    <span th:text="${character.characterType}"></span>
                   </div>
                   <div class="col-auto">
-                    <!--<form th:action="@{/encounter/builder/character/add/{id}(id=${character.id})}" method="post">-->
-                    <button class="btn btn-dark btn-sm">+</button>
-                    <!--</form>-->
+                    <form th:action="@{/encounter/builder/character/add/{id}(id=${character.id})}" method="post">
+                      <button class="btn btn-dark btn-sm">+</button>
+                    </form>
                   </div>
                 </div>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" th:id="${'collapse-character-' + character.id}" class="accordion-collapse collapse"
+                     aria-labelledby="headingOne" th:aria-labelledby="${'heading-character-'+ character.id}"
+                     data-bs-parent="#character-list">
                   <div class="accordion-body border-top">
-                    ez itt a tartalom helye
+                    <!---ez itt a tartalom helye--->
+                    <div class="row text-center">
+                      <div class="col-1">
+                        <div class="card">
+                          STR<br>
+                          <span th:text="${'(' + character.getAttributeBonus('STR') + ')'}"></span>
+                          <span th:text="${character.getAttributeValue('STR')}">21</span>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card">
+                          DEX<br>
+                          <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('DEX') + ')'}"
+                                  th:onclick="getRoll([[${character.getAttributeBonusRollDescription('DEX')}]])"
+                                  style="padding: 0.05rem 0.8rem;">21</button>
+                          <span th:text="${character.getAttributeValue('DEX')}">21</span>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card">
+                          CON<br>
+                          <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('CON') + ')'}"
+                                  th:onclick="getRoll([[${character.getAttributeBonusRollDescription('CON')}]])"
+                                  style="padding: 0.05rem 0.8rem;">21</button>
+                          <span th:text="${character.getAttributeValue('CON')}">21</span>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card">
+                          INT<br>
+                          <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('INT') + ')'}"
+                                  th:onclick="getRoll([[${character.getAttributeBonusRollDescription('INT')}]])"
+                                  style="padding: 0.05rem 0.8rem;">21</button>
+                          <span th:text="${character.getAttributeValue('INT')}">21</span>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card">
+                          WIS<br>
+                          <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('WIS') + ')'}"
+                                  th:onclick="getRoll([[${character.getAttributeBonusRollDescription('WIS')}]])"
+                                  style="padding: 0.05rem 0.8rem;">21</button>
+                          <span th:text="${character.getAttributeValue('WIS')}">21</span>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="card">
+                          CHA<br>
+                          <button class="btn align-self-center btn-outline-dark" th:text="${'(' + character.getAttributeBonus('CHA') + ')'}"
+                                  th:onclick="getRoll([[${character.getAttributeBonusRollDescription('CHA')}]])"
+                                  style="padding: 0.05rem 0.8rem;">21</button>
+                          <span th:text="${character.getAttributeValue('CHA')}">21</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- accordion end -->
-
-            <table class="table table-striped">
-              <thead>
-
-              </thead>
-              <tbody>
-                <tr th:each="character: ${characters}">
-                  <td th:text="${character.name}"></td>
-                  <td style="width: 45px">
-                    <form th:action="@{/encounter/builder/character/add/{id}(id=${character.id})}" method="post">
-                      <button class="btn btn-dark btn-sm">+</button>
-                    </form>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
