@@ -176,9 +176,13 @@ public class Character {
         return armor;
     }
 
-    public Character setArmor(Armor armor) {
+    public Character equipArmor(Armor armor) {
         this.armor = armor;
         return this;
+    }
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 
     public boolean isCaster() {
