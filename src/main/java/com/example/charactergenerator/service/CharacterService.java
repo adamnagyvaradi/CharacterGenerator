@@ -23,8 +23,6 @@ public class CharacterService {
         return characterRepository.findCharactersByName(characterName).orElseThrow();
     }
 
-
-
     public Character findById(long id){
         return characterRepository.findById(id).orElseThrow();
     }

@@ -192,6 +192,16 @@ public class Character {
         return this;
     }
 
+    public Character equipMeleeWeapon(MeleeWeapon meleeWeapon) {
+        this.meleeWeapon = meleeWeapon;
+        return this;
+    }
+    public Character equipRangedWeapon(RangedWeapon rangedWeapon) {
+        this.rangedWeapon = rangedWeapon;
+        return this;
+    }
+
+
     public boolean isCaster() {
         return isCaster;
     }
