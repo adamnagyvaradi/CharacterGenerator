@@ -229,6 +229,7 @@ public class Character {
                 case 18 -> this.slots = new int[] {4, 3, 3, 3, 3, 1, 1, 1, 1};
                 case 19 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 1, 1, 1};
                 case 20 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 2, 1, 1};
+                default -> throw new IllegalStateException("Unexpected value: " + level);
             }
         }
     }
