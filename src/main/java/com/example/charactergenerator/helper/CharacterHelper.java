@@ -108,4 +108,42 @@ public class CharacterHelper implements ApplicationRunner {
                 new Armor(13,"Plate", ArmorType.HEAVY, (byte) 18)));
     }
 
+    public List<MeleeWeapon> getMeleeWeapons() {
+
+        return new ArrayList<>(Arrays.asList(
+                new MeleeWeapon(1, "Club", "1d4 bludgeoning"),
+                new MeleeWeapon(2, "Dagger", "1d4 piercing"),
+                new MeleeWeapon(3, "Greatclub", "1d8 bludgeoning"),
+                new MeleeWeapon(4, "Handaxe", "1d6 slashing"),
+                new MeleeWeapon(5, "Javelin", "1d6 piercing"),
+                new MeleeWeapon(6, "Light hammer", "1d4 bludgeoning"),
+                new MeleeWeapon(7, "Mace", "1d4 bludgeoning"),
+                new MeleeWeapon(8, "Quarterstaff", "1d6 bludgeoning"),
+                new MeleeWeapon(9, "Sickle", "1d4 slashing"),
+                new MeleeWeapon(10, "Spear", "1d6 piercing"),
+                new MeleeWeapon(11, "Battleaxe", "1d8 slashing"),
+                new MeleeWeapon(12, "Greataxe", "1d12 slashing"),
+                new MeleeWeapon(13, "Greatsword", "2d6 slashing"),
+                new MeleeWeapon(14, "Longsword", "1d8 slashing"),
+                new MeleeWeapon(15, "Pike", "1d10 piercing"),
+                new MeleeWeapon(16, "Scimitar", "1d6 slashing"),
+                new MeleeWeapon(17, "Shortsword", "1d6 piercing"),
+                new MeleeWeapon(18, "Warhammer", "1d8 bludgeoning")
+        ));
+    }
+
+    public List<RangedWeapon> getRangedWeapons() {
+        return new ArrayList<>(Arrays.asList(
+                new RangedWeapon(1, "Crossbow, light", "1d8 piercing"),
+                new RangedWeapon(2, "Dart", "1d4 piercing"),
+                new RangedWeapon(3, "Shortbow", "1d6 piercing"),
+                new RangedWeapon(4, "Sling", "1d4 bludgeoning"),
+                new RangedWeapon(5, "Blowgun", "1 piercing"),
+                new RangedWeapon(6, "Crossbow, hand", "1d6 piercing"),
+                new RangedWeapon(7, "Crossbow, heavy", "1d10 piercing"),
+                new RangedWeapon(8, "Longbow", "1d8 piercing"),
+                new RangedWeapon(9, "Net", "-")
+        ));
+    }
+
 }
