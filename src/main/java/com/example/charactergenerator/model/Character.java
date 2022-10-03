@@ -1,71 +1,107 @@
 package com.example.charactergenerator.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-@Entity(name = "Characters")
+@Entity(name = "characters")
 public class Character {
-
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
+    private byte armorClass;
     private short hitPoints; // hit dice
+    private byte speed;
+    private byte challengeRating;
 
-    private byte proficiencyBonus;
+    @ManyToOne
+    @JoinColumn (name = "armor_id")
+    private Armor armor;
 
-    private byte strength;
+    @ManyToOne
+    @JoinColumn (name = "meleeWeapon_id")
+    private MeleeWeapon meleeWeapon;
 
-    private byte dexterity;
+    @ManyToOne
+    @JoinColumn(name = "rangedWeapon_id")
+    private RangedWeapon rangedWeapon;
 
-    private byte constitution;
-
-
-    private byte intelligence;
-
-    private byte wisdom;
-
-    private byte charisma;
-
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "characters_attributes",
+            joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "modifier")
+    Map<AttributeType, Byte> attributes = new EnumMap<>(AttributeType.class);
     @Transient
     private List<Skill> skills;
 
-    /* private byte speed;
+    @Enumerated(EnumType.STRING)
+    private CharacterType characterType;
 
-    private byte armor;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "characters_proficiencies",
+        joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
+    private List<SkillType> proficiencies = new ArrayList<>();
 
-    private String characterClass; // List<String> features
+    private boolean isCaster;
 
-    private String race;
-
-    private String background;
-
-    private List<String> equipment;*/
+    @Transient
+    private int[] slots;
 
     public Character() {
+
     }
 
-    public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma) {
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, List<SkillType> proficiencies){
+        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
+    }
+
+    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, List<SkillType> proficiencies) {
         this.name = name;
-        this.proficiencyBonus = proficiencyBonus;
-        this.strength = strength;
-        this.dexterity = dexterity;
-        this.constitution = constitution;
-        this.intelligence = intelligence;
-        this.wisdom = wisdom;
-        this.charisma = charisma;
-        generateSkills();
-        setSkills();
-
+        this.armorClass = armorClass;
+        this.hitPoints = hitPoints;
+        this.speed = speed;
+        this.challengeRating = challengeRating;
+        this.characterType = characterType;
+        attributes.put(AttributeType.STR, strength);
+        attributes.put(AttributeType.DEX, dexterity);
+        attributes.put(AttributeType.CON, constitution);
+        attributes.put(AttributeType.INT, intelligence);
+        attributes.put(AttributeType.WIS, wisdom);
+        attributes.put(AttributeType.CHA, charisma);
+        this.proficiencies = proficiencies;
     }
 
-    public Character(String name, byte proficiencyBonus, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, short hp) {
-        this(name, proficiencyBonus, strength, dexterity, constitution, intelligence, wisdom, charisma);
-        this.hitPoints = hp;
+    public byte getAttributeBonus(AttributeType attributeType){
+        byte attributeValue = getAttributeValue(attributeType);
+        return attributeType.getBonus(attributeValue);
+    }
+
+    public byte getAttributeBonus(String attributeName){
+        return getAttributeBonus(AttributeType.valueOf(attributeName));
+    }
+
+    public byte getAttributeValue(AttributeType attributeType){
+        return attributes.get(attributeType);
+    }
+
+    public byte getAttributeValue(String attributeName){
+        return getAttributeValue(AttributeType.valueOf(attributeName));
+    }
+
+    public void setAttributeValue(AttributeType attributeType, byte value){
+        attributes.put(attributeType,value);
+    }
+
+    public String getAttributeBonusRollDescription(String attributeName){
+        String rollDesciption = "d20";
+        int bonus = getAttributeBonus(attributeName);
+        if (bonus > 0){
+            rollDesciption += "+" + bonus;
+        }else if (bonus < 0){
+            rollDesciption += bonus;
+        }
+
+        return rollDesciption;
     }
 
     public Long getId() {
@@ -84,6 +120,17 @@ public class Character {
         this.name = name;
     }
 
+    public byte getArmorClass() {
+        if (armor == null){
+            return armorClass;
+        }
+        return armor.getArmorClass(getAttributeBonus(AttributeType.DEX));
+    }
+
+    public void setArmorClass(byte armorClass) {
+        this.armorClass = armorClass;
+    }
+
     public short getHitPoints() {
         return hitPoints;
     }
@@ -92,99 +139,150 @@ public class Character {
         this.hitPoints = hitPoints;
     }
 
+    public byte getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(byte speed) {
+        this.speed = speed;
+    }
+
+    public byte getChallengeRating() {
+        return challengeRating;
+    }
+
+    public void setChallengeRating(byte challengeRating) {
+        this.challengeRating = challengeRating;
+    }
+
     public byte getProficiencyBonus() {
-        return proficiencyBonus;
+        return switch (challengeRating) {
+            case 0, 1, 2, 3, 4 -> 2;
+            case 5, 6, 7, 8 -> 3;
+            case 9, 10, 11, 12 -> 4;
+            case 13, 14, 15, 16 -> 5;
+            case 17, 18, 19, 20 -> 6;
+            case 21, 22, 23, 24 -> 7;
+            case 25, 26, 27, 28 -> 8;
+            case 29, 30 -> 9;
+            default -> throw new IllegalStateException("Unexpected value: " + challengeRating);
+        };
     }
 
-    public void setProficiencyBonus(byte proficiencyBonus) {
-        this.proficiencyBonus = proficiencyBonus;
+
+    public Map<AttributeType, Byte> getAttributes() {
+        return attributes;
     }
 
-    public byte getStrength() {
-        return strength;
+    public void setAttributes(Map<AttributeType, Byte> attributes) {
+        this.attributes = attributes;
     }
 
-    public void setStrength(byte strength) {
-        this.strength = strength;
+    public Armor getArmor() {
+        return armor;
     }
 
-    public byte getDexterity() {
-        return dexterity;
+
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 
-    public void setDexterity(byte dexterity) {
-        this.dexterity = dexterity;
+    public Character equipArmor(Armor armor) {
+        this.armor = armor;
+        return this;
     }
 
-    public byte getConstitution() {
-        return constitution;
+    public Character equipMeleeWeapon(MeleeWeapon meleeWeapon) {
+        this.meleeWeapon = meleeWeapon;
+        return this;
+    }
+    public Character equipRangedWeapon(RangedWeapon rangedWeapon) {
+        this.rangedWeapon = rangedWeapon;
+        return this;
     }
 
-    public void setConstitution(byte constitution) {
-        this.constitution = constitution;
+
+    public boolean isCaster() {
+        return isCaster;
     }
 
-    public byte getIntelligence() {
-        return intelligence;
+    public int[] getSlots() {
+        return slots;
     }
 
-    public void setIntelligence(byte intelligence) {
-        this.intelligence = intelligence;
+    public void setSlots(int[] slots) {
+        this.slots = slots;
     }
 
-    public byte getWisdom() {
-        return wisdom;
+    private void generateSkills() {
+        this.skills = SkillType.getSkillList(this);
     }
-
-    public void setWisdom(byte wisdom) {
-        this.wisdom = wisdom;
-    }
-
-    public byte getCharisma() {
-        return charisma;
-    }
-
-    public void setCharisma(byte charisma) {
-        this.charisma = charisma;
-    }
-
-    private void generateSkills(){
-        this.skills = new ArrayList<>(Arrays.asList(
-                    new Skill("Acrobatics", "Dexterity"),
-                    new Skill("Animal Handling", "Wisdom"),
-                    new Skill("Arcana", "Intelligence"),
-                    new Skill("Athletics", "Strength"),
-                    new Skill("Deception", "Charisma"),
-                    new Skill("History", "Intelligence"),
-                    new Skill("Insight", "Wisdom"),
-                    new Skill("Intimidation", "Charisma"),
-                    new Skill("Investigation", "Intelligence"),
-                    new Skill("Medicine", "Wisdom"),
-                    new Skill("Nature", "Intelligence"),
-                    new Skill("Perception", "Wisdom"),
-                    new Skill("Performance", "Charisma"),
-                    new Skill("Persuasion", "Charisma"),
-                    new Skill("Religion", "Intelligence"),
-                    new Skill("Sleight of Hand", "Dexterity"),
-                    new Skill("Stealth", "Dexterity"),
-                    new Skill("Survival", "Wisdom")
-            ));
-
-        }
 
     public List<Skill> getSkills() {
+        if (skills == null){
+            generateSkills();
+        }
+
         return skills;
     }
 
-    private void setSkills() {
-        for (Skill skill: skills) {
-            switch (skill.getModifier()) {
-                case "Dexterity" -> skill.setBonus(dexterity);
-                case "Wisdom" -> skill.setBonus(wisdom);
-                case "Intelligence" -> skill.setBonus(intelligence);
-                case "Charisma" -> skill.setBonus(charisma);
-                case "Constitution" -> skill.setBonus(constitution);
-                case "Strength" -> skill.setBonus(strength);
+    public com.example.charactergenerator.model.CharacterType getCharacterType() {
+        return characterType;
+    }
+
+    public void setCharacterType(CharacterType characterType) {
+        this.characterType = characterType;
+    }
+
+    public List<SkillType> getProficiency() {
+        return proficiencies;
+    }
+
+    public void setCaster(boolean caster) {
+        isCaster = caster;
+    }
+
+    public MeleeWeapon getMeleeWeapon() {
+        return meleeWeapon;
+    }
+
+    public void setMeleeWeapon(MeleeWeapon meleeWeapon) {
+        this.meleeWeapon = meleeWeapon;
+    }
+
+    public RangedWeapon getRangedWeapon() {
+        return rangedWeapon;
+    }
+
+    public void setRangedWeapon(RangedWeapon rangedWeapon) {
+        this.rangedWeapon = rangedWeapon;
+    }
+
+    public void setProficiency(List<SkillType> proficiencies) {
+        this.proficiencies = proficiencies;
+    }
+    public void assignSlots(int level) {
+        if (isCaster && level > 0 && level <= 20) {
+            int[] spellSlots;
+            switch (level) {
+                case 1 -> this.slots = new int[] {2};
+                case 2 -> this.slots = new int[] {3};
+                case 3 -> this.slots = new int[] {4, 2};
+                case 4 -> this.slots = new int[] {4, 3};
+                case 5 -> this.slots = new int[] {4, 3, 2};
+                case 6 -> this.slots = new int[] {4, 3, 3};
+                case 7 -> this.slots = new int[] {4, 3, 3, 1};
+                case 8 -> this.slots = new int[] {4, 3, 3, 2};
+                case 9 -> this.slots = new int[] {4, 3, 3, 3, 1};
+                case 10 -> this.slots = new int[] {4, 3, 3, 3, 2};
+                case 11, 12 -> this.slots = new int[] {4, 3, 3, 3, 2, 1};
+                case 13, 14 -> this.slots = new int[] {4, 3, 3, 3, 2, 1, 1};
+                case 15, 16 -> this.slots = new int[] {4, 3, 3, 3, 2, 1, 1, 1};
+                case 17 -> this.slots = new int[] {4, 3, 3, 3, 2, 1, 1, 1, 1};
+                case 18 -> this.slots = new int[] {4, 3, 3, 3, 3, 1, 1, 1, 1};
+                case 19 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 1, 1, 1};
+                case 20 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 2, 1, 1};
+                default -> throw new IllegalStateException("Unexpected value: " + level);
             }
         }
     }
