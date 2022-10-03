@@ -291,9 +291,8 @@ public class Character {
         StringBuilder sb = new StringBuilder();
 
         for (SkillType skillType: proficiencies){
-            int bonus = getAttributeBonus(skillType.getModifier());
             sb.append(skillType.getName()).append(" ")
-                    .append(bonus > 0 ? "+" + bonus: bonus)
+                    .append(getAttributeBonus(skillType.getModifier()))
                     .append(", ");
         }
 

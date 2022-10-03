@@ -98,13 +98,17 @@
                         <div class="row pb-2">
                           <div class="col"><strong>Speed: </strong><span th:text="${character.speed}">30</span></div>
                         </div>
+                        <div class="row pb-2">
+                          <div class="col"><strong>Proficiency Bonus: </strong><span th:text="${character.proficiencyBonus}">30</span></div>
+                        </div>
                         <div class="row pb-2" th:if="${character.hasArmor()}">
                           <div class="col">
                             <strong>Armor: </strong>
-                            <span th:text="${character.armor.getName()}">30</span>
+                            <span th:text="${character.armor.name}">30</span>
                             (<span th:text="${character.armor.armorValue}"></span>)
                           </div>
                         </div>
+
                         <div class="row pb-2" th:if="${character.hasProficiencies()}">
                           <div class="col"><strong>Proficiencies: </strong><span th:text="${character.proficienciesToString()}">30</span></div>
                         </div>
