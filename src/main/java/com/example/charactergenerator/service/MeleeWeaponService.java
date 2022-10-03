@@ -15,11 +15,11 @@ public class MeleeWeaponService {
         this.meleeWeaponRepository = meleeWeaponRepository;
     }
 
-    private void saveAll(List<MeleeWeapon> meleeWeapons){
+    public void saveAll(List<MeleeWeapon> meleeWeapons){
         meleeWeaponRepository.saveAll(meleeWeapons);
     }
 
-    private List<MeleeWeapon> findAll(){
+    public List<MeleeWeapon> findAll(){
         return (List<MeleeWeapon>) meleeWeaponRepository.findAll();
     }
 }

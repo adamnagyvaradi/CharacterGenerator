@@ -16,11 +16,11 @@ public class RangedWeaponService {
         this.rangedWeaponRepository = rangedWeaponRepository;
     }
 
-    private void saveAll(List<RangedWeapon> rangedWeapons){
+    public void saveAll(List<RangedWeapon> rangedWeapons){
         rangedWeaponRepository.saveAll(rangedWeapons);
     }
 
-    private List<RangedWeapon> findAll(){
+    public List<RangedWeapon> findAll(){
         return (List<RangedWeapon>) rangedWeaponRepository.findAll();
     }
 }
