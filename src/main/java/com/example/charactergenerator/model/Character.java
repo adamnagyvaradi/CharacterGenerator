@@ -286,4 +286,27 @@ public class Character {
             }
         }
     }
+
+    public String proficienciesToString(){
+        StringBuilder sb = new StringBuilder();
+
+        for (SkillType skillType: proficiencies){
+            int bonus = getAttributeBonus(skillType.getModifier());
+            sb.append(skillType.getName()).append(" ")
+                    .append(bonus > 0 ? "+" + bonus: bonus)
+                    .append(", ");
+        }
+
+        int endIndex = sb.lastIndexOf(",");
+
+        return sb.substring(0,endIndex);
+    }
+
+    public boolean hasProficiencies(){
+        return !proficiencies.isEmpty();
+    }
+
+    public boolean hasArmor(){
+        return armor != null;
+    }
 }
