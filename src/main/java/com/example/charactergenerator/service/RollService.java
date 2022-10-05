@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class RollService {
 
+    private final RandomService randomService;
+
+    public RollService(RandomService diceService) {
+        this.randomService = diceService;
+    }
+
     public RollDto roll(String rollDefinition){
         int dIndex = rollDefinition.indexOf('d');
 
@@ -34,11 +40,11 @@ public class RollService {
         return roll;
     }
 
-    private RollDto generateRoll(int sides, int times) {
+    protected RollDto generateRoll(int sides, int times) {
         int sum = 0;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < times; i++){
-            int actualRollValue = (int) ((Math.random() * sides + 1));
+            int actualRollValue = randomService.randomRoll(sides);
             stringBuilder.append(actualRollValue);
 
             if (i < times - 1){
@@ -51,7 +57,7 @@ public class RollService {
         return new RollDto(stringBuilder.toString(), sum);
     }
 
-    private int getTimes(String rollDescription, int dIndex){
+    protected int getTimes(String rollDescription, int dIndex){
         if (dIndex > 0){
             return Integer.parseInt(rollDescription.substring(0,dIndex));
         }
@@ -59,7 +65,7 @@ public class RollService {
         return 1;
     }
 
-    private int getBonus(String rollDescription, int bonusSignIndex){
+    protected int getBonus(String rollDescription, int bonusSignIndex){
         if (bonusSignIndex > 0){
             return Integer.parseInt(rollDescription.substring(bonusSignIndex + 1));
         }
@@ -67,7 +73,7 @@ public class RollService {
         return 0;
     }
 
-    private int getSides(String rollDescription, int dIndex, int bonusSignIndex){
+    protected int getSides(String rollDescription, int dIndex, int bonusSignIndex){
         int endIndex;
         if (bonusSignIndex == - 1){
             endIndex = rollDescription.length();
@@ -78,7 +84,7 @@ public class RollService {
         return Integer.parseInt(rollDescription.substring(dIndex + 1, endIndex));
     }
 
-    private int getBonusSignIndex(String rollDescription){
+    protected int getBonusSignIndex(String rollDescription){
         if (rollDescription.contains("+")){
             return rollDescription.indexOf("+");
         }
