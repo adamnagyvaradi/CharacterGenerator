@@ -42,7 +42,7 @@ public class EncounterController {
         model.addAttribute("characters",characters);
         model.addAttribute("charactersCart",encounterService.getAllCharacter());
 
-        return "encounter-builder";
+        return "encounter/builder";
     }
 
     @GetMapping("/encounter/builder/character")
@@ -51,13 +51,13 @@ public class EncounterController {
 
         model.addAttribute("characters",characters);
 
-        return "encounter-edit";
+        return "encounter/encounter-edit";
     }
 
     @PostMapping("/encounter/builder/character/edit/{id}")
     public String editCharacter(@PathVariable long id){
 
-        return "character-edit";
+        return "encounter/character-edit";
     }
 
     @PostMapping("/encounter/builder/character/add/{id}")
