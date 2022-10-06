@@ -1,9 +1,7 @@
 package com.example.charactergenerator.service;
 
 import com.example.charactergenerator.model.Armor;
-import com.example.charactergenerator.model.RangedWeapon;
 import com.example.charactergenerator.repository.ArmorRepository;
-import com.example.charactergenerator.repository.RangedWeaponRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
