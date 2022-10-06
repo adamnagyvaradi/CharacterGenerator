@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public class EncounterService {
     private CharacterService characterService;
+    private long lastId = 0;
 
     @Autowired
     public void setCharacterService(CharacterService characterService) {
@@ -19,8 +20,7 @@ public class EncounterService {
     private Encounter encounter = new Encounter();
 
     public void addCharacter(Character character){
-        long id = encounter.getCharacters().size() + 1L;
-        character.setId(id);
+        character.setId(++lastId);
         encounter.addCharacter(character);
     }
 
@@ -31,5 +31,9 @@ public class EncounterService {
 
     public List<Character> getAllCharacter(){
         return encounter.getCharacters();
+    }
+
+    public Character findCharacterById(long id){
+        return encounter.findById(id);
     }
 }
