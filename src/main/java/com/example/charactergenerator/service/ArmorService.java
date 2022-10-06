@@ -17,63 +17,17 @@ public class ArmorService {
 
     private ArmorRepository armorRepository;
 
-    private CharacterRepository characterRepository;
 
-    public ArmorService(ArmorRepository armorRepository, CharacterRepository characterRepository) {
+    public ArmorService(ArmorRepository armorRepository) {
         this.armorRepository = armorRepository;
-        this.characterRepository = characterRepository;
     }
 
-    public List<Character> getNewCharacters() {
-        if (characterRepository.count() == 0) {
-            characterRepository.saveAll(Arrays.asList(
-                    new Character("Hobgoblin", (byte) 10, (short) 7, (byte) 8, (byte) 4, (byte) 4, (byte) 4, (byte) 8,
-                            (byte) 11, (byte) 4, (byte) 4, CharacterType.HUMANOID),
-                    new Character("Giant Skeleton", (byte) 10, (short) 7, (byte) 8, (byte) 4, (byte) 4, (byte) 4, (byte) 8,
-                            (byte) 11, (byte) 4, (byte) 4, CharacterType.UNDEAD),
-                    new Character("Aarakocra", (byte) 10, (short) 7, (byte) 8, (byte) 4, (byte) 4, (byte) 4, (byte) 8,
-                            (byte) 11, (byte) 4, (byte) 4, CharacterType.ABERRATION),
-                    new Character("Bandit", (byte) 10, (short) 7, (byte) 8, (byte) 4, (byte) 4, (byte) 4, (byte) 8,
-                            (byte) 11, (byte) 4, (byte) 4, CharacterType.HUMANOID),
-                    new Character("Bandit Captain", (byte) 10, (short) 7, (byte) 8, (byte) 4, (byte) 4, (byte) 4, (byte) 8,
-                            (byte) 11, (byte) 4, (byte) 4, CharacterType.HUMANOID),
-                    new Character("Drow Inquisitor", (byte) 10, (short) 7, (byte) 8, (byte) 4, (byte) 4, (byte) 4, (byte) 8,
-                            (byte) 11, (byte) 4, (byte) 4,  CharacterType.HUMANOID),
-                    new Character("Grimlock", (byte) 11, (short) 11, (byte) 30, (byte) 2, (byte) 16, (byte) 12, (byte) 12,
-                            (byte) 9, (byte) 8, (byte) 6, CharacterType.BEAST),
-                    new Character("Merfolk", (byte) 11, (short) 11, (byte) 10, (byte) 2, (byte) 10, (byte) 13, (byte) 12,
-                            (byte) 11, (byte) 11, (byte) 12, CharacterType.HUMANOID),
-                    new Character("Tribal Warrior", (byte) 12, (short) 11, (byte) 30, (byte) 2, (byte) 13, (byte) 11,
-                            (byte) 12, (byte) 8, (byte) 11, (byte) 8, CharacterType.HUMANOID)
-            ));
-        }
-
-        return (List<Character>) characterRepository.findAll();
-
+    public void saveAll(List<Armor> armors) {
+        armorRepository.saveAll(armors);
     }
 
-    @Transactional
-    public void addArmorToCharacters () {
-        List<Character> newCharacters = getNewCharacters();
-
-        List<Armor> armors = (List<Armor>) armorRepository.saveAll(Arrays.asList(
-                new Armor("Padded", ArmorType.LIGHT, (byte) 11),
-                new Armor("Leather", ArmorType.LIGHT, (byte) 11),
-                new Armor("Studded leather", ArmorType.LIGHT, (byte) 12),
-                new Armor("Hide", ArmorType.MEDIUM, (byte) 12),
-                new Armor("Chain shirt", ArmorType.MEDIUM, (byte) 13),
-                new Armor("Scale mail", ArmorType.MEDIUM, (byte) 14),
-                new Armor("Breastplate", ArmorType.MEDIUM, (byte) 14),
-                new Armor("Half plate", ArmorType.MEDIUM, (byte) 15),
-                new Armor("Ring mail", ArmorType.HEAVY, (byte) 14),
-                new Armor("Chain mail", ArmorType.HEAVY, (byte) 16),
-                new Armor("Splint", ArmorType.HEAVY, (byte) 17),
-                new Armor("Plate", ArmorType.HEAVY, (byte) 18)));
-
-
-        for (Character character : newCharacters) {
-            character.setArmor(armors.get((int) (Math.random() * 3)));
-
-        }
+    public List<Armor> findAll(){
+        return (List<Armor>) armorRepository.findAll();
     }
+
 }

@@ -20,7 +20,9 @@ public class CharacterService {
         return characterRepository.findCharactersByName(characterName).orElseThrow();
     }
 
-
+    public List<Character> findAllByNameContains(String keyword){
+        return characterRepository.findAllByNameContains(keyword);
+    }
 
     public Character findById(long id){
         return characterRepository.findById(id).orElseThrow();
@@ -40,5 +42,9 @@ public class CharacterService {
         character.setAttributeValue(AttributeType.CHA, characterDto.getCharisma());
 
         save(character);
+    }
+
+    public List<Character> findAll() {
+        return (List<Character>) characterRepository.findAll();
     }
 }

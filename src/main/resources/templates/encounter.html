@@ -53,6 +53,16 @@
                         <td>Sárkááány</td>
                     </tr>
                     </tbody>
+
+                    <div class="col-lg-3" th:object="${test}">
+                        <select class="form-control" id="testOrder" name="testOrder">
+                            <option value="">Select Test Order</option>
+                            <option th:each="test : ${tests}"
+                                    th:value="${test.testCode}"
+                                    th:text="${test.testCode}+' : '+${test.testName}"></option>
+                        </select>
+                    </div>
+
                 </table>
             </div>
         </div>
