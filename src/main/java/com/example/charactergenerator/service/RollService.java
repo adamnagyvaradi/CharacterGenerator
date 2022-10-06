@@ -40,7 +40,7 @@ public class RollService {
         return roll;
     }
 
-    protected RollDto generateRoll(int sides, int times) {
+    private RollDto generateRoll(int sides, int times) {
         int sum = 0;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < times; i++){
@@ -57,7 +57,7 @@ public class RollService {
         return new RollDto(stringBuilder.toString(), sum);
     }
 
-    protected int getTimes(String rollDescription, int dIndex){
+    private int getTimes(String rollDescription, int dIndex){
         if (dIndex > 0){
             return Integer.parseInt(rollDescription.substring(0,dIndex));
         }
@@ -65,7 +65,7 @@ public class RollService {
         return 1;
     }
 
-    protected int getBonus(String rollDescription, int bonusSignIndex){
+    private int getBonus(String rollDescription, int bonusSignIndex){
         if (bonusSignIndex > 0){
             return Integer.parseInt(rollDescription.substring(bonusSignIndex + 1));
         }
@@ -73,7 +73,7 @@ public class RollService {
         return 0;
     }
 
-    protected int getSides(String rollDescription, int dIndex, int bonusSignIndex){
+    private int getSides(String rollDescription, int dIndex, int bonusSignIndex){
         int endIndex;
         if (bonusSignIndex == - 1){
             endIndex = rollDescription.length();
@@ -84,7 +84,7 @@ public class RollService {
         return Integer.parseInt(rollDescription.substring(dIndex + 1, endIndex));
     }
 
-    protected int getBonusSignIndex(String rollDescription){
+    private int getBonusSignIndex(String rollDescription){
         if (rollDescription.contains("+")){
             return rollDescription.indexOf("+");
         }
