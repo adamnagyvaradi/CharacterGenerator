@@ -45,6 +45,21 @@ public class EncounterController {
         return "encounter-builder";
     }
 
+    @GetMapping("/encounter/builder/character")
+    public String showCharacters(Model model){
+        List<Character> characters = encounterService.getAllCharacter();
+
+        model.addAttribute("characters",characters);
+
+        return "encounter-edit";
+    }
+
+    @PostMapping("/encounter/builder/character/edit/{id}")
+    public String editCharacter(@PathVariable long id){
+
+        return "character-edit";
+    }
+
     @PostMapping("/encounter/builder/character/add/{id}")
     public String addCharacterIntoBuilder(@PathVariable long id){
         encounterService.addCharacter(id);
