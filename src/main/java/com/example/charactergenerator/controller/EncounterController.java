@@ -69,5 +69,12 @@ public class EncounterController {
         return "redirect:/encounter/builder";
     }
 
+    @PostMapping("/encounter/builder/character/remove/{id}")
+    public String removeCharacterFromCart(@PathVariable long id){
+        encounterService.removeCharacterById(id);
+
+        return "redirect:/encounter/builder";
+    }
+
 
 }
