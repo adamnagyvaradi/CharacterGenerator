@@ -36,4 +36,8 @@ public class EncounterService {
     public Character findCharacterById(long id){
         return encounter.findById(id);
     }
+
+    public void removeCharacterById(long id){
+        encounter.removeCharacterById(id);
+    }
 }

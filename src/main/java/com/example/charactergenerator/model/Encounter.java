@@ -37,4 +37,8 @@ public class Encounter {
 
         throw new IllegalArgumentException("Character not found. Id: " + id);
     }
+
+    public void removeCharacterById(long id){
+        characters.remove(findById(id));
+    }
 }
