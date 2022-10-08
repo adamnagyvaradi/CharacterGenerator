@@ -44,6 +44,8 @@ public class Character {
 
     private boolean isCaster;
 
+    private int spellLevel;
+
     @Transient
     private int[] slots;
 
@@ -69,8 +71,7 @@ public class Character {
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
         this.proficiencies = proficiencies;
-        this.isCaster=(Math.random()<0.5);
-        this.assignSlots((int)(Math.random() * 20 + 1));
+        this.isCaster = true;
     }
 
     public byte getAttributeBonus(AttributeType attributeType){
@@ -180,6 +181,13 @@ public class Character {
         this.attributes = attributes;
     }
 
+    public int getSpellLevel() {
+        return spellLevel;
+    }
+
+    public void setSpellLevel(int spellLevel) {
+        this.spellLevel = spellLevel;
+    }
     public Armor getArmor() {
         return armor;
     }
@@ -209,6 +217,8 @@ public class Character {
     }
 
     public int[] getSlots() {
+        this.assignSlots((int)(Math.random() * 20 +1));
+
         return slots;
     }
 
@@ -263,10 +273,11 @@ public class Character {
     public void setProficiency(List<SkillType> proficiencies) {
         this.proficiencies = proficiencies;
     }
-    public void assignSlots(int level) {
-        if (isCaster && level > 0 && level <= 20) {
+    public void assignSlots(int spellLevel) {
+        this.spellLevel = spellLevel;
+        if (isCaster && spellLevel > 0 && spellLevel <= 20) {
             int[] spellSlots;
-            switch (level) {
+            switch (spellLevel) {
                 case 1 -> this.slots = new int[] {2};
                 case 2 -> this.slots = new int[] {3};
                 case 3 -> this.slots = new int[] {4, 2};
@@ -284,7 +295,7 @@ public class Character {
                 case 18 -> this.slots = new int[] {4, 3, 3, 3, 3, 1, 1, 1, 1};
                 case 19 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 1, 1, 1};
                 case 20 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 2, 1, 1};
-                default -> throw new IllegalStateException("Unexpected value: " + level);
+                default -> throw new IllegalStateException("Unexpected value: " + spellLevel);
             }
         }
     }

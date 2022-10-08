@@ -173,12 +173,26 @@
                             <thead>
                             <tr>
                                 <th>Level</th>
-                                <th>Spell Slot</th>
+                                <th>1th</th>
+                                <th>2th</th>
+                                <th>3th</th>
+                                <th>4th</th>
+                                <th>5th</th>
+                                <th>6th</th>
+                                <th>7th</th>
+                                <th>8th</th>
+                                <th>9th</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:if="${character.isCaster()}">
-                                <td th:each="slot: ${character.slots}"><span th:text="${slot}"></span></td>
+                            <tr th:if="${character.isCaster()}" th:each="slot: ${character.slots}">
+                                <td></td>
+                                <td ><span th:text="${slot}"></span></td>
+
+                            </tr>
+                            <tr th:if="${character.isCaster()}" th:each="slot: ${character.slots}">
+                                <td><span th:text=" ${character.get}"</td>
+                                <td ><span th:text="${slot}"></span></td>
 
                             </tr>
                             <tr th:unless="${character.isCaster()}">
