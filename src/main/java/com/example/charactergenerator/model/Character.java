@@ -69,6 +69,8 @@ public class Character {
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
         this.proficiencies = proficiencies;
+        this.isCaster=(Math.random()<0.5);
+        this.assignSlots((int)(Math.random() * 20 + 1));
     }
 
     public byte getAttributeBonus(AttributeType attributeType){

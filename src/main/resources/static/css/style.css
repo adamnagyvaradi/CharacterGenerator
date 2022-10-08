@@ -1,0 +1,16 @@
+body {
+    background-image: url('static/assets/statblockparch.jpg');
+}
+
+footer, nav {
+    background-image: url('static/assets/statblockbar.jpg');
+    background-size: cover;
+}
+
+/*.card-header{
+    background-color: rgba(255,246,22,0.75);
+}*/
+
+/*.card-body{
+    background-color: rgba(255,235,96,0.52);
+}*/
