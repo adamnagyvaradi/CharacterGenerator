@@ -54,7 +54,7 @@ public class EncounterController {
         return "encounter/encounter-edit";
     }
 
-    @PostMapping("/encounter/builder/character/edit/{id}")
+    @GetMapping("/encounter/builder/character/edit/{id}")
     public String editCharacter(@PathVariable long id, Model model){
 
         model.addAttribute("character", encounterService.findCharacterById(id));
