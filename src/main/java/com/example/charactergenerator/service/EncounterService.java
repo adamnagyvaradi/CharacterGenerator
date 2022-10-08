@@ -1,5 +1,6 @@
 package com.example.charactergenerator.service;
 
+import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.model.Encounter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,9 @@ public class EncounterService {
 
     public void removeCharacterById(long id){
         encounter.removeCharacterById(id);
+    }
+
+    public void updateCharacter(CharacterDto characterDto){
+
     }
 }

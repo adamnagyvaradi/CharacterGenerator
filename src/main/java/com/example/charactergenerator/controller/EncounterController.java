@@ -1,5 +1,6 @@
 package com.example.charactergenerator.controller;
 
+import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,13 @@ public class EncounterController {
         model.addAttribute("randedWeapons", rangedWeaponService.findAll());
 
         return "encounter/character-edit";
+    }
+
+    @GetMapping("/encounter/character/update")
+    public String updateCharacter(CharacterDto characterDto){
+        encounterService.updateCharacter(characterDto);
+
+        return "redirect:/encounter/builder/character";
     }
 
     @PostMapping("/encounter/builder/character/add/{id}")
