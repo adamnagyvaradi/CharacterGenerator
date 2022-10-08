@@ -17,11 +17,9 @@ public class ArmorService {
 
     private ArmorRepository armorRepository;
 
-    private CharacterRepository characterRepository;
 
-    public ArmorService(ArmorRepository armorRepository, CharacterRepository characterRepository) {
+    public ArmorService(ArmorRepository armorRepository) {
         this.armorRepository = armorRepository;
-        this.characterRepository = characterRepository;
     }
 
     public void saveAll(List<Armor> armors) {

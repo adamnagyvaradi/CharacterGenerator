@@ -93,15 +93,15 @@ public class Character {
     }
 
     public String getAttributeBonusRollDescription(String attributeName){
-        String rollDesciption = "d20";
+        String rollDescription = "d20";
         int bonus = getAttributeBonus(attributeName);
         if (bonus > 0){
-            rollDesciption += "+" + bonus;
+            rollDescription += "+" + bonus;
         }else if (bonus < 0){
-            rollDesciption += bonus;
+            rollDescription += bonus;
         }
 
-        return rollDesciption;
+        return rollDescription;
     }
 
     public Long getId() {
