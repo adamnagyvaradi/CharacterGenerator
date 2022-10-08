@@ -1,12 +1,7 @@
 package com.example.charactergenerator.dto;
 
-import com.example.charactergenerator.model.*;
+import com.example.charactergenerator.model.AttributeType;
 import com.example.charactergenerator.model.Character;
-
-import javax.persistence.*;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
 
 public class CharacterDto {
     private long id;
@@ -17,26 +12,18 @@ public class CharacterDto {
     private byte intelligence;
     private byte wisdom;
     private byte charisma;
-
     private byte armorClass;
-
     private short hitPoints;
-
     private byte speed;
-
     private byte challengeRating;
+    private String armor;
+    private String meleeWeapon;
+    private String rangedWeapon;
 
-    Map<AttributeType, Byte> attributes = new EnumMap<>(AttributeType.class);
+    //private CharacterType CharacterType;
 
-    private List<Skill> skills;
+    //private boolean isCaster;
 
-    private Armor armor;
-
-    private CharacterType CharacterType;
-
-    private boolean isCaster;
-
-    private int[] slots;
 
     public CharacterDto() {
     }
@@ -114,5 +101,61 @@ public class CharacterDto {
 
     public void setCharisma(byte charisma) {
         this.charisma = charisma;
+    }
+
+    public byte getArmorClass() {
+        return armorClass;
+    }
+
+    public void setArmorClass(byte armorClass) {
+        this.armorClass = armorClass;
+    }
+
+    public short getHitPoints() {
+        return hitPoints;
+    }
+
+    public void setHitPoints(short hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
+    public byte getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(byte speed) {
+        this.speed = speed;
+    }
+
+    public byte getChallengeRating() {
+        return challengeRating;
+    }
+
+    public void setChallengeRating(byte challengeRating) {
+        this.challengeRating = challengeRating;
+    }
+
+    public String getArmor() {
+        return armor;
+    }
+
+    public void setArmor(String armor) {
+        this.armor = armor;
+    }
+
+    public String getMeleeWeapon() {
+        return meleeWeapon;
+    }
+
+    public void setMeleeWeapon(String meleeWeapon) {
+        this.meleeWeapon = meleeWeapon;
+    }
+
+    public String getRangedWeapon() {
+        return rangedWeapon;
+    }
+
+    public void setRangedWeapon(String rangedWeapon) {
+        this.rangedWeapon = rangedWeapon;
     }
 }
