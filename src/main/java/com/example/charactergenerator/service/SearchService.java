@@ -25,23 +25,24 @@ public class SearchService {
     @Autowired
     private SearchRepository searchRepository;
 
-    public List<Character>filterBy(String charactername,CharacterType characterTypes,Byte challengerating){
+    public List<Character>filterBy(String characterName,String characterTypes,Byte challengeRating){
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Character> criteriaQuery = criteriaBuilder.createQuery(Character.class);
 
         Root<Character> characterRoot=criteriaQuery.from(Character.class);
         List<Predicate> predicates = new ArrayList<>();
 
-        if (!charactername.isBlank()){
-            Predicate predicatename = criteriaBuilder.like(characterRoot.get("name"),"%"+ charactername + "%");
-            predicates.add(predicatename);
+        if (!characterName.isBlank()){
+            Predicate predicateName = criteriaBuilder.like(characterRoot.get("name"),"%"+ characterName + "%");
+            predicates.add(predicateName);
             }
-        if(characterTypes != null){
-            Predicate predicateType = criteriaBuilder.equal(characterRoot.get("character_type"),characterTypes);
+        if(characterTypes != null && !characterTypes.equals("AllTypes")){
+            CharacterType characterType = CharacterType.valueOf(characterTypes);
+            Predicate predicateType = criteriaBuilder.equal(characterRoot.get("characterType"),characterType);
             predicates.add(predicateType);
         }
-        if(challengerating!= null){
-            Predicate predicaterating = criteriaBuilder.equal(characterRoot.get("challange_rating"),challengerating);
+        if(challengeRating!= null){
+            Predicate predicaterating = criteriaBuilder.equal(characterRoot.get("challengeRating"),challengeRating);
             predicates.add(predicaterating);
         }
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
