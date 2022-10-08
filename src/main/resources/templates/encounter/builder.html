@@ -180,6 +180,11 @@
                   <tbody>
                   <tr th:each="character: ${charactersCart}">
                     <td th:text="${character.name}"></td>
+                    <td>
+                      <form th:action="@{/encounter/builder/character/remove/{id}(id=${character.id})}" method="post">
+                        <button class="btn btn-dark btn-sm">-</button>
+                      </form>
+                    </td>
                   </tr>
                   </tbody>
                 </table>
