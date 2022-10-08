@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col overflow-auto">
+          <div class="col overflow-auto" style="max-height: 65vh">
             <!-- accordion -->
             <div class="accordion" id="character-list">
               <div class="accordion-item" th:each="character: ${characters}">
@@ -175,7 +175,7 @@
               <div class="card-header">
                 Characters Cart
               </div>
-              <div class="card-body  overflow-auto" style="max-height: 75vh">
+              <div class="card-body  overflow-auto" style="max-height: 60vh">
                 <table class="table table-striped">
                   <tbody>
                   <tr th:each="character: ${charactersCart}">
@@ -187,12 +187,12 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-auto">
-        <a th:href="@{/encounter/builder/character}" class="btn btn-dark" role="button">Next</a>
+        <div class="row mt-2">
+          <div class="col"></div>
+          <div class="col-auto">
+            <a th:href="@{/encounter/builder/character}" class="btn btn-dark" role="button">Next</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
