@@ -1,6 +1,7 @@
 package com.example.charactergenerator.controller;
 
 import com.example.charactergenerator.model.Character;
+import com.example.charactergenerator.service.ArmorService;
 import com.example.charactergenerator.service.CharacterService;
 import com.example.charactergenerator.service.EncounterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.List;
 public class EncounterController {
     private CharacterService characterService;
     private EncounterService encounterService;
+    private ArmorService armorService;
 
     @Autowired
     public void setCharacterService(CharacterService characterService) {
@@ -26,6 +28,11 @@ public class EncounterController {
     @Autowired
     public void setEncounterService(EncounterService encounterService) {
         this.encounterService = encounterService;
+    }
+
+    @Autowired
+    public void setArmorService(ArmorService armorService) {
+        this.armorService = armorService;
     }
 
     @GetMapping("/encounter/builder")
@@ -58,6 +65,7 @@ public class EncounterController {
     public String editCharacter(@PathVariable long id, Model model){
 
         model.addAttribute("character", encounterService.findCharacterById(id));
+        model.addAttribute("armors", armorService.findAll());
 
         return "encounter/character-edit";
     }
