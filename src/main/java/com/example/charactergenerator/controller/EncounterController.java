@@ -1,9 +1,7 @@
 package com.example.charactergenerator.controller;
 
 import com.example.charactergenerator.model.Character;
-import com.example.charactergenerator.service.ArmorService;
-import com.example.charactergenerator.service.CharacterService;
-import com.example.charactergenerator.service.EncounterService;
+import com.example.charactergenerator.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +17,8 @@ public class EncounterController {
     private CharacterService characterService;
     private EncounterService encounterService;
     private ArmorService armorService;
+    private MeleeWeaponService meleeWeaponService;
+    private RangedWeaponService rangedWeaponService;
 
     @Autowired
     public void setCharacterService(CharacterService characterService) {
@@ -33,6 +33,16 @@ public class EncounterController {
     @Autowired
     public void setArmorService(ArmorService armorService) {
         this.armorService = armorService;
+    }
+
+    @Autowired
+    public void setMeleeWeaponService(MeleeWeaponService meleeWeaponService) {
+        this.meleeWeaponService = meleeWeaponService;
+    }
+
+    @Autowired
+    public void setRangedWeaponService(RangedWeaponService rangedWeaponService) {
+        this.rangedWeaponService = rangedWeaponService;
     }
 
     @GetMapping("/encounter/builder")
@@ -66,6 +76,8 @@ public class EncounterController {
 
         model.addAttribute("character", encounterService.findCharacterById(id));
         model.addAttribute("armors", armorService.findAll());
+        model.addAttribute("meleeWeapons", meleeWeaponService.findAll());
+        model.addAttribute("randedWeapons", rangedWeaponService.findAll());
 
         return "encounter/character-edit";
     }
