@@ -44,77 +44,97 @@
             <form th:object="${character}">
                 <div class="row mb-3">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{name}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="hitPoints" class="col-sm-2 col-form-label">HP</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{hitPoints}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="armorClass" class="col-sm-2 col-form-label">Armor Class</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" name="armorClass" id="armorClass" th:value="*{defaultArmorClass}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="speed" class="col-sm-2 col-form-label">Speed</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{speed}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="challengeRating" class="col-sm-2 col-form-label">Challenge Rating</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{challengeRating}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="strength" class="col-sm-2 col-form-label">Strength</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{strength}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="dexterity" class="col-sm-2 col-form-label">Dexterity</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{dexterity}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="constitution" class="col-sm-2 col-form-label">Constitution</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{constitution}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="intelligence" class="col-sm-2 col-form-label">Intelligence</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{intelligence}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="wisdom" class="col-sm-2 col-form-label">Wisdom</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{wisdom}">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="charisma" class="col-sm-2 col-form-label">Charisma</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{charisma}">
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="" class="col-sm-2 col-form-label">Armor</label>
-                    <div class="col-sm-10">
+                <div class="row mb-3" th:if="${character.characterType.name() == 'HUMANOID'}">
+                    <label for="armor" class="col-sm-2 col-form-label">Armor</label>
+                    <div class="col-sm-6">
                         <select class="form-select" id="armor" name="armor">
-                            <option value="no-armor-selected">Choose armor(optional)</option>
+                            <option value="no-armor-selected">Choose one...(optional)</option>
                             <option th:each="armor: ${armors}" th:value="${armor.id}"
                                     th:text="${armor.name + ' (Base AC: ' + armor.armorValue + ', Type: ' + armor.armorType.name + ')'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3" th:if="${character.characterType.name() == 'HUMANOID'}">
+                    <label for="meleeWeapon" class="col-sm-2 col-form-label">Melee Weapon</label>
+                    <div class="col-sm-6">
+                        <select class="form-select" id="meleeWeapon" name="meleeWeapon">
+                            <option value="no-melee-weapon-selected">Choose one...(optional)</option>
+                            <option th:each="meleeWeapon: ${meleeWeapons}" th:value="${meleeWeapon.id}"
+                                    th:text="${meleeWeapon.name + ' (Damage: ' + meleeWeapon.damage + ')'}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3" th:if="${character.characterType.name() == 'HUMANOID'}">
+                    <label for="rangedWeapon" class="col-sm-2 col-form-label">Ranged Weapon</label>
+                    <div class="col-sm-6">
+                        <select class="form-select" id="rangedWeapon" name="rangedWeapon">
+                            <option value="no-ranged-weapon-selected">Choose one...(optional)</option>
+                            <option th:each="rangedWeapon: ${randedWeapons}" th:value="${rangedWeapon.id}"
+                                    th:text="${rangedWeapon.name + ' (Damage: ' + rangedWeapon.damage + ')'}"></option>
                         </select>
                     </div>
                 </div>
