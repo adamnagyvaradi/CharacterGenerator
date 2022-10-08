@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class CharacterHelper implements ApplicationRunner {
+public class    CharacterHelper implements ApplicationRunner {
     private CharacterService characterService;
 
     private ArmorService armorService;

@@ -2,6 +2,7 @@ package com.example.charactergenerator.model;
 
 public enum CharacterType {
 
+
     ABERRATION("Aberration"),
     BEAST("Beats"),
     CELESTIAL("Celestial"),
@@ -28,4 +29,5 @@ public enum CharacterType {
     public void setCharacterType(String characterType) {
         this.characterType = characterType;
     }
-}
+
+  }

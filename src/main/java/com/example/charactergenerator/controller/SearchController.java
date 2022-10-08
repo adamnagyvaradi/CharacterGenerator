@@ -22,11 +22,11 @@ public class SearchController {
 
     @GetMapping("/search")
     public String searchCharacter(Model model,
-       @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword,
-       @RequestParam(required = false, name = "characterType") CharacterType characterType,
-       @RequestParam(required = false, name = "challangeRating") Byte challangeRating) {
+       @RequestParam(required = false, name = "characterName",defaultValue ="") String characterName,
+       @RequestParam(required = false, name = "characterType") String characterType,
+       @RequestParam(required = false, name = "challengeRating") Byte challengeRating) {
 
-        List<Character> characterList = searchService.filterBy(keyword,characterType,challangeRating);
+        List<Character> characterList = searchService.filterBy(characterName,characterType, challengeRating);
         model.addAttribute("characters",characterList);
 
        return "search";
