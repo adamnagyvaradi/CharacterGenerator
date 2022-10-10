@@ -1,5 +1,6 @@
 package com.example.charactergenerator.service;
 
+import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.model.CharacterType;
 import com.example.charactergenerator.model.SkillType;
@@ -10,6 +11,7 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,8 +29,7 @@ class CharacterServiceTest {
                         List.of(SkillType.HISTORY,SkillType.PERCEPTION));
     }
 
-
-    /*@Test
+    @Test
     void findByNameTest() {
 
         CharacterRepository characterRepository
@@ -37,12 +38,12 @@ class CharacterServiceTest {
         CharacterService characterService
                 = new CharacterService(characterRepository);
 
-        Mockito.when(characterService.findByName(Mockito.anyString())).thenReturn(testChar);
+        Mockito.when(characterRepository.findCharactersByName(Mockito.anyString())).thenReturn(Optional.ofNullable(testChar));
 
         Character serviceResult = characterService.findByName("Test");
 
         assertEquals(testChar, serviceResult);
-    }*/
+    }
 
     @Test
     void findAllByNameContainsTest() {
@@ -62,7 +63,7 @@ class CharacterServiceTest {
         assertEquals(characterList, serviceResult);
     }
 
-    /*@Test
+    @Test
     void findByIdTest() {
 
         CharacterRepository characterRepository
@@ -71,29 +72,11 @@ class CharacterServiceTest {
         CharacterService characterService
                 = new CharacterService(characterRepository);
 
-        Mockito.when(characterService.findById(Mockito.anyLong())).thenReturn(testChar);
+        Mockito.when(characterRepository.findById(Mockito.anyLong())).thenReturn(Optional.ofNullable(testChar));
 
         Character serviceResult = characterService.findById(3);
 
         assertEquals(testChar, serviceResult);
-    }*/
-
-    @Test
-    void findAllTest() {
-
-        CharacterRepository characterRepository
-                = Mockito.mock(CharacterRepository.class);
-
-        CharacterService characterService
-                = new CharacterService(characterRepository);
-
-        List<Character> characterList = new ArrayList<>();
-
-        Mockito.when(characterService.findAll()).thenReturn(characterList);
-
-        List<Character> serviceResult = characterService.findAll();
-
-        assertEquals(characterList, serviceResult);
     }
 
     @Test
@@ -110,4 +93,39 @@ class CharacterServiceTest {
         Mockito.verify(characterRepository).save(testChar);
     }
 
+    @Test
+    void findAllTest() {
+
+        CharacterRepository characterRepository
+                = Mockito.mock(CharacterRepository.class);
+
+        CharacterService characterService
+                = new CharacterService(characterRepository);
+
+        List<Character> characterList = new ArrayList<>();
+
+        characterList.add(testChar);
+
+        Mockito.when(characterService.findAll()).thenReturn(characterList);
+
+        List<Character> serviceResult = characterService.findAll();
+
+        assertEquals(characterList, serviceResult);
+    }
+
+    @Test
+    void updateTest() {
+
+        CharacterRepository characterRepository
+                = Mockito.mock(CharacterRepository.class);
+
+        CharacterService characterService
+                = new CharacterService(characterRepository);
+
+        CharacterDto testCharDto = new CharacterDto();
+
+        characterService.update(testChar, testCharDto);
+
+        Mockito.verify(characterRepository).save(testChar);
+    }
 }
