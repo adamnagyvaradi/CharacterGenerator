@@ -309,6 +309,14 @@ public class Character {
         return armor != null;
     }
 
+    public boolean hasMeleeWeapon(){
+        return meleeWeapon != null;
+    }
+
+    public boolean hasRangedWeapon(){
+        return rangedWeapon != null;
+    }
+
     public byte getDefaultArmorClass(){
         return armorClass;
     }
