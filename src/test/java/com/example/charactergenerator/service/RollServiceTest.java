@@ -31,5 +31,4 @@ class RollServiceTest {
         assertEquals(20, service.roll("5d20").getResult());
 
     }
-
 }
