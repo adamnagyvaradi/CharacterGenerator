@@ -27,4 +27,18 @@ public class Encounter {
     public void setEditable(boolean editable) {
         this.editable = editable;
     }
+
+    public Character findById(long id){
+        for (Character actualCharacter: characters){
+            if (actualCharacter.getId() == id){
+                return actualCharacter;
+            }
+        }
+
+        throw new IllegalArgumentException("Character not found. Id: " + id);
+    }
+
+    public void removeCharacterById(long id){
+        characters.remove(findById(id));
+    }
 }

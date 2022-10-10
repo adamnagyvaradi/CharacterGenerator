@@ -321,4 +321,32 @@ public class Character {
     public boolean hasArmor(){
         return armor != null;
     }
+
+    public byte getDefaultArmorClass(){
+        return armorClass;
+    }
+
+    public byte getStrength(){
+        return getAttributeValue(AttributeType.STR);
+    }
+
+    public byte getDexterity(){
+        return getAttributeValue(AttributeType.DEX);
+    }
+
+    public byte getConstitution(){
+        return getAttributeValue(AttributeType.CON);
+    }
+
+    public byte getIntelligence(){
+        return getAttributeValue(AttributeType.INT);
+    }
+
+    public byte getWisdom(){
+        return getAttributeValue(AttributeType.WIS);
+    }
+
+    public byte getCharisma(){
+        return getAttributeValue(AttributeType.CHA);
+    }
 }
