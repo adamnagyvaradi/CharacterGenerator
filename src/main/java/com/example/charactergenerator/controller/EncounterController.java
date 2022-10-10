@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -83,7 +84,7 @@ public class EncounterController {
         return "encounter/character-edit";
     }
 
-    @GetMapping("/encounter/character/update")
+    @PostMapping("/encounter/character/update")
     public String updateCharacter(CharacterDto characterDto){
         encounterService.updateCharacter(characterDto);
 
@@ -103,6 +104,4 @@ public class EncounterController {
 
         return "redirect:/encounter/builder";
     }
-
-
 }

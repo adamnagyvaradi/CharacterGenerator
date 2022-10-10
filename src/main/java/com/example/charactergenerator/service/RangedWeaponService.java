@@ -23,4 +23,8 @@ public class RangedWeaponService {
     public List<RangedWeapon> findAll(){
         return (List<RangedWeapon>) rangedWeaponRepository.findAll();
     }
+
+    public RangedWeapon findById(String id){
+        return rangedWeaponRepository.findById(Long.parseLong(id)).orElseThrow();
+    }
 }
