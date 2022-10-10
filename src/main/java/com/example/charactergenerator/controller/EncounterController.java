@@ -1,8 +1,8 @@
 package com.example.charactergenerator.controller;
 
+import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.Character;
-import com.example.charactergenerator.service.CharacterService;
-import com.example.charactergenerator.service.EncounterService;
+import com.example.charactergenerator.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +17,9 @@ import java.util.List;
 public class EncounterController {
     private CharacterService characterService;
     private EncounterService encounterService;
+    private ArmorService armorService;
+    private MeleeWeaponService meleeWeaponService;
+    private RangedWeaponService rangedWeaponService;
 
     @Autowired
     public void setCharacterService(CharacterService characterService) {
@@ -26,6 +29,21 @@ public class EncounterController {
     @Autowired
     public void setEncounterService(EncounterService encounterService) {
         this.encounterService = encounterService;
+    }
+
+    @Autowired
+    public void setArmorService(ArmorService armorService) {
+        this.armorService = armorService;
+    }
+
+    @Autowired
+    public void setMeleeWeaponService(MeleeWeaponService meleeWeaponService) {
+        this.meleeWeaponService = meleeWeaponService;
+    }
+
+    @Autowired
+    public void setRangedWeaponService(RangedWeaponService rangedWeaponService) {
+        this.rangedWeaponService = rangedWeaponService;
     }
 
     @GetMapping("/encounter/builder")
@@ -42,12 +60,46 @@ public class EncounterController {
         model.addAttribute("characters",characters);
         model.addAttribute("charactersCart",encounterService.getAllCharacter());
 
-        return "encounter-builder";
+        return "encounter/builder";
+    }
+
+    @GetMapping("/encounter/builder/character")
+    public String showCharacters(Model model){
+        List<Character> characters = encounterService.getAllCharacter();
+
+        model.addAttribute("characters",characters);
+
+        return "encounter/encounter-edit";
+    }
+
+    @GetMapping("/encounter/builder/character/edit/{id}")
+    public String editCharacter(@PathVariable long id, Model model){
+
+        model.addAttribute("character", encounterService.findCharacterById(id));
+        model.addAttribute("armors", armorService.findAll());
+        model.addAttribute("meleeWeapons", meleeWeaponService.findAll());
+        model.addAttribute("randedWeapons", rangedWeaponService.findAll());
+
+        return "encounter/character-edit";
+    }
+
+    @GetMapping("/encounter/character/update")
+    public String updateCharacter(CharacterDto characterDto){
+        encounterService.updateCharacter(characterDto);
+
+        return "redirect:/encounter/builder/character";
     }
 
     @PostMapping("/encounter/builder/character/add/{id}")
     public String addCharacterIntoBuilder(@PathVariable long id){
         encounterService.addCharacter(id);
+
+        return "redirect:/encounter/builder";
+    }
+
+    @PostMapping("/encounter/builder/character/remove/{id}")
+    public String removeCharacterFromCart(@PathVariable long id){
+        encounterService.removeCharacterById(id);
 
         return "redirect:/encounter/builder";
     }

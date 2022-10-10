@@ -2,6 +2,7 @@ package com.example.charactergenerator.repository;
 
 
 import com.example.charactergenerator.model.Character;
+import com.example.charactergenerator.model.CharacterType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,10 @@ public interface SearchRepository extends JpaRepository<Character,Long> {
     List<Character> findByKeyword(@Param("keyword") String keyword);*/
 
     List<Character> findCharactersByNameContains(String characterName);
+
+    List<CharacterType>findCharacterTypeByNameContains(String characterType);
+
+    List<CharacterType>findAllByNameContains(String characterType);
+
 }
 

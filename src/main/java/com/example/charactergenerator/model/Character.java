@@ -93,15 +93,15 @@ public class Character {
     }
 
     public String getAttributeBonusRollDescription(String attributeName){
-        String rollDesciption = "d20";
+        String rollDescription = "d20";
         int bonus = getAttributeBonus(attributeName);
         if (bonus > 0){
-            rollDesciption += "+" + bonus;
+            rollDescription += "+" + bonus;
         }else if (bonus < 0){
-            rollDesciption += bonus;
+            rollDescription += bonus;
         }
 
-        return rollDesciption;
+        return rollDescription;
     }
 
     public Long getId() {
@@ -285,5 +285,55 @@ public class Character {
                 default -> throw new IllegalStateException("Unexpected value: " + level);
             }
         }
+    }
+
+    public String proficienciesToString(){
+        StringBuilder sb = new StringBuilder();
+
+        for (SkillType skillType: proficiencies){
+            sb.append(skillType.getName()).append(" ")
+                    .append(getAttributeBonus(skillType.getModifier()))
+                    .append(", ");
+        }
+
+        int endIndex = sb.lastIndexOf(",");
+
+        return sb.substring(0,endIndex);
+    }
+
+    public boolean hasProficiencies(){
+        return !proficiencies.isEmpty();
+    }
+
+    public boolean hasArmor(){
+        return armor != null;
+    }
+
+    public byte getDefaultArmorClass(){
+        return armorClass;
+    }
+
+    public byte getStrength(){
+        return getAttributeValue(AttributeType.STR);
+    }
+
+    public byte getDexterity(){
+        return getAttributeValue(AttributeType.DEX);
+    }
+
+    public byte getConstitution(){
+        return getAttributeValue(AttributeType.CON);
+    }
+
+    public byte getIntelligence(){
+        return getAttributeValue(AttributeType.INT);
+    }
+
+    public byte getWisdom(){
+        return getAttributeValue(AttributeType.WIS);
+    }
+
+    public byte getCharisma(){
+        return getAttributeValue(AttributeType.CHA);
     }
 }

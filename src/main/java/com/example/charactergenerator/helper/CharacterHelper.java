@@ -5,6 +5,8 @@ import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.repository.ArmorRepository;
 import com.example.charactergenerator.service.ArmorService;
 import com.example.charactergenerator.service.CharacterService;
+import com.example.charactergenerator.service.MeleeWeaponService;
+import com.example.charactergenerator.service.RangedWeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -15,11 +17,14 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class CharacterHelper implements ApplicationRunner {
+public class    CharacterHelper implements ApplicationRunner {
     private CharacterService characterService;
 
     private ArmorService armorService;
 
+    private MeleeWeaponService meleeWeaponService;
+
+    private RangedWeaponService rangedWeaponService;
 
     @Autowired
     public void setArmorRepository(ArmorService armorService) {
@@ -31,8 +36,20 @@ public class CharacterHelper implements ApplicationRunner {
         this.characterService = characterService;
     }
 
+    @Autowired
+    public void setMeleeWeaponService(MeleeWeaponService meleeWeaponService){
+        this.meleeWeaponService = meleeWeaponService;
+    }
+
+    @Autowired
+    public void setRangedWeaponService(RangedWeaponService rangedWeaponService) {
+        this.rangedWeaponService = rangedWeaponService;
+    }
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        saveMelee();
+        saveRanged();
         saveArmors();
         saveCharacters();
     }
@@ -45,10 +62,45 @@ public class CharacterHelper implements ApplicationRunner {
         armorService.saveAll(getAllArmors());
     }
 
+    private void saveMelee(){
+        meleeWeaponService.saveAll(getMeleeWeapons());
+    }
+
+    private void saveRanged(){
+        rangedWeaponService.saveAll(getRangedWeapons());
+    }
+
     public Armor getArmorByName(String name){
         for (Armor armor : getAllArmors()) {
             if (armor.getName().equals(name)) {
                 return armor;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public Armor getArmorByID(Long id){
+        for (Armor armor : getAllArmors()) {
+            if (armor.getId() == id) {
+                return armor;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public MeleeWeapon getMeleeWeaponByID(Long id){
+        for (MeleeWeapon meleeWeapon : getMeleeWeapons()){
+            if (meleeWeapon.getId() == id){
+                return meleeWeapon;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public RangedWeapon getRangedWeaponByID(Long id){
+        for (RangedWeapon rangedWeapon : getRangedWeapons()){
+            if (rangedWeapon.getId() == id){
+                return rangedWeapon;
             }
         }
         throw new IllegalArgumentException();
@@ -79,7 +131,8 @@ public class CharacterHelper implements ApplicationRunner {
                 new Character("Bandit", 10, 7, 8, 4, 4, 4, 8,
                         11, 4, 4, CharacterType.HUMANOID,new ArrayList<>()),
                 new Character("Bandit Captain", 10, 7, 8, 4, 4, 4, 8,
-                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>()).equipArmor(getArmorByName("Plate")),
+                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>())
+                        .equipArmor(getArmorByID(3L)).equipMeleeWeapon(getMeleeWeaponByID(3L)).equipRangedWeapon(getRangedWeaponByID(3L)),
                 new Character("Drow Inquisitor", 10, 7, 8, 4, 4, 4, 8,
                         11, 4, 4,  CharacterType.HUMANOID, new ArrayList<>()),
                 new Character("Grimlock", 11, 11, 30, 2, 16, 12, 12,
