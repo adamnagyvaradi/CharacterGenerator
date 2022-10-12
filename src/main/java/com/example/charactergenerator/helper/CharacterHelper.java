@@ -12,9 +12,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class    CharacterHelper implements ApplicationRunner {
@@ -109,38 +107,38 @@ public class    CharacterHelper implements ApplicationRunner {
     private List<Character> getCharacters(){
         return new ArrayList<>(Arrays.asList(
                 new Character("Aboleth",17, 135,10,10,
-                        21,9,15,18,15,18,CharacterType.ABERRATION, Arrays.asList(SkillType.HISTORY, SkillType.PERCEPTION)),
+                        21,9,15,18,15,18,CharacterType.ABERRATION, Set.of(SkillType.HISTORY, SkillType.PERCEPTION)),
                 new Character("Acolyte",10, 9,30,0,
-                        10,10,10,10,14,11,CharacterType.HUMANOID,Arrays.asList(SkillType.MEDICINE, SkillType.RELIGION)),
+                        10,10,10,10,14,11,CharacterType.HUMANOID,Set.of(SkillType.MEDICINE, SkillType.RELIGION)),
                 new Character("Air Elemental",15, 90,0, 4,
-                        14,20,14,6,10,6,CharacterType.ELEMENTAL,new ArrayList<>()),
+                        14,20,14,6,10,6,CharacterType.ELEMENTAL,new HashSet<>()),
                 new Character("Allosaurus",13, 51,60, 2,
-                        19,13,17,2,12,5,CharacterType.BEAST,Arrays.asList(SkillType.PERCEPTION)),
+                        19,13,17,2,12,5,CharacterType.BEAST,Set.of(SkillType.PERCEPTION)),
                 new Character("Animated Armor",18, 33,25, 4,
-                        14,11,13,1,3,1,CharacterType.CONSTRUCT,new ArrayList<>()),
+                        14,11,13,1,3,1,CharacterType.CONSTRUCT,new HashSet<>()),
                 new Character("Ankheg",14, 39, 30, 10,
-                        17, 11, 13, 1, 13, 6,CharacterType.MONSTROSITY, new ArrayList<>()),
+                        17, 11, 13, 1, 13, 6,CharacterType.MONSTROSITY, new HashSet<>()),
                 new Character("Ankylosaurus",15, 68, 30, 16,
-                        19,11,15,2,12,5,CharacterType.BEAST, new ArrayList<>()),
+                        19,11,15,2,12,5,CharacterType.BEAST, new HashSet<>()),
                 new Character("Hobgoblin", 10, 7, 8, 4, 4, 4, 8,
-                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>()),
+                        11, 4, 4, CharacterType.HUMANOID, new HashSet<>()),
                 new Character("Giant Skeleton", 10, 7, 8, 4, 4, 4,  8,
-                        11, 4, 4, CharacterType.UNDEAD, new ArrayList<>()),
+                        11, 4, 4, CharacterType.UNDEAD, new HashSet<>()),
                 new Character("Aarakocra", 10, 7, 8, 4, 4, 4, 8,
-                        11, 4, 4, CharacterType.ABERRATION, new ArrayList<>()),
+                        11, 4, 4, CharacterType.ABERRATION, new HashSet<>()),
                 new Character("Bandit", 10, 7, 8, 4, 4, 4, 8,
-                        11, 4, 4, CharacterType.HUMANOID,new ArrayList<>()),
+                        11, 4, 4, CharacterType.HUMANOID,new HashSet<>()),
                 new Character("Bandit Captain", 10, 7, 8, 4, 4, 4, 8,
-                        11, 4, 4, CharacterType.HUMANOID, new ArrayList<>())
+                        11, 4, 4, CharacterType.HUMANOID, new HashSet<>())
                         .equipArmor(getArmorByID(3L)).equipMeleeWeapon(getMeleeWeaponByID(3L)).equipRangedWeapon(getRangedWeaponByID(3L)),
                 new Character("Drow Inquisitor", 10, 7, 8, 4, 4, 4, 8,
-                        11, 4, 4,  CharacterType.HUMANOID, new ArrayList<>()),
+                        11, 4, 4,  CharacterType.HUMANOID, new HashSet<>()),
                 new Character("Grimlock", 11, 11, 30, 2, 16, 12, 12,
-                        9, 8, 6, CharacterType.BEAST, new ArrayList<>()),
+                        9, 8, 6, CharacterType.BEAST, new HashSet<>()),
                 new Character("Merfolk", 11, 11, 10, 2, 10, 13, 12,
-                        11, 11, 12, CharacterType.HUMANOID, new ArrayList<>()),
+                        11, 11, 12, CharacterType.HUMANOID, new HashSet<>()),
                 new Character("Tribal Warrior", 12, 11, 30, 2, 13, 11,
-                        12, 8, 11, 8, CharacterType.HUMANOID, new ArrayList<>())
+                        12, 8, 11, 8, CharacterType.HUMANOID, new HashSet<>())
         ));
     }
 
