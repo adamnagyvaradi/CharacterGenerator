@@ -17,7 +17,7 @@ public class RollRestController {
 
     @CrossOrigin
     @GetMapping("/roll/{rollDefinition}")
-    public RollDto rollDice(@PathVariable String rollDefinition){
+    public RollDto rollDice(@PathVariable String rollDefinition) {
         System.out.println(rollDefinition);
         return rollService.roll(rollDefinition);
     }

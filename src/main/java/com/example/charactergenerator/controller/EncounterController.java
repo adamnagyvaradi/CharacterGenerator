@@ -48,33 +48,31 @@ public class EncounterController {
 
     @GetMapping("/encounter/builder")
     public String showEncounterBuilder(Model model,
-                                       @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword){
+                                       @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword) {
         List<Character> characters;
 
-        if(keyword.isBlank()){
+        if (keyword.isBlank()) {
             characters = characterService.findAll();
-        }else{
+        } else {
             characters = characterService.findAllByNameContains(keyword);
         }
 
-        model.addAttribute("characters",characters);
-        model.addAttribute("charactersCart",encounterService.getAllCharacter());
+        model.addAttribute("characters", characters);
+        model.addAttribute("charactersCart", encounterService.getAllCharacter());
 
         return "encounter/builder";
     }
 
     @GetMapping("/encounter/builder/character")
-    public String showCharacters(Model model){
+    public String showCharacters(Model model) {
         List<Character> characters = encounterService.getAllCharacter();
-
-        model.addAttribute("characters",characters);
+        model.addAttribute("characters", characters);
 
         return "encounter/encounter-edit";
     }
 
     @GetMapping("/encounter/builder/character/edit/{id}")
-    public String editCharacter(@PathVariable long id, Model model){
-
+    public String editCharacter(@PathVariable long id, Model model) {
         model.addAttribute("character", encounterService.findCharacterById(id));
         model.addAttribute("armors", armorService.findAll());
         model.addAttribute("meleeWeapons", meleeWeaponService.findAll());
@@ -84,21 +82,21 @@ public class EncounterController {
     }
 
     @GetMapping("/encounter/character/update")
-    public String updateCharacter(CharacterDto characterDto){
+    public String updateCharacter(CharacterDto characterDto) {
         encounterService.updateCharacter(characterDto);
 
         return "redirect:/encounter/builder/character";
     }
 
     @PostMapping("/encounter/builder/character/add/{id}")
-    public String addCharacterIntoBuilder(@PathVariable long id){
+    public String addCharacterIntoBuilder(@PathVariable long id) {
         encounterService.addCharacter(id);
 
         return "redirect:/encounter/builder";
     }
 
     @PostMapping("/encounter/builder/character/remove/{id}")
-    public String removeCharacterFromCart(@PathVariable long id){
+    public String removeCharacterFromCart(@PathVariable long id) {
         encounterService.removeCharacterById(id);
 
         return "redirect:/encounter/builder";

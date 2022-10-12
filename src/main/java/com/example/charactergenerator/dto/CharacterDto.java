@@ -24,11 +24,10 @@ public class CharacterDto {
 
     //private boolean isCaster;
 
-
     public CharacterDto() {
     }
 
-    public CharacterDto(Character character){
+    public CharacterDto(Character character) {
         id = character.getId();
         name = character.getName();
         strength = character.getAttributeValue(AttributeType.STR);

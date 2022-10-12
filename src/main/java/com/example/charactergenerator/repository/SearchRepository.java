@@ -10,16 +10,16 @@ import java.util.List;
 
 
 @Repository
-public interface SearchRepository extends JpaRepository<Character,Long> {
+public interface SearchRepository extends JpaRepository<Character, Long> {
    /* @Query(value = "select c FROM characters c where characters.name like %:keyword% ")
     //@Query("SELECT characters FROM characters WHERE characters.name LIKE %?1%")
     List<Character> findByKeyword(@Param("keyword") String keyword);*/
 
     List<Character> findCharactersByNameContains(String characterName);
 
-    List<CharacterType>findCharacterTypeByNameContains(String characterType);
+    List<CharacterType> findCharacterTypeByNameContains(String characterType);
 
-    List<CharacterType>findAllByNameContains(String characterType);
+    List<CharacterType> findAllByNameContains(String characterType);
 
 }
 

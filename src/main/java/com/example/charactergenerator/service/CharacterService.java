@@ -4,33 +4,44 @@ import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.AttributeType;
 import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.repository.CharacterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class CharacterService {
 
     private CharacterRepository characterRepository;
 
     public CharacterService(CharacterRepository characterRepository) {
-        this.characterRepository= characterRepository;
+        this.characterRepository = characterRepository;
     }
+
+    /*@Autowired
+    public void setCharacterRepository(CharacterRepository characterRepository) {
+        this.characterRepository= characterRepository;
+    }*/
 
     public Character findByName(String characterName) {
         return characterRepository.findCharactersByName(characterName).orElseThrow();
     }
 
-    public List<Character> findAllByNameContains(String keyword){
+    public List<Character> findAllByNameContains(String keyword) {
         return characterRepository.findAllByNameContains(keyword);
     }
 
-    public Character findById(long id){
+    public Character findById(long id) {
         return characterRepository.findById(id).orElseThrow();
     }
 
-    public List<Character>getAllCharacter(){return (List<Character>) characterRepository.findAll();}
+    public List<Character> getAllCharacter() {
+        return (List<Character>) characterRepository.findAll();
+    }
 
-    public void save(Character character) {characterRepository.save(character);}
+    public void save(Character character) {
+        characterRepository.save(character);
+    }
 
     public void update(Character character, CharacterDto characterDto) {
         character.setName(characterDto.getName());

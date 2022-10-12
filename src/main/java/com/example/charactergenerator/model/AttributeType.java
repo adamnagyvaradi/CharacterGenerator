@@ -10,15 +10,15 @@ public enum AttributeType {
 
     private String name;
 
-    AttributeType(String name){
+    AttributeType(String name) {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public byte getBonus(int modifierValue){
-        return (byte)(modifierValue - 10 < 0 ? (modifierValue - 11) / 2 : (modifierValue - 10) / 2);
+    public byte getBonus(int modifierValue) {
+        return (byte) (modifierValue - 10 < 0 ? (modifierValue - 11) / 2 : (modifierValue - 10) / 2);
     }
 }

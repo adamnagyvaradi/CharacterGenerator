@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class EncounterService {
     private CharacterService characterService;
+
     private long lastId = 0;
 
     @Autowired
@@ -20,29 +21,28 @@ public class EncounterService {
 
     private Encounter encounter = new Encounter();
 
-    public void addCharacter(Character character){
+    public void addCharacter(Character character) {
         character.setId(++lastId);
         encounter.addCharacter(character);
     }
 
-    public void addCharacter(long id){
+    public void addCharacter(long id) {
         Character character = characterService.findById(id);
         addCharacter(character);
     }
 
-    public List<Character> getAllCharacter(){
+    public List<Character> getAllCharacter() {
         return encounter.getCharacters();
     }
 
-    public Character findCharacterById(long id){
+    public Character findCharacterById(long id) {
         return encounter.findById(id);
     }
 
-    public void removeCharacterById(long id){
+    public void removeCharacterById(long id) {
         encounter.removeCharacterById(id);
     }
 
-    public void updateCharacter(CharacterDto characterDto){
-
+    public void updateCharacter(CharacterDto characterDto) {
     }
 }

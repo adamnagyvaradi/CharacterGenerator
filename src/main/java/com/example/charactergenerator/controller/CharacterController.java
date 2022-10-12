@@ -3,6 +3,7 @@ package com.example.charactergenerator.controller;
 import com.example.charactergenerator.dto.CharacterDto;
 import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.service.CharacterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +15,17 @@ public class CharacterController {
 
     private CharacterService characterService;
 
-    public CharacterController(CharacterService characterService){
+    public CharacterController(CharacterService characterService) {
         this.characterService = characterService;
     }
 
+ /*   @Autowired
+    public void setCharacterService(CharacterService characterService) {
+        this.characterService = characterService;
+    }*/
+
     @GetMapping(value = {"/sheet"})
-    public String getAttributes(Model model){
+    public String getAttributes(Model model) {
 
         Character character = characterService.findById(1);
         CharacterDto characterDto = new CharacterDto(character);
@@ -31,20 +37,18 @@ public class CharacterController {
     }
 
     @GetMapping(value = {"/character/{id}"})
-    public String showCharacterById(@PathVariable long id, Model model){
+    public String showCharacterById(@PathVariable long id, Model model) {
         Character character = characterService.findById(id);
         CharacterDto characterDto = new CharacterDto(character);
         model.addAttribute(character);
         model.addAttribute(characterDto);
 
-
         return "character";
     }
 
-    @PostMapping(value={"/character/update"})
-    public String updateCharacter(CharacterDto characterDto){
+    @PostMapping(value = {"/character/update"})
+    public String updateCharacter(CharacterDto characterDto) {
         Character character = characterService.findById(characterDto.getId());
-
         characterService.update(character, characterDto);
 
         return "redirect:/character/" + character.getId();

@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Armor {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
 
@@ -14,7 +14,6 @@ public class Armor {
     private ArmorType armorType;
 
     private byte armorValue;
-
 
     public Armor() {
     }
@@ -64,12 +63,11 @@ public class Armor {
         return getArmorClass(dexBonus);
     }
 
-
-    public byte getArmorClass(byte dexBonus){
-        if (armorType.equals(ArmorType.HEAVY)){
+    public byte getArmorClass(byte dexBonus) {
+        if (armorType.equals(ArmorType.HEAVY)) {
             return armorValue;
         } else if (armorType.equals(ArmorType.MEDIUM)) {
-            if (dexBonus >= 2){
+            if (dexBonus >= 2) {
                 return (byte) (armorValue + 2);
             }
             return (byte) (armorValue + dexBonus);

@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RangedWeaponRepository extends CrudRepository <RangedWeapon, Long> {
+public interface RangedWeaponRepository extends CrudRepository<RangedWeapon, Long> {
 }

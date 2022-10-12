@@ -25,28 +25,28 @@ public class SearchService {
     @Autowired
     private SearchRepository searchRepository;
 
-    public List<Character>filterBy(String characterName,String characterTypes,Byte challengeRating){
+    public List<Character> filterBy(String characterName, String characterTypes, Byte challengeRating) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Character> criteriaQuery = criteriaBuilder.createQuery(Character.class);
 
-        Root<Character> characterRoot=criteriaQuery.from(Character.class);
+        Root<Character> characterRoot = criteriaQuery.from(Character.class);
         List<Predicate> predicates = new ArrayList<>();
 
-        if (!characterName.isBlank()){
-            Predicate predicateName = criteriaBuilder.like(characterRoot.get("name"),"%"+ characterName + "%");
+        if (!characterName.isBlank()) {
+            Predicate predicateName = criteriaBuilder.like(characterRoot.get("name"), "%" + characterName + "%");
             predicates.add(predicateName);
-            }
-        if(characterTypes != null && !characterTypes.equals("AllTypes")){
+        }
+        if (characterTypes != null && !characterTypes.equals("AllTypes")) {
             CharacterType characterType = CharacterType.valueOf(characterTypes);
-            Predicate predicateType = criteriaBuilder.equal(characterRoot.get("characterType"),characterType);
+            Predicate predicateType = criteriaBuilder.equal(characterRoot.get("characterType"), characterType);
             predicates.add(predicateType);
         }
-        if(challengeRating!= null){
-            Predicate predicaterating = criteriaBuilder.equal(characterRoot.get("challengeRating"),challengeRating);
+        if (challengeRating != null) {
+            Predicate predicaterating = criteriaBuilder.equal(characterRoot.get("challengeRating"), challengeRating);
             predicates.add(predicaterating);
         }
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
-        TypedQuery<Character>query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<Character> query = entityManager.createQuery(criteriaQuery);
 
         return query.getResultList();
 

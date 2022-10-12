@@ -6,6 +6,7 @@ import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.model.CharacterType;
 import com.example.charactergenerator.repository.ArmorRepository;
 import com.example.charactergenerator.repository.CharacterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,11 +22,16 @@ public class ArmorService {
         this.armorRepository = armorRepository;
     }
 
+    /*@Autowired
+    public void setArmorRepository(ArmorRepository armorRepository) {
+        this.armorRepository = armorRepository;
+    }*/
+
     public void saveAll(List<Armor> armors) {
         armorRepository.saveAll(armors);
     }
 
-    public List<Armor> findAll(){
+    public List<Armor> findAll() {
         return (List<Armor>) armorRepository.findAll();
     }
 

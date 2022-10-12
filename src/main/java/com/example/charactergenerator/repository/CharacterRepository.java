@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CharacterRepository extends CrudRepository<Character,Long> {
+public interface CharacterRepository extends CrudRepository<Character, Long> {
 
-    Optional<Character>findCharactersByName(String characterName);
+    Optional<Character> findCharactersByName(String characterName);
+
     List<Character> findAllByNameContains(String keyword);
 
 }

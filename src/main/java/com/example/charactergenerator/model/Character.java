@@ -6,7 +6,7 @@ import java.util.*;
 @Entity(name = "characters")
 public class Character {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private byte armorClass;
@@ -15,11 +15,11 @@ public class Character {
     private byte challengeRating;
 
     @ManyToOne
-    @JoinColumn (name = "armor_id")
+    @JoinColumn(name = "armor_id")
     private Armor armor;
 
     @ManyToOne
-    @JoinColumn (name = "meleeWeapon_id")
+    @JoinColumn(name = "meleeWeapon_id")
     private MeleeWeapon meleeWeapon;
 
     @ManyToOne
@@ -39,7 +39,7 @@ public class Character {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_proficiencies",
-        joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
+            joinColumns = {@JoinColumn(name = "character_id", referencedColumnName = "id")})
     private List<SkillType> proficiencies = new ArrayList<>();
 
     private boolean isCaster;
@@ -51,8 +51,8 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, List<SkillType> proficiencies){
-        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, List<SkillType> proficiencies) {
+        this(name, (byte) armorClass, (short) hitPoints, (byte) speed, (byte) challengeRating, (byte) strength, (byte) dexterity, (byte) constitution, (byte) intelligence, (byte) wisdom, (byte) charisma, characterType, proficiencies);
     }
 
     public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, List<SkillType> proficiencies) {
@@ -71,33 +71,33 @@ public class Character {
         this.proficiencies = proficiencies;
     }
 
-    public byte getAttributeBonus(AttributeType attributeType){
+    public byte getAttributeBonus(AttributeType attributeType) {
         byte attributeValue = getAttributeValue(attributeType);
         return attributeType.getBonus(attributeValue);
     }
 
-    public byte getAttributeBonus(String attributeName){
+    public byte getAttributeBonus(String attributeName) {
         return getAttributeBonus(AttributeType.valueOf(attributeName));
     }
 
-    public byte getAttributeValue(AttributeType attributeType){
+    public byte getAttributeValue(AttributeType attributeType) {
         return attributes.get(attributeType);
     }
 
-    public byte getAttributeValue(String attributeName){
+    public byte getAttributeValue(String attributeName) {
         return getAttributeValue(AttributeType.valueOf(attributeName));
     }
 
-    public void setAttributeValue(AttributeType attributeType, byte value){
-        attributes.put(attributeType,value);
+    public void setAttributeValue(AttributeType attributeType, byte value) {
+        attributes.put(attributeType, value);
     }
 
-    public String getAttributeBonusRollDescription(String attributeName){
+    public String getAttributeBonusRollDescription(String attributeName) {
         String rollDescription = "d20";
         int bonus = getAttributeBonus(attributeName);
-        if (bonus > 0){
+        if (bonus > 0) {
             rollDescription += "+" + bonus;
-        }else if (bonus < 0){
+        } else if (bonus < 0) {
             rollDescription += bonus;
         }
 
@@ -121,7 +121,7 @@ public class Character {
     }
 
     public byte getArmorClass() {
-        if (armor == null){
+        if (armor == null) {
             return armorClass;
         }
         return armor.getArmorClass(getAttributeBonus(AttributeType.DEX));
@@ -196,6 +196,7 @@ public class Character {
         this.meleeWeapon = meleeWeapon;
         return this;
     }
+
     public Character equipRangedWeapon(RangedWeapon rangedWeapon) {
         this.rangedWeapon = rangedWeapon;
         return this;
@@ -219,7 +220,7 @@ public class Character {
     }
 
     public List<Skill> getSkills() {
-        if (skills == null){
+        if (skills == null) {
             generateSkills();
         }
 
@@ -261,36 +262,37 @@ public class Character {
     public void setProficiency(List<SkillType> proficiencies) {
         this.proficiencies = proficiencies;
     }
+
     public void assignSlots(int level) {
         if (isCaster && level > 0 && level <= 20) {
             int[] spellSlots;
             switch (level) {
-                case 1 -> this.slots = new int[] {2};
-                case 2 -> this.slots = new int[] {3};
-                case 3 -> this.slots = new int[] {4, 2};
-                case 4 -> this.slots = new int[] {4, 3};
-                case 5 -> this.slots = new int[] {4, 3, 2};
-                case 6 -> this.slots = new int[] {4, 3, 3};
-                case 7 -> this.slots = new int[] {4, 3, 3, 1};
-                case 8 -> this.slots = new int[] {4, 3, 3, 2};
-                case 9 -> this.slots = new int[] {4, 3, 3, 3, 1};
-                case 10 -> this.slots = new int[] {4, 3, 3, 3, 2};
-                case 11, 12 -> this.slots = new int[] {4, 3, 3, 3, 2, 1};
-                case 13, 14 -> this.slots = new int[] {4, 3, 3, 3, 2, 1, 1};
-                case 15, 16 -> this.slots = new int[] {4, 3, 3, 3, 2, 1, 1, 1};
-                case 17 -> this.slots = new int[] {4, 3, 3, 3, 2, 1, 1, 1, 1};
-                case 18 -> this.slots = new int[] {4, 3, 3, 3, 3, 1, 1, 1, 1};
-                case 19 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 1, 1, 1};
-                case 20 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 2, 1, 1};
+                case 1 -> this.slots = new int[]{2};
+                case 2 -> this.slots = new int[]{3};
+                case 3 -> this.slots = new int[]{4, 2};
+                case 4 -> this.slots = new int[]{4, 3};
+                case 5 -> this.slots = new int[]{4, 3, 2};
+                case 6 -> this.slots = new int[]{4, 3, 3};
+                case 7 -> this.slots = new int[]{4, 3, 3, 1};
+                case 8 -> this.slots = new int[]{4, 3, 3, 2};
+                case 9 -> this.slots = new int[]{4, 3, 3, 3, 1};
+                case 10 -> this.slots = new int[]{4, 3, 3, 3, 2};
+                case 11, 12 -> this.slots = new int[]{4, 3, 3, 3, 2, 1};
+                case 13, 14 -> this.slots = new int[]{4, 3, 3, 3, 2, 1, 1};
+                case 15, 16 -> this.slots = new int[]{4, 3, 3, 3, 2, 1, 1, 1};
+                case 17 -> this.slots = new int[]{4, 3, 3, 3, 2, 1, 1, 1, 1};
+                case 18 -> this.slots = new int[]{4, 3, 3, 3, 3, 1, 1, 1, 1};
+                case 19 -> this.slots = new int[]{4, 3, 3, 3, 3, 2, 1, 1, 1};
+                case 20 -> this.slots = new int[]{4, 3, 3, 3, 3, 2, 2, 1, 1};
                 default -> throw new IllegalStateException("Unexpected value: " + level);
             }
         }
     }
 
-    public String proficienciesToString(){
+    public String proficienciesToString() {
         StringBuilder sb = new StringBuilder();
 
-        for (SkillType skillType: proficiencies){
+        for (SkillType skillType : proficiencies) {
             sb.append(skillType.getName()).append(" ")
                     .append(getAttributeBonus(skillType.getModifier()))
                     .append(", ");
@@ -298,42 +300,42 @@ public class Character {
 
         int endIndex = sb.lastIndexOf(",");
 
-        return sb.substring(0,endIndex);
+        return sb.substring(0, endIndex);
     }
 
-    public boolean hasProficiencies(){
+    public boolean hasProficiencies() {
         return !proficiencies.isEmpty();
     }
 
-    public boolean hasArmor(){
+    public boolean hasArmor() {
         return armor != null;
     }
 
-    public byte getDefaultArmorClass(){
+    public byte getDefaultArmorClass() {
         return armorClass;
     }
 
-    public byte getStrength(){
+    public byte getStrength() {
         return getAttributeValue(AttributeType.STR);
     }
 
-    public byte getDexterity(){
+    public byte getDexterity() {
         return getAttributeValue(AttributeType.DEX);
     }
 
-    public byte getConstitution(){
+    public byte getConstitution() {
         return getAttributeValue(AttributeType.CON);
     }
 
-    public byte getIntelligence(){
+    public byte getIntelligence() {
         return getAttributeValue(AttributeType.INT);
     }
 
-    public byte getWisdom(){
+    public byte getWisdom() {
         return getAttributeValue(AttributeType.WIS);
     }
 
-    public byte getCharisma(){
+    public byte getCharisma() {
         return getAttributeValue(AttributeType.CHA);
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class MeleeWeapon {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -36,7 +36,6 @@ public class MeleeWeapon {
     public String getName() {
         return name;
     }
-
 
     public String getDamage() {
         return damage;
