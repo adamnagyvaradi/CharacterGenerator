@@ -217,7 +217,9 @@ public class Character {
     }
 
     public int[] getSlots() {
-        this.assignSlots((int)(Math.random() * 20 +1));
+        if(slots == null) {
+            assignSlots((int) (Math.random() * 20 + 1));
+        }
 
         return slots;
     }
