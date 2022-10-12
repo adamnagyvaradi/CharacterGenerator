@@ -166,20 +166,17 @@
                         </div>
                     </div>
                 </div>
-
-        <!--<table class="table table-striped">
-            <tbody>
-                <tr th:each="character: ${characters}">
-                    <td th:text="${character.id}"></td>
-                    <td th:text="${character.name}"></td>
-                    <td>
-                        <a th:href="@{/encounter/builder/character/edit/{id}(id=${character.id})}" class="btn btn-dark" role="button">
-                            Edit
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>-->
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col"></div>
+            <div class="col-auto">
+                <form th:action="@{/encounter/builder/save}" method="post">
+                    <button class="btn btn-dark">Save</button>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
     </div>
 </section>
 <!-- Footer-->

@@ -92,4 +92,12 @@ public class EncounterService {
             character.equipRangedWeapon(rangedWeapon);
         }
     }
+
+    public void saveEncounter(){
+        encounter.setEditable(false);
+    }
+
+    public boolean isEncounterEditable() {
+        return encounter.isEditable();
+    }
 }

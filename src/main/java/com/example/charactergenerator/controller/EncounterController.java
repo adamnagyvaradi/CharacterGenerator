@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.print.attribute.standard.PresentationDirection;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -103,5 +104,20 @@ public class EncounterController {
         encounterService.removeCharacterById(id);
 
         return "redirect:/encounter/builder";
+    }
+
+    @PostMapping("/encounter/builder/save")
+    public String saveEncounter(){
+        encounterService.saveEncounter();
+        return "redirect:/encounter";
+    }
+
+    @GetMapping("/encounter")
+    public String showEncounter(Model model){
+        if (encounterService.isEncounterEditable()){
+            return "redirect:/encounter/builder/character";
+        }
+
+        return "encounter/encounter";
     }
 }
