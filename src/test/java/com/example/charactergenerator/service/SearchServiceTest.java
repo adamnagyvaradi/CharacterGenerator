@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SearchServiceTest {
 
     /*@Test
-    void findByNameTest() {
+    void filterByTest() {
 
         SearchRepository searchRepository
                 = Mockito.mock(SearchRepository.class);
@@ -25,11 +25,11 @@ class SearchServiceTest {
 
         characterList.add(new Character());
 
-        Mockito.when(searchRepository.findCharactersByNameContains(Mockito.anyString())).thenReturn(characterList);
+        Mockito.when(searchService.filterBy(Mockito.anyString(),
+                Mockito.anyString(), Mockito.anyByte())).thenReturn(characterList);
 
-        List<Character> serviceResult = searchService.findByName("Test");
+        List<Character> serviceResult = searchService.filterBy("Test", "Test", (byte) 1);
 
         assertEquals(characterList, serviceResult);
     }*/
-
 }
