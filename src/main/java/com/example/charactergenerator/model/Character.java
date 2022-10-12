@@ -42,9 +42,7 @@ public class Character {
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
     private List<SkillType> proficiencies = new ArrayList<>();
 
-    private boolean isCaster;
-
-    private int spellLevel;
+    private Integer spellLevel;
 
     @Transient
     private int[] slots;
@@ -71,7 +69,6 @@ public class Character {
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
         this.proficiencies = proficiencies;
-        this.isCaster = true;
     }
 
     public byte getAttributeBonus(AttributeType attributeType){
@@ -185,8 +182,8 @@ public class Character {
         return spellLevel;
     }
 
-    public void setSpellLevel(int spellLevel) {
-        this.spellLevel = spellLevel;
+    public void setSpellLevel(int casterLevel) {
+        this.spellLevel = casterLevel;
     }
     public Armor getArmor() {
         return armor;
@@ -213,12 +210,12 @@ public class Character {
 
 
     public boolean isCaster() {
-        return isCaster;
+        return spellLevel != null;
     }
 
     public int[] getSlots() {
-        if(slots == null) {
-            assignSlots((int) (Math.random() * 20 + 1));
+        if(slots == null && spellLevel != null) {
+            assignSlots(spellLevel);
         }
 
         return slots;
@@ -252,8 +249,8 @@ public class Character {
         return proficiencies;
     }
 
-    public void setCaster(boolean caster) {
-        isCaster = caster;
+    public void setSpellLevel(Integer spellLevel) {
+        this.spellLevel = spellLevel;
     }
 
     public MeleeWeapon getMeleeWeapon() {
@@ -275,11 +272,9 @@ public class Character {
     public void setProficiency(List<SkillType> proficiencies) {
         this.proficiencies = proficiencies;
     }
-    public void assignSlots(int spellLevel) {
-        this.spellLevel = spellLevel;
-        if (isCaster && spellLevel > 0 && spellLevel <= 20) {
-            int[] spellSlots;
-            switch (spellLevel) {
+    public void assignSlots(Integer casterLevel) {
+        if (casterLevel != null && casterLevel > 0 && casterLevel <= 20) {
+            switch (casterLevel) {
                 case 1 -> this.slots = new int[] {2};
                 case 2 -> this.slots = new int[] {3};
                 case 3 -> this.slots = new int[] {4, 2};
