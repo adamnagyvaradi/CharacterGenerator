@@ -17,7 +17,6 @@ public class ArmorService {
 
     private ArmorRepository armorRepository;
 
-
     public ArmorService(ArmorRepository armorRepository) {
         this.armorRepository = armorRepository;
     }

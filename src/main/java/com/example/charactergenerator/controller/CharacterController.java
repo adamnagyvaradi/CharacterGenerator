@@ -14,7 +14,6 @@ public class CharacterController {
 
     private CharacterService characterService;
 
-
     public CharacterController(CharacterService characterService){
         this.characterService = characterService;
     }
