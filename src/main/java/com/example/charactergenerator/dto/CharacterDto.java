@@ -20,9 +20,7 @@ public class CharacterDto {
     private String meleeWeapon;
     private String rangedWeapon;
 
-    //private CharacterType CharacterType;
-
-    //private boolean isCaster;
+    private String casterLevel;
 
 
     public CharacterDto() {
@@ -157,5 +155,13 @@ public class CharacterDto {
 
     public void setRangedWeapon(String rangedWeapon) {
         this.rangedWeapon = rangedWeapon;
+    }
+
+    public String getCasterLevel() {
+        return casterLevel;
+    }
+
+    public void setCasterLevel(String casterLevel) {
+        this.casterLevel = casterLevel;
     }
 }

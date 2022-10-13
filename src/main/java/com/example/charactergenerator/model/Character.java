@@ -42,7 +42,7 @@ public class Character {
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
     private List<SkillType> proficiencies = new ArrayList<>();
 
-    private boolean isCaster;
+    private Integer spellLevel;
 
     @Transient
     private int[] slots;
@@ -178,6 +178,13 @@ public class Character {
         this.attributes = attributes;
     }
 
+    public int getSpellLevel() {
+        return spellLevel;
+    }
+
+    public void setSpellLevel(int casterLevel) {
+        this.spellLevel = casterLevel;
+    }
     public Armor getArmor() {
         return armor;
     }
@@ -203,10 +210,14 @@ public class Character {
 
 
     public boolean isCaster() {
-        return isCaster;
+        return spellLevel != null;
     }
 
     public int[] getSlots() {
+        if(slots == null && spellLevel != null) {
+            assignSlots(spellLevel);
+        }
+
         return slots;
     }
 
@@ -238,8 +249,8 @@ public class Character {
         return proficiencies;
     }
 
-    public void setCaster(boolean caster) {
-        isCaster = caster;
+    public void setSpellLevel(Integer spellLevel) {
+        this.spellLevel = spellLevel;
     }
 
     public MeleeWeapon getMeleeWeapon() {
@@ -261,10 +272,9 @@ public class Character {
     public void setProficiency(List<SkillType> proficiencies) {
         this.proficiencies = proficiencies;
     }
-    public void assignSlots(int level) {
-        if (isCaster && level > 0 && level <= 20) {
-            int[] spellSlots;
-            switch (level) {
+    public void assignSlots(Integer casterLevel) {
+        if (casterLevel != null && casterLevel > 0 && casterLevel <= 20) {
+            switch (casterLevel) {
                 case 1 -> this.slots = new int[] {2};
                 case 2 -> this.slots = new int[] {3};
                 case 3 -> this.slots = new int[] {4, 2};
@@ -282,7 +292,7 @@ public class Character {
                 case 18 -> this.slots = new int[] {4, 3, 3, 3, 3, 1, 1, 1, 1};
                 case 19 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 1, 1, 1};
                 case 20 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 2, 1, 1};
-                default -> throw new IllegalStateException("Unexpected value: " + level);
+                default -> throw new IllegalStateException("Unexpected value: " + spellLevel);
             }
         }
     }
