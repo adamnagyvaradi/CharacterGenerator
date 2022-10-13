@@ -30,4 +30,8 @@ public class ArmorService {
         return (List<Armor>) armorRepository.findAll();
     }
 
+    public Armor findById(String id){
+        return armorRepository.findById(Long.parseLong(id)).orElseThrow();
+    }
+
 }

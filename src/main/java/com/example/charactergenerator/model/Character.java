@@ -40,7 +40,7 @@ public class Character {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_proficiencies",
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
-    private List<SkillType> proficiencies = new ArrayList<>();
+    private Set<SkillType> proficiencies = new LinkedHashSet<>();
 
     private Integer spellLevel;
 
@@ -51,11 +51,11 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, List<SkillType> proficiencies){
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies){
         this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
     }
 
-    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, List<SkillType> proficiencies) {
+    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, Set<SkillType> proficiencies) {
         this.name = name;
         this.armorClass = armorClass;
         this.hitPoints = hitPoints;
@@ -245,7 +245,7 @@ public class Character {
         this.characterType = characterType;
     }
 
-    public List<SkillType> getProficiency() {
+    public Set<SkillType> getProficiency() {
         return proficiencies;
     }
 
@@ -269,7 +269,7 @@ public class Character {
         this.rangedWeapon = rangedWeapon;
     }
 
-    public void setProficiency(List<SkillType> proficiencies) {
+    public void setProficiency(Set<SkillType> proficiencies) {
         this.proficiencies = proficiencies;
     }
     public void assignSlots(Integer casterLevel) {
@@ -317,6 +317,14 @@ public class Character {
 
     public boolean hasArmor(){
         return armor != null;
+    }
+
+    public boolean hasMeleeWeapon(){
+        return meleeWeapon != null;
+    }
+
+    public boolean hasRangedWeapon(){
+        return rangedWeapon != null;
     }
 
     public byte getDefaultArmorClass(){

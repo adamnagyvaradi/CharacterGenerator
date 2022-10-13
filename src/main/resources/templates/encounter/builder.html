@@ -101,14 +101,6 @@
                         <div class="row pb-2">
                           <div class="col"><strong>Proficiency Bonus: </strong><span th:text="${character.proficiencyBonus}">30</span></div>
                         </div>
-                        <div class="row pb-2" th:if="${character.hasArmor()}">
-                          <div class="col">
-                            <strong>Armor: </strong>
-                            <span th:text="${character.armor.name}">30</span>
-                            (<span th:text="${character.armor.armorValue}"></span>)
-                          </div>
-                        </div>
-
                         <div class="row pb-2" th:if="${character.hasProficiencies()}">
                           <div class="col"><strong>Proficiencies: </strong><span th:text="${character.proficienciesToString()}">30</span></div>
                         </div>
@@ -160,6 +152,31 @@
                         </div>
                       </div>
                     </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="row pb-2" th:if="${character.hasArmor()}">
+                          <div class="col">
+                            <strong>Armor: </strong>
+                            <span th:text="${character.armor.name}">Armor</span>
+                            (<span th:text="${character.armor.armorValue}"></span>)
+                          </div>
+                        </div>
+                        <div class="row pb-2" th:if="${character.hasMeleeWeapon()}">
+                          <div class="col">
+                            <strong>Melee Weapon: </strong>
+                            <span th:text="${character.meleeWeapon.name}">Melee Weapon</span>
+                            (<span th:text="${character.meleeWeapon.damage}"></span>)
+                          </div>
+                        </div>
+                        <div class="row pb-2" th:if="${character.hasRangedWeapon()}">
+                          <div class="col">
+                            <strong>Ranged Weapon: </strong>
+                            <span th:text="${character.rangedWeapon.name}">Melee Weapon</span>
+                            (<span th:text="${character.rangedWeapon.damage}"></span>)
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -173,7 +190,7 @@
           <div class="col">
             <div class="card">
               <div class="card-header">
-                Characters Cart
+                Opponents
               </div>
               <div class="card-body  overflow-auto" style="max-height: 60vh">
                 <table class="table table-striped">
