@@ -67,6 +67,10 @@ public class EncounterController {
 
     @GetMapping("/encounter/builder/character")
     public String showCharacters(Model model){
+        if (encounterService.getAllCharacter().isEmpty()){
+            return "redirect:/encounter/builder";
+        }
+
         List<Character> characters = encounterService.getAllCharacter();
 
         model.addAttribute("characters",characters);
@@ -109,14 +113,17 @@ public class EncounterController {
     @PostMapping("/encounter/builder/save")
     public String saveEncounter(){
         encounterService.saveEncounter();
-        return "redirect:/encounter";
+        return "redirect:/encounter/character";
     }
 
-    @GetMapping("/encounter")
-    public String showEncounter(Model model){
+    @GetMapping(value = {"/encounter/character", "/encounter/character/{id}"})
+    public String showEncounter(@PathVariable(required = false) Long id,Model model){
         if (encounterService.isEncounterEditable()){
             return "redirect:/encounter/builder/character";
         }
+
+        model.addAttribute("characters", encounterService.getAllCharacter());
+        model.addAttribute("character", encounterService.findCharacterById(id));
 
         return "encounter/encounter";
     }
