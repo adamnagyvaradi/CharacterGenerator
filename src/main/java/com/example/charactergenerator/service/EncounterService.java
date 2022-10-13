@@ -51,7 +51,11 @@ public class EncounterService {
         return encounter.getCharacters();
     }
 
-    public Character findCharacterById(long id){
+    public Character findCharacterById(Long id){
+        if (id == null){
+            return getAllCharacter().get(0);
+        }
+
         return encounter.findById(id);
     }
 
