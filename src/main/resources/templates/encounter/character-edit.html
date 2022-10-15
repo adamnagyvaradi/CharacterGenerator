@@ -131,7 +131,14 @@
                     <div class="col-sm-6">
                         <select class="form-select" id="armor" name="armor">
                             <option value="no-armor-selected">Choose one...(optional)</option>
-                            <option th:each="armor: ${armors}" th:value="${armor.id}"
+                            <option th:if="${character.hasArmor()}"
+                                    th:each="armor: ${armors}"
+                                    th:value="${armor.id}"
+                                    th:text="${armor.name + ' (Base AC: ' + armor.armorValue + ', Type: ' + armor.armorType.name + ')'}"
+                                    th:selected="${armor.id == character.armor.id}"></option>
+                            <option th:unless="${character.hasArmor()}"
+                                    th:each="armor: ${armors}"
+                                    th:value="${armor.id}"
                                     th:text="${armor.name + ' (Base AC: ' + armor.armorValue + ', Type: ' + armor.armorType.name + ')'}"></option>
                         </select>
                     </div>
@@ -141,7 +148,14 @@
                     <div class="col-sm-6">
                         <select class="form-select" id="meleeWeapon" name="meleeWeapon">
                             <option value="no-melee-weapon-selected">Choose one...(optional)</option>
-                            <option th:each="meleeWeapon: ${meleeWeapons}" th:value="${meleeWeapon.id}"
+                            <option th:if="${character.hasMeleeWeapon()}"
+                                    th:each="meleeWeapon: ${meleeWeapons}"
+                                    th:value="${meleeWeapon.id}"
+                                    th:text="${meleeWeapon.name + ' (Damage: ' + meleeWeapon.damage + ')'}"
+                                    th:selected="${meleeWeapon.id == character.meleeWeapon.id}"></option>
+                            <option th:unless="${character.hasMeleeWeapon()}"
+                                    th:each="meleeWeapon: ${meleeWeapons}"
+                                    th:value="${meleeWeapon.id}"
                                     th:text="${meleeWeapon.name + ' (Damage: ' + meleeWeapon.damage + ')'}"></option>
                         </select>
                     </div>
@@ -151,7 +165,9 @@
                     <div class="col-sm-6">
                         <select class="form-select" id="rangedWeapon" name="rangedWeapon">
                             <option value="no-ranged-weapon-selected">Choose one...(optional)</option>
-                            <option th:each="rangedWeapon: ${randedWeapons}" th:value="${rangedWeapon.id}"
+                            <option th:if="${character.hasRangedWeapon()}"
+                                    th:each="rangedWeapon: ${rangedWeapons}"
+                                    th:value="${rangedWeapon.id}"
                                     th:text="${rangedWeapon.name + ' (Damage: ' + rangedWeapon.damage + ')'}"></option>
                         </select>
                     </div>
