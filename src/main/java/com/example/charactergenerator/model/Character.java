@@ -42,7 +42,7 @@ public class Character {
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
     private Set<SkillType> proficiencies = new LinkedHashSet<>();
 
-    private Integer spellLevel;
+    private Integer casterLevel;
 
     @Transient
     private int[] slots;
@@ -178,12 +178,13 @@ public class Character {
         this.attributes = attributes;
     }
 
-    public int getSpellLevel() {
-        return spellLevel;
+    public int getCasterLevel() {
+        return casterLevel;
     }
 
-    public void setSpellLevel(int casterLevel) {
-        this.spellLevel = casterLevel;
+    public void setCasterLevel(int casterLevel) {
+        this.casterLevel = casterLevel;
+        assignSlots(casterLevel);
     }
     public Armor getArmor() {
         return armor;
@@ -210,14 +211,10 @@ public class Character {
 
 
     public boolean isCaster() {
-        return spellLevel != null;
+        return casterLevel != null;
     }
 
     public int[] getSlots() {
-        if(slots == null && spellLevel != null) {
-            assignSlots(spellLevel);
-        }
-
         return slots;
     }
 
@@ -250,7 +247,7 @@ public class Character {
     }
 
     public void setSpellLevel(Integer spellLevel) {
-        this.spellLevel = spellLevel;
+        this.casterLevel = spellLevel;
     }
 
     public MeleeWeapon getMeleeWeapon() {
@@ -292,7 +289,7 @@ public class Character {
                 case 18 -> this.slots = new int[] {4, 3, 3, 3, 3, 1, 1, 1, 1};
                 case 19 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 1, 1, 1};
                 case 20 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 2, 1, 1};
-                default -> throw new IllegalStateException("Unexpected value: " + spellLevel);
+                default -> throw new IllegalStateException("Unexpected value: " + casterLevel);
             }
         }
     }
