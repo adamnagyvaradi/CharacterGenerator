@@ -40,9 +40,9 @@ public class Character {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "characters_proficiencies",
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
-    private List<SkillType> proficiencies = new ArrayList<>();
+    private Set<SkillType> proficiencies = new LinkedHashSet<>();
 
-    private boolean isCaster;
+    private Integer spellLevel;
 
     @Transient
     private int[] slots;
@@ -51,11 +51,11 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, List<SkillType> proficiencies){
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies){
         this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
     }
 
-    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, List<SkillType> proficiencies) {
+    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, Set<SkillType> proficiencies) {
         this.name = name;
         this.armorClass = armorClass;
         this.hitPoints = hitPoints;
@@ -178,6 +178,13 @@ public class Character {
         this.attributes = attributes;
     }
 
+    public int getSpellLevel() {
+        return spellLevel;
+    }
+
+    public void setSpellLevel(int casterLevel) {
+        this.spellLevel = casterLevel;
+    }
     public Armor getArmor() {
         return armor;
     }
@@ -203,10 +210,14 @@ public class Character {
 
 
     public boolean isCaster() {
-        return isCaster;
+        return spellLevel != null;
     }
 
     public int[] getSlots() {
+        if(slots == null && spellLevel != null) {
+            assignSlots(spellLevel);
+        }
+
         return slots;
     }
 
@@ -234,12 +245,12 @@ public class Character {
         this.characterType = characterType;
     }
 
-    public List<SkillType> getProficiency() {
+    public Set<SkillType> getProficiency() {
         return proficiencies;
     }
 
-    public void setCaster(boolean caster) {
-        isCaster = caster;
+    public void setSpellLevel(Integer spellLevel) {
+        this.spellLevel = spellLevel;
     }
 
     public MeleeWeapon getMeleeWeapon() {
@@ -258,13 +269,12 @@ public class Character {
         this.rangedWeapon = rangedWeapon;
     }
 
-    public void setProficiency(List<SkillType> proficiencies) {
+    public void setProficiency(Set<SkillType> proficiencies) {
         this.proficiencies = proficiencies;
     }
-    public void assignSlots(int level) {
-        if (isCaster && level > 0 && level <= 20) {
-            int[] spellSlots;
-            switch (level) {
+    public void assignSlots(Integer casterLevel) {
+        if (casterLevel != null && casterLevel > 0 && casterLevel <= 20) {
+            switch (casterLevel) {
                 case 1 -> this.slots = new int[] {2};
                 case 2 -> this.slots = new int[] {3};
                 case 3 -> this.slots = new int[] {4, 2};
@@ -282,7 +292,7 @@ public class Character {
                 case 18 -> this.slots = new int[] {4, 3, 3, 3, 3, 1, 1, 1, 1};
                 case 19 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 1, 1, 1};
                 case 20 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 2, 1, 1};
-                default -> throw new IllegalStateException("Unexpected value: " + level);
+                default -> throw new IllegalStateException("Unexpected value: " + spellLevel);
             }
         }
     }
@@ -307,6 +317,14 @@ public class Character {
 
     public boolean hasArmor(){
         return armor != null;
+    }
+
+    public boolean hasMeleeWeapon(){
+        return meleeWeapon != null;
+    }
+
+    public boolean hasRangedWeapon(){
+        return rangedWeapon != null;
     }
 
     public byte getDefaultArmorClass(){

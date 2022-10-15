@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class Encounter {
-    private List<Character> characters = new ArrayList<>();
+    private final List<Character> characters = new ArrayList<>();
     private boolean editable = true;
 
     public Encounter(){

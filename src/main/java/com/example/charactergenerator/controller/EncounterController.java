@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.print.attribute.standard.PresentationDirection;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -65,6 +67,10 @@ public class EncounterController {
 
     @GetMapping("/encounter/builder/character")
     public String showCharacters(Model model){
+        if (encounterService.getAllCharacter().isEmpty()){
+            return "redirect:/encounter/builder";
+        }
+
         List<Character> characters = encounterService.getAllCharacter();
 
         model.addAttribute("characters",characters);
@@ -83,7 +89,7 @@ public class EncounterController {
         return "encounter/character-edit";
     }
 
-    @GetMapping("/encounter/character/update")
+    @PostMapping("/encounter/character/update")
     public String updateCharacter(CharacterDto characterDto){
         encounterService.updateCharacter(characterDto);
 
@@ -104,5 +110,21 @@ public class EncounterController {
         return "redirect:/encounter/builder";
     }
 
+    @PostMapping("/encounter/builder/save")
+    public String saveEncounter(){
+        encounterService.saveEncounter();
+        return "redirect:/encounter/character";
+    }
 
+    @GetMapping(value = {"/encounter/character", "/encounter/character/{id}"})
+    public String showEncounter(@PathVariable(required = false) Long id,Model model){
+        if (encounterService.isEncounterEditable()){
+            return "redirect:/encounter/builder/character";
+        }
+
+        model.addAttribute("characters", encounterService.getAllCharacter());
+        model.addAttribute("character", encounterService.findCharacterById(id));
+
+        return "encounter/encounter";
+    }
 }

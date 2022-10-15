@@ -41,7 +41,7 @@
 <section class="pb-5">
     <div class="container px-4 px-lg-5 mt-4">
         <div class="row">
-            <form th:object="${character}">
+            <form th:object="${character}" th:action="@{/encounter/character/update}" method="post">
                 <input type="hidden" th:field="*{id}">
                 <div class="row mb-3">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
@@ -137,6 +137,14 @@
                             <option th:each="rangedWeapon: ${randedWeapons}" th:value="${rangedWeapon.id}"
                                     th:text="${rangedWeapon.name + ' (Damage: ' + rangedWeapon.damage + ')'}"></option>
                         </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <a th:href="@{/encounter/builder/character}" class="form-control btn btn-dark" role="button">Cancel</a>
+                    </div>
+                    <div class="col-3">
+                        <button class="form-control btn btn-dark">Update</button>
                     </div>
                 </div>
             </form>
