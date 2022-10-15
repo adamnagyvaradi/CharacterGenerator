@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.print.attribute.standard.PresentationDirection;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class EncounterController {
