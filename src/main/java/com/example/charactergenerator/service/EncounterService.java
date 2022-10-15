@@ -6,6 +6,7 @@ import com.example.charactergenerator.model.Character;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -107,6 +108,12 @@ public class EncounterService {
             character.equipRangedWeapon(rangedWeapon);
         } else {
             character.setRangedWeapon(null);
+        }
+
+        if (characterDto.getProficiencies() != null){
+            character.setProficiency(characterDto.getProficiencies());
+        } else {
+            character.setProficiency(new HashSet<>());
         }
     }
 
