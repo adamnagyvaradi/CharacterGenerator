@@ -182,7 +182,7 @@ public class Character {
         return casterLevel;
     }
 
-    public void setCasterLevel(int casterLevel) {
+    public void setCasterLevel(Integer casterLevel) {
         this.casterLevel = casterLevel;
         assignSlots(casterLevel);
     }

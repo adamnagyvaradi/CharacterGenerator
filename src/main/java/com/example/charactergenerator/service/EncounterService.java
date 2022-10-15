@@ -78,6 +78,13 @@ public class EncounterService {
         character.setAttributeValue(AttributeType.WIS, characterDto.getWisdom());
         character.setAttributeValue(AttributeType.CHA, characterDto.getCharisma());
 
+        String casterLevel = characterDto.getCasterLevel();
+        if (!casterLevel.equals("non-caster")){
+            character.setCasterLevel(Integer.parseInt(casterLevel));
+        }else{
+            character.setCasterLevel(null);
+        }
+
         String armorId = characterDto.getArmor();
         if (armorId != null && !armorId.equals("no-armor-selected")){
             Armor armor = armorService.findById(armorId);
