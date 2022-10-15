@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,7 @@ class CharacterServiceTest {
                         1, 1, 1, 1,
                         1, 1, 1,
                         CharacterType.ABERRATION,
-                        List.of(SkillType.HISTORY,SkillType.PERCEPTION));
+                        Set.of(SkillType.HISTORY,SkillType.PERCEPTION));
     }
 
     @Test

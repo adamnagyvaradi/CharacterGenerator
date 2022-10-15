@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +19,7 @@ class CharacterTest {
                         1, 1, 1, 1,
                         1, 1, 1,
                         CharacterType.ABERRATION,
-                        List.of(SkillType.HISTORY,SkillType.PERCEPTION));
+                        Set.of(SkillType.HISTORY,SkillType.PERCEPTION));
     }
 
     @Test
@@ -66,11 +67,8 @@ class CharacterTest {
 
     @Test
     void  assignSlotsTest() {
-        testChar.assignSlots(5);
-
         assertArrayEquals(null, testChar.getSlots());
 
-        testChar.setCaster(true);
         testChar.assignSlots(5);
 
         assertArrayEquals(new int[] {4, 3, 2}, testChar.getSlots());

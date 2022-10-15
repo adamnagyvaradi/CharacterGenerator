@@ -50,7 +50,7 @@ class EncounterServiceTest {
 
         Mockito.when(encounterService.findCharacterById(Mockito.anyLong())).thenReturn(testChar);
 
-        Character serviceResult = encounterService.findCharacterById(3);
+        Character serviceResult = encounterService.findCharacterById(3L);
 
         assertEquals(testChar, serviceResult);
     }
