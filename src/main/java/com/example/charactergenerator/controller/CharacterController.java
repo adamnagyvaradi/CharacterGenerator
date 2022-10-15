@@ -23,9 +23,7 @@ public class CharacterController {
     public String getAttributes(Model model){
 
         Character character = characterService.findById(1);
-        CharacterDto characterDto = new CharacterDto(character);
         model.addAttribute(character);
-        model.addAttribute(characterDto);
         model.addAttribute("rolled", "");
 
         return "character";
@@ -34,10 +32,7 @@ public class CharacterController {
     @GetMapping(value = {"/character/{id}"})
     public String showCharacterById(@PathVariable long id, Model model){
         Character character = characterService.findById(id);
-        CharacterDto characterDto = new CharacterDto(character);
         model.addAttribute(character);
-        model.addAttribute(characterDto);
-
 
         return "character";
     }
