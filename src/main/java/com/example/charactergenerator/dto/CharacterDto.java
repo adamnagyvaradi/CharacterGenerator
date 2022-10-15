@@ -2,6 +2,9 @@ package com.example.charactergenerator.dto;
 
 import com.example.charactergenerator.model.AttributeType;
 import com.example.charactergenerator.model.Character;
+import com.example.charactergenerator.model.SkillType;
+
+import java.util.Set;
 
 public class CharacterDto {
     private long id;
@@ -19,22 +22,10 @@ public class CharacterDto {
     private String armor;
     private String meleeWeapon;
     private String rangedWeapon;
-
     private String casterLevel;
-
+    private Set<SkillType> proficiencies;
 
     public CharacterDto() {
-    }
-
-    public CharacterDto(Character character){
-        id = character.getId();
-        name = character.getName();
-        strength = character.getAttributeValue(AttributeType.STR);
-        dexterity = character.getAttributeValue(AttributeType.DEX);
-        constitution = character.getAttributeValue(AttributeType.CON);
-        intelligence = character.getAttributeValue(AttributeType.INT);
-        wisdom = character.getAttributeValue(AttributeType.WIS);
-        charisma = character.getAttributeValue(AttributeType.CHA);
     }
 
     public long getId() {
@@ -163,5 +154,13 @@ public class CharacterDto {
 
     public void setCasterLevel(String casterLevel) {
         this.casterLevel = casterLevel;
+    }
+
+    public Set<SkillType> getProficiencies() {
+        return proficiencies;
+    }
+
+    public void setProficiencies(Set<SkillType> proficiencies) {
+        this.proficiencies = proficiencies;
     }
 }
