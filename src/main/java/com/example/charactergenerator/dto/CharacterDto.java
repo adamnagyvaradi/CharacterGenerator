@@ -1,7 +1,5 @@
 package com.example.charactergenerator.dto;
 
-import com.example.charactergenerator.model.AttributeType;
-import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.model.SkillType;
 
 import java.util.Set;
