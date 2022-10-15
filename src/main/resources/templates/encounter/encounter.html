@@ -178,12 +178,12 @@
                     <div class="card-body">
                         <div class="btn-group-vertical" role="group">
                             <div class="col" th:each="actualCharacter: ${characters}">
-                                    <a href="#" class="btn btn-outline-secondary btn-block active" role="button"
-                                       th:if="${character.id == actualCharacter.id}"
-                                       th:text="${actualCharacter.name}" th:href="@{/encounter/character/{id}(id=${actualCharacter.id})}"></a>
-                                    <a href="#" class="btn btn-outline-secondary btn-block" role="button"
-                                       th:unless="${character.id == actualCharacter.id}"
-                                       th:text="${actualCharacter.name}" th:href="@{/encounter/character/{id}(id=${actualCharacter.id})}"></a>
+                                <a href="#" class="btn btn-outline-secondary btn-block active" role="button"
+                                   th:if="${character.id == actualCharacter.id}"
+                                   th:text="${actualCharacter.name}" th:href="@{/encounter/character/{id}(id=${actualCharacter.id})}"></a>
+                                <a href="#" class="btn btn-outline-secondary btn-block" role="button"
+                                   th:unless="${character.id == actualCharacter.id}"
+                                   th:text="${actualCharacter.name}" th:href="@{/encounter/character/{id}(id=${actualCharacter.id})}"></a>
                             </div>
                         </div>
                     </div>
