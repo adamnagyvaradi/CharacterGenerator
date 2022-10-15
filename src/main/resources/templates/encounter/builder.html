@@ -154,6 +154,12 @@
                     </div>
                     <div class="row">
                       <div class="col">
+                        <div class="row pb-2" th:if="${character.isCaster()}">
+                          <div class="col">
+                            <strong>Caster level: </strong>
+                            <span th:text="${character.casterLevel}">1</span>
+                          </div>
+                        </div>
                         <div class="row pb-2" th:if="${character.hasArmor()}">
                           <div class="col">
                             <strong>Armor: </strong>
