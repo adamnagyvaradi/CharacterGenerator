@@ -168,6 +168,11 @@
                             <option th:if="${character.hasRangedWeapon()}"
                                     th:each="rangedWeapon: ${rangedWeapons}"
                                     th:value="${rangedWeapon.id}"
+                                    th:text="${rangedWeapon.name + ' (Damage: ' + rangedWeapon.damage + ')'}"
+                                    th:selected="${rangedWeapon.id == character.rangedWeapon.id}"></option>
+                            <option th:unless="${character.hasRangedWeapon()}"
+                                    th:each="rangedWeapon: ${rangedWeapons}"
+                                    th:value="${rangedWeapon.id}"
                                     th:text="${rangedWeapon.name + ' (Damage: ' + rangedWeapon.damage + ')'}"></option>
                         </select>
                     </div>

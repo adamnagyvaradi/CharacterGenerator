@@ -89,18 +89,24 @@ public class EncounterService {
         if (armorId != null && !armorId.equals("no-armor-selected")){
             Armor armor = armorService.findById(armorId);
             character.equipArmor(armor);
+        } else {
+            character.setArmor(null);
         }
 
         String meleeWeaponId = characterDto.getMeleeWeapon();
         if (meleeWeaponId != null && !meleeWeaponId.equals("no-melee-weapon-selected")){
             MeleeWeapon meleeWeapon = meleeWeaponService.findById(meleeWeaponId);
             character.equipMeleeWeapon(meleeWeapon);
+        } else {
+            character.setMeleeWeapon(null);
         }
 
         String rangedWeaponId = characterDto.getRangedWeapon();
         if (rangedWeaponId != null && !rangedWeaponId.equals("no-ranged-weapon-selected")){
             RangedWeapon rangedWeapon = rangedWeaponService.findById(rangedWeaponId);
             character.equipRangedWeapon(rangedWeapon);
+        } else {
+            character.setRangedWeapon(null);
         }
     }
 
