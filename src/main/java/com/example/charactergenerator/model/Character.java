@@ -178,7 +178,7 @@ public class Character {
         this.attributes = attributes;
     }
 
-    public int getCasterLevel() {
+    public Integer getCasterLevel() {
         return casterLevel;
     }
 
