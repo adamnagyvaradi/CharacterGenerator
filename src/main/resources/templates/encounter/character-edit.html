@@ -43,6 +43,11 @@
                     <div class="col-sm-6">
                         <input type="text" class="form-control" th:field="*{hitPoints}">
                     </div>
+                    <div class="col-1">
+                        <button class="btn btn-dark" type="button"
+                                th:text="${character.hitPointsRollDefinition}"
+                                th:onclick="characterEditRoll([[${character.hitPointsRollDefinition}]],'hitPoints')"></button>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <label for="armorClass" class="col-sm-2 col-form-label">Armor Class</label>
@@ -204,7 +209,11 @@
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
 </footer>
+<!-- Toast -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Roll js -->
+<script src="/js/roll.js"></script>
 </body>
 </html>
