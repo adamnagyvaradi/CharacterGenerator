@@ -49,6 +49,10 @@ public class EncounterController {
     @GetMapping("/encounter/builder")
     public String showEncounterBuilder(Model model,
                                        @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword){
+        if (!encounterService.isEncounterEditable()){
+            return "redirect:/encounter/character";
+        }
+
         List<Character> characters;
 
         if(keyword.isBlank()){
@@ -67,6 +71,9 @@ public class EncounterController {
     public String showCharacters(Model model){
         if (encounterService.getAllCharacter().isEmpty()){
             return "redirect:/encounter/builder";
+        }
+        if (!encounterService.isEncounterEditable()){
+            return "redirect:/encounter/character";
         }
 
         List<Character> characters = encounterService.getAllCharacter();
