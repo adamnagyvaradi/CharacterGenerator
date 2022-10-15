@@ -51,6 +51,12 @@ public class Character {
 
     }
 
+    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies, int casterLevel){
+        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
+        this.casterLevel = casterLevel;
+        assignSlots(casterLevel);
+    }
+
     public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies){
         this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
     }
@@ -215,6 +221,10 @@ public class Character {
     }
 
     public int[] getSlots() {
+        if (slots == null && casterLevel != null){
+            assignSlots(casterLevel);
+        }
+
         return slots;
     }
 

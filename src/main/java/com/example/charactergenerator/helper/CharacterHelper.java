@@ -109,7 +109,7 @@ public class    CharacterHelper implements ApplicationRunner {
                 new Character("Aboleth",17, 135,10,10,
                         21,9,15,18,15,18,CharacterType.ABERRATION, Set.of(SkillType.HISTORY, SkillType.PERCEPTION)),
                 new Character("Acolyte",10, 9,30,0,
-                        10,10,10,10,14,11,CharacterType.HUMANOID,Set.of(SkillType.MEDICINE, SkillType.RELIGION)),
+                        10,10,10,10,14,11,CharacterType.HUMANOID,Set.of(SkillType.MEDICINE, SkillType.RELIGION),1),
                 new Character("Air Elemental",15, 90,0, 4,
                         14,20,14,6,10,6,CharacterType.ELEMENTAL,new HashSet<>()),
                 new Character("Allosaurus",13, 51,60, 2,
