@@ -15,7 +15,7 @@ class CharacterTest {
     @BeforeEach
     void createTestChar() {
         testChar =
-                new Character("Test", 1, 1, 1,
+                new Character("Test", 1, 1, "d10",1,
                         1, 1, 1, 1,
                         1, 1, 1,
                         CharacterType.ABERRATION,
