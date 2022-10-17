@@ -6,6 +6,7 @@ import com.example.charactergenerator.model.Character;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -78,22 +79,41 @@ public class EncounterService {
         character.setAttributeValue(AttributeType.WIS, characterDto.getWisdom());
         character.setAttributeValue(AttributeType.CHA, characterDto.getCharisma());
 
+        String casterLevel = characterDto.getCasterLevel();
+        if (!casterLevel.equals("non-caster")){
+            character.setCasterLevel(Integer.parseInt(casterLevel));
+        }else{
+            character.setCasterLevel(null);
+        }
+
         String armorId = characterDto.getArmor();
         if (armorId != null && !armorId.equals("no-armor-selected")){
             Armor armor = armorService.findById(armorId);
             character.equipArmor(armor);
+        } else {
+            character.setArmor(null);
         }
 
         String meleeWeaponId = characterDto.getMeleeWeapon();
         if (meleeWeaponId != null && !meleeWeaponId.equals("no-melee-weapon-selected")){
             MeleeWeapon meleeWeapon = meleeWeaponService.findById(meleeWeaponId);
             character.equipMeleeWeapon(meleeWeapon);
+        } else {
+            character.setMeleeWeapon(null);
         }
 
         String rangedWeaponId = characterDto.getRangedWeapon();
         if (rangedWeaponId != null && !rangedWeaponId.equals("no-ranged-weapon-selected")){
             RangedWeapon rangedWeapon = rangedWeaponService.findById(rangedWeaponId);
             character.equipRangedWeapon(rangedWeapon);
+        } else {
+            character.setRangedWeapon(null);
+        }
+
+        if (characterDto.getProficiencies() != null){
+            character.setProficiency(characterDto.getProficiencies());
+        } else {
+            character.setProficiency(new HashSet<>());
         }
     }
 

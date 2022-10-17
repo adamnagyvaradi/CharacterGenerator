@@ -14,6 +14,19 @@ function getRoll(rollDefinition){
     );
 }
 
+function characterEditRoll(rollDefinition, inputFieldId){
+    getServerData("http://localhost:8080/api/roll/" + rollDefinition).then(
+        roll => messageAndUpdate(roll, rollDefinition, inputFieldId)
+    );
+}
+
+function messageAndUpdate(roll, rollDefinition, inputFieldId){
+    message(roll, rollDefinition);
+    const inputField = document.getElementById(inputFieldId);
+    inputField.value = roll.result;
+}
+
+
 const message = (roll, rollDefinition) => {
     const wrapper = document.querySelector(".toast-container");
     const randomUUID = crypto.randomUUID();

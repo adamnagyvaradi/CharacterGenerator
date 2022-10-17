@@ -10,7 +10,8 @@ public class Character {
     private Long id;
     private String name;
     private byte armorClass;
-    private short hitPoints; // hit dice
+    private short hitPoints;
+    private String hitPointsRollDefinition;
     private byte speed;
     private byte challengeRating;
 
@@ -42,7 +43,7 @@ public class Character {
         joinColumns = {@JoinColumn(name = "character_id",referencedColumnName = "id")})
     private Set<SkillType> proficiencies = new LinkedHashSet<>();
 
-    private Integer spellLevel;
+    private Integer casterLevel;
 
     @Transient
     private int[] slots;
@@ -51,11 +52,17 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies){
-        this(name, (byte)armorClass, (short)hitPoints,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
+    public Character(String name, int armorClass, int hitPoints, String hitPointsRollDefinition,int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies, int casterLevel){
+        this(name, (byte)armorClass, (short)hitPoints, hitPointsRollDefinition,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
+        this.casterLevel = casterLevel;
+        assignSlots(casterLevel);
     }
 
-    public Character(String name, byte armorClass, short hitPoints, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, Set<SkillType> proficiencies) {
+    public Character(String name, int armorClass, int hitPoints, String hitPointsRollDefinition, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies){
+        this(name, (byte)armorClass, (short)hitPoints, hitPointsRollDefinition,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
+    }
+
+    public Character(String name, byte armorClass, short hitPoints, String hitPointsRollDefinition, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, Set<SkillType> proficiencies) {
         this.name = name;
         this.armorClass = armorClass;
         this.hitPoints = hitPoints;
@@ -69,6 +76,7 @@ public class Character {
         attributes.put(AttributeType.WIS, wisdom);
         attributes.put(AttributeType.CHA, charisma);
         this.proficiencies = proficiencies;
+        this.hitPointsRollDefinition = hitPointsRollDefinition;
     }
 
     public byte getAttributeBonus(AttributeType attributeType){
@@ -178,12 +186,13 @@ public class Character {
         this.attributes = attributes;
     }
 
-    public int getSpellLevel() {
-        return spellLevel;
+    public Integer getCasterLevel() {
+        return casterLevel;
     }
 
-    public void setSpellLevel(int casterLevel) {
-        this.spellLevel = casterLevel;
+    public void setCasterLevel(Integer casterLevel) {
+        this.casterLevel = casterLevel;
+        assignSlots(casterLevel);
     }
     public Armor getArmor() {
         return armor;
@@ -210,12 +219,12 @@ public class Character {
 
 
     public boolean isCaster() {
-        return spellLevel != null;
+        return casterLevel != null;
     }
 
     public int[] getSlots() {
-        if(slots == null && spellLevel != null) {
-            assignSlots(spellLevel);
+        if (slots == null && casterLevel != null){
+            assignSlots(casterLevel);
         }
 
         return slots;
@@ -250,7 +259,7 @@ public class Character {
     }
 
     public void setSpellLevel(Integer spellLevel) {
-        this.spellLevel = spellLevel;
+        this.casterLevel = spellLevel;
     }
 
     public MeleeWeapon getMeleeWeapon() {
@@ -292,7 +301,7 @@ public class Character {
                 case 18 -> this.slots = new int[] {4, 3, 3, 3, 3, 1, 1, 1, 1};
                 case 19 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 1, 1, 1};
                 case 20 -> this.slots = new int[] {4, 3, 3, 3, 3, 2, 2, 1, 1};
-                default -> throw new IllegalStateException("Unexpected value: " + spellLevel);
+                default -> throw new IllegalStateException("Unexpected value: " + casterLevel);
             }
         }
     }
@@ -353,5 +362,13 @@ public class Character {
 
     public byte getCharisma(){
         return getAttributeValue(AttributeType.CHA);
+    }
+
+    public String getHitPointsRollDefinition() {
+        return hitPointsRollDefinition;
+    }
+
+    public void setHitPointsRollDefinition(String hitPointsRollDefinition) {
+        this.hitPointsRollDefinition = hitPointsRollDefinition;
     }
 }

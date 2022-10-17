@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.print.attribute.standard.PresentationDirection;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -51,6 +49,10 @@ public class EncounterController {
     @GetMapping("/encounter/builder")
     public String showEncounterBuilder(Model model,
                                        @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword){
+        if (!encounterService.isEncounterEditable()){
+            return "redirect:/encounter/character";
+        }
+
         List<Character> characters;
 
         if(keyword.isBlank()){
@@ -70,6 +72,9 @@ public class EncounterController {
         if (encounterService.getAllCharacter().isEmpty()){
             return "redirect:/encounter/builder";
         }
+        if (!encounterService.isEncounterEditable()){
+            return "redirect:/encounter/character";
+        }
 
         List<Character> characters = encounterService.getAllCharacter();
 
@@ -84,7 +89,9 @@ public class EncounterController {
         model.addAttribute("character", encounterService.findCharacterById(id));
         model.addAttribute("armors", armorService.findAll());
         model.addAttribute("meleeWeapons", meleeWeaponService.findAll());
-        model.addAttribute("randedWeapons", rangedWeaponService.findAll());
+        model.addAttribute("rangedWeapons", rangedWeaponService.findAll());
+        model.addAttribute("casterLevels", List.of(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20));
+
 
         return "encounter/character-edit";
     }
