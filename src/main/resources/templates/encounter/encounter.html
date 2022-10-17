@@ -152,7 +152,29 @@
                             <div class="col">
                                 <!-- ide jön majd a tartalom, pl spellslotok meg armor, weapon-->
                                 <div class="row">
-
+                                    <table th:if="${character.isCaster()}" class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Caster Level</th>
+                                            <th>1th</th>
+                                            <th>2th</th>
+                                            <th>3th</th>
+                                            <th>4th</th>
+                                            <th>5th</th>
+                                            <th>6th</th>
+                                            <th>7th</th>
+                                            <th>8th</th>
+                                            <th>9th</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td th:text="${character.casterLevel}"></td>
+                                            <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
+                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
