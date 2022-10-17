@@ -195,7 +195,6 @@
                                 <td th:text="${character.casterLevel}"></td>
                                 <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
                                 <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
-
                             </tr>
                             </tbody>
                         </table>
