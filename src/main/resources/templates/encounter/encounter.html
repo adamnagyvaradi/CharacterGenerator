@@ -157,7 +157,6 @@
                                 </table>
                             </div>
                             <div class="col">
-                                <!-- ide jön majd a tartalom, pl spellslotok meg armor, weapon-->
                                 <div class="row">
                                     <table th:if="${character.isCaster()}" class="table table-striped">
                                         <thead>
@@ -249,7 +248,7 @@
                 </div>
             </div>
             <div class="col-2">
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-header">
                         Characters
                     </div>
@@ -262,6 +261,41 @@
                                 <a href="#" class="btn btn-outline-secondary btn-block" role="button"
                                    th:unless="${character.id == actualCharacter.id}"
                                    th:text="${actualCharacter.name}" th:href="@{/encounter/character/{id}(id=${actualCharacter.id})}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        Custom roll
+                    </div>
+                    <div class="card-body">
+                        <div class="row input-group">
+                            <div class="row mb-2">
+                                <div class="col" >
+                                    <input type="text" class="form-control mx-2" style="width: 100%;" name="times" id="times" placeholder="Times">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col"><button class="btn btn-secondary" style="width: 100%;" onclick="getCustomRoll('d4')">d4</button></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d6')">d6</button></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d8')">d8</button></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d10')">d10</button></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d12')">d12</button></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d20')">d20</button></div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d100')">d100</button></div>
                             </div>
                         </div>
                     </div>
