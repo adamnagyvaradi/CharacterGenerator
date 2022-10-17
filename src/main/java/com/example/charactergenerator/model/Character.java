@@ -12,7 +12,7 @@ public class Character {
     private byte armorClass;
     private short hitPoints;
     private String hitPointsRollDefinition;
-    private byte speed;
+    private String speed;
     private byte challengeRating;
 
     @ManyToOne
@@ -52,17 +52,17 @@ public class Character {
 
     }
 
-    public Character(String name, int armorClass, int hitPoints, String hitPointsRollDefinition,int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies, int casterLevel){
-        this(name, (byte)armorClass, (short)hitPoints, hitPointsRollDefinition,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
+    public Character(String name, int armorClass, int hitPoints, String hitPointsRollDefinition,String speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies, int casterLevel){
+        this(name, (byte)armorClass, (short)hitPoints, hitPointsRollDefinition,speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
         this.casterLevel = casterLevel;
         assignSlots(casterLevel);
     }
 
-    public Character(String name, int armorClass, int hitPoints, String hitPointsRollDefinition, int speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies){
-        this(name, (byte)armorClass, (short)hitPoints, hitPointsRollDefinition,(byte)speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
+    public Character(String name, int armorClass, int hitPoints, String hitPointsRollDefinition, String speed, int challengeRating, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, CharacterType characterType, Set<SkillType> proficiencies){
+        this(name, (byte)armorClass, (short)hitPoints, hitPointsRollDefinition, speed, (byte)challengeRating,(byte)strength,(byte)dexterity,(byte)constitution,(byte)intelligence, (byte)wisdom,(byte)charisma, characterType,proficiencies);
     }
 
-    public Character(String name, byte armorClass, short hitPoints, String hitPointsRollDefinition, byte speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, Set<SkillType> proficiencies) {
+    public Character(String name, byte armorClass, short hitPoints, String hitPointsRollDefinition, String speed, byte challengeRating, byte strength, byte dexterity, byte constitution, byte intelligence, byte wisdom, byte charisma, CharacterType characterType, Set<SkillType> proficiencies) {
         this.name = name;
         this.armorClass = armorClass;
         this.hitPoints = hitPoints;
@@ -147,11 +147,11 @@ public class Character {
         this.hitPoints = hitPoints;
     }
 
-    public byte getSpeed() {
+    public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(byte speed) {
+    public void setSpeed(String speed) {
         this.speed = speed;
     }
 
