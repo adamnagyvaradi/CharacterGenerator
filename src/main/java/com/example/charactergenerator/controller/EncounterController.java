@@ -134,4 +134,10 @@ public class EncounterController {
 
         return "encounter/encounter";
     }
+
+    @GetMapping("/encounter/builder/new")
+    public String newEncounter(){
+        encounterService.resetEncounter();
+        return "redirect:/encounter/builder";
+    }
 }

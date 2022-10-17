@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public class Encounter {
-    private final List<Character> characters = new ArrayList<>();
+    private List<Character> characters = new ArrayList<>();
     private boolean editable = true;
 
     public Encounter(){
@@ -40,5 +40,10 @@ public class Encounter {
 
     public void removeCharacterById(long id){
         characters.remove(findById(id));
+    }
+
+    public void resetEncounter(){
+        characters = new ArrayList<>();
+        editable = true;
     }
 }
