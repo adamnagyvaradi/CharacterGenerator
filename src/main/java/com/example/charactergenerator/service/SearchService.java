@@ -25,7 +25,7 @@ public class SearchService {
     @Autowired
     private SearchRepository searchRepository;
 
-    public List<Character>filterBy(String characterName,String characterTypes,Byte challengeRating){
+   /* public List<Character>filterBy(String characterName,String characterTypes,Byte challengeRating){
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Character> criteriaQuery = criteriaBuilder.createQuery(Character.class);
 
@@ -51,5 +51,5 @@ public class SearchService {
         return query.getResultList();
 
 
-    }
+    }*/
 }
