@@ -244,7 +244,7 @@
                   <tbody>
                   <tr th:each="character: ${charactersCart}">
                     <td th:text="${character.name}"></td>
-                    <td>
+                    <td style="width: 35px">
                       <form th:action="@{/encounter/builder/character/remove/{id}(id=${character.id})}" method="post">
                         <button class="btn btn-dark btn-sm">-</button>
                       </form>
