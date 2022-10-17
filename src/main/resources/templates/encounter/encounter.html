@@ -176,6 +176,54 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="col-6">
+                                    <table th:if="${character.isCaster()}" class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Chosen Armor</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td th:text="${character.casterLevel}"></td>
+                                            <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
+                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-6">
+                                    <table th:if="${character.isCaster()}" class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Chosen Melee Weapon</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td th:text="${character.casterLevel}"></td>
+                                            <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
+                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-6">
+                                    <table th:if="${character.isCaster()}" class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Chosen Ranged Weapon</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td th:text="${character.casterLevel}"></td>
+                                            <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
+                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
