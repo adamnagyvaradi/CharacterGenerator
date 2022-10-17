@@ -181,6 +181,66 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="row">
+                                    <table th:if="${character.hasArmor()}" class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th style = "width: 50%">Chosen Armor</th>
+                                            <th>Armor Value</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <div class="row pb-2" th:if="${character.hasArmor()}">
+                                                <div class="col">
+                                                    <td th:text="${character.armor.name}">Armor</td>
+                                                    <td th:text="${character.armor.armorValue}"></td>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <table th:if="${character.hasMeleeWeapon()}" class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th style = "width: 50%">Chosen Melee Weapon</th>
+                                            <th>Damage</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <div class="row pb-2" th:if="${character.hasMeleeWeapon()}">
+                                                <div class="col">
+                                                    <td th:text="${character.meleeWeapon.name}"></td>
+                                                    <td th:text="${character.meleeWeapon.damage}"></td>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <table th:if="${character.hasRangedWeapon()}" class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th style = "width: 50%">Chosen Ranged Weapon</th>
+                                            <th>Damage</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <div class="row pb-2" th:if="${character.hasRangedWeapon()}">
+                                                <div class="col">
+                                                    <td th:text="${character.rangedWeapon.name}"></td>
+                                                    <td th:text="${character.rangedWeapon.damage}"></td>
+                                                </div>
+                                            </div>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
