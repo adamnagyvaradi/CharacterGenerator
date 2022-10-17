@@ -39,7 +39,7 @@
                 <input type="text" class="form-control" id="txtSearch" name="characterName" placeholder="Search">
                 </div>
                 <div class="col-auto">
-                  <select id="challengeRating" name ="challengeRating">
+                  <select class="form-select" id="challengeRating" name ="challengeRating">
                     <option th:value="null"> Rating: All </option>
                     <option th:value="0"> Rating: 0 </option>
                     <option th:value="1"> Rating: 1 </option>
@@ -77,7 +77,7 @@
                   </select>
                 </div>
               <div class="col-auto">
-                <select id="characterType" name="characterType">
+                <select class="form-select" id="characterType" name="characterType">
                   <option value="AllTypes"> All Charactertypes</option>
                   <option th:each="characterType: ${T(com.example.charactergenerator.model.CharacterType).values()}"
                           th:value="${characterType}" th:text="${characterType.characterType}"

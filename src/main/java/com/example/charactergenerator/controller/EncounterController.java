@@ -52,8 +52,10 @@ public class EncounterController {
                                   @RequestParam(required = false, name = "characterType") String characterType,
                                   @RequestParam(required = false, name = "challengeRating") Byte challengeRating) {
 
-        List<Character> characterList = characterService.filterBy(characterName,characterType, challengeRating);
-        model.addAttribute("characters",characterList);
+        List<Character> characters = characterService.filterBy(characterName,characterType, challengeRating);
+        List<Character> charactersCart = encounterService.getAllCharacter();
+        model.addAttribute("characters",characters);
+        model.addAttribute("charactersCart", charactersCart);
 
         return "encounter/builder";
     }
