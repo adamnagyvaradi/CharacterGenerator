@@ -45,12 +45,64 @@
         <div class="row">
           <div class="col">
             <form class="row g-3" th:action="@{/encounter/builder}" method="get">
-              <div class="col">
+              <div class="col-4">
                 <label for="txtSearch" class="visually-hidden">Search</label>
-                <input type="text" class="form-control" id="txtSearch" name="keyword" placeholder="Search">
-              </div>
+                <input type="text" class="form-control" id="txtSearch" name="characterName" placeholder="Search">
+                </div>
+                <div class="col-auto">
+                  <select id="challengeRating" name ="challengeRating">
+                    <option th:value="null"> Rating: All </option>
+                    <option th:value="0"> Rating: 0 </option>
+                    <option th:value="1"> Rating: 1 </option>
+                    <option th:value="2"> Rating: 2 </option>
+                    <option th:value="3"> Rating: 3 </option>
+                    <option th:value="4"> Rating: 4 </option>
+                    <option th:value="5"> Rating: 5 </option>
+                    <option th:value="6"> Rating: 6 </option>
+                    <option th:value="7"> Rating: 7 </option>
+                    <option th:value="8"> Rating: 8 </option>
+                    <option th:value="9"> Rating: 9 </option>
+                    <option th:value="10"> Rating: 10 </option>
+                    <option th:value="11"> Rating: 11 </option>
+                    <option th:value="12"> Rating: 12 </option>
+                    <option th:value="13"> Rating: 13 </option>
+                    <option th:value="14"> Rating: 14 </option>
+                    <option th:value="15"> Rating: 15 </option>
+                    <option th:value="16"> Rating: 16 </option>
+                    <option th:value="17"> Rating: 17 </option>
+                    <option th:value="18"> Rating: 18 </option>
+                    <option th:value="19"> Rating: 19 </option>
+                    <option th:value="20"> Rating: 20 </option>
+                    <option th:value="21"> Rating: 21 </option>
+                    <option th:value="22"> Rating: 22 </option>
+                    <option th:value="23"> Rating: 23 </option>
+                    <option th:value="24"> Rating: 24 </option>
+                    <option th:value="25"> Rating: 25 </option>
+                    <option th:value="26"> Rating: 26 </option>
+                    <option th:value="27"> Rating: 27 </option>
+                    <option th:value="28"> Rating: 28 </option>
+                    <option th:value="29"> Rating: 29 </option>
+                    <option th:value="30"> Rating: 30 </option>
+                    <option th:if="${#lists.isEmpty(param.challengeRating)}"></option>
+
+                  </select>
+                </div>
               <div class="col-auto">
+                <select id="characterType" name="characterType">
+                  <option value="AllTypes"> All Charactertypes</option>
+                  <option th:each="characterType: ${T(com.example.charactergenerator.model.CharacterType).values()}"
+                          th:value="${characterType}" th:text="${characterType.characterType}"
+                          th:selected="${#lists.contains(param.characterType,characterType.name())}"
+                          th:unless="${#lists.isEmpty(param.characterType)}"></option>
+                  <option th:each="characterType: ${T(com.example.charactergenerator.model.CharacterType).values()}"
+                          th:value="${characterType}" th:text="${characterType.characterType}"
+                          th:if="${#lists.isEmpty(param.characterType)}"></option>"
+                </select>
+              </div>
+
+                  <div class="col-auto">
                 <button type="submit" class="btn btn-dark mb-3">Search</button>
+
               </div>
             </form>
           </div>
