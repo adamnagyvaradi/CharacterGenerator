@@ -21,6 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/encounter/builder}">Encounter</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/encounter/builder/new}">New Encounter</a></li>
             </ul>
         </div>
     </div>
@@ -37,36 +38,40 @@
                     </div>
                     <div class="card-body">
                         <div class="row text-center">
-                            <div class="col">
-                                <div class="card">
-                                    <span>Armor class</span>
-                                    <span th:text="${character.armorClass}">17</span>
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <span>Armor class</span>
+                                            <span th:text="${character.armorClass}">17</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="card">
+                                            <span>HP</span>
+                                            <span th:text="${character.hitPoints}">17</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="card">
+                                            <span>CR</span>
+                                            <span th:text="${character.challengeRating}">2</span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card">
+                                            <span>Proficiency</span>
+                                            <span th:text="${'+' + character.proficiencyBonus}">2</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 text-start">
+                                    <div class="col">
+                                        <strong>Speed: </strong><span th:text="${character.speed}">10 ft.</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-1">
-                                <div class="card">
-                                    <span>HP</span>
-                                    <span th:text="${character.hitPoints}">17</span>
-                                </div>
-                            </div>
-                            <div class="col-1">
-                                <div class="card">
-                                    <span>Speed</span>
-                                    <span th:text="${character.speed}">10 ft.</span>
-                                </div>
-                            </div>
-                            <div class="col-1">
-                                <div class="card">
-                                    <span>CR</span>
-                                    <span th:text="${character.challengeRating}">2</span>
-                                </div>
-                            </div>
-                            <div class="col px-3">
-                                <div class="card">
-                                    <span>Proficiency</span>
-                                    <span th:text="${'+' + character.proficiencyBonus}">2</span>
-                                </div>
-                            </div>
+
                             <div class="col-1">
                                 <div class="card">
                                     STR<br>

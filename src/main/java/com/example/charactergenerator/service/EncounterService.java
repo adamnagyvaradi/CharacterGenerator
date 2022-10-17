@@ -1,15 +1,17 @@
 package com.example.charactergenerator.service;
 
 import com.example.charactergenerator.dto.CharacterDto;
-import com.example.charactergenerator.model.*;
 import com.example.charactergenerator.model.Character;
+import com.example.charactergenerator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.HashSet;
 import java.util.List;
 
 @Service
+@SessionScope
 public class EncounterService {
     private CharacterService characterService;
     private ArmorService armorService;
@@ -123,5 +125,14 @@ public class EncounterService {
 
     public boolean isEncounterEditable() {
         return encounter.isEditable();
+    }
+
+    public void modifyHitPoints(long id, short hitPoints){
+        Character character = findCharacterById(id);
+        character.setHitPoints(hitPoints);
+    }
+
+    public void resetEncounter(){
+        encounter.resetEncounter();
     }
 }
