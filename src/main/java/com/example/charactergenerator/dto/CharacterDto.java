@@ -15,7 +15,7 @@ public class CharacterDto {
     private byte charisma;
     private byte armorClass;
     private short hitPoints;
-    private byte speed;
+    private String speed;
     private byte challengeRating;
     private String armor;
     private String meleeWeapon;
@@ -106,11 +106,11 @@ public class CharacterDto {
         this.hitPoints = hitPoints;
     }
 
-    public byte getSpeed() {
+    public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(byte speed) {
+    public void setSpeed(String speed) {
         this.speed = speed;
     }
 

@@ -47,22 +47,13 @@ public class EncounterController {
     }
 
     @GetMapping("/encounter/builder")
-    public String showEncounterBuilder(Model model,
-                                       @RequestParam(required = false, name = "keyword", defaultValue = "") String keyword){
-        if (!encounterService.isEncounterEditable()){
-            return "redirect:/encounter/character";
-        }
+    public String searchCharacter(Model model,
+                                  @RequestParam(required = false, name = "characterName",defaultValue ="") String characterName,
+                                  @RequestParam(required = false, name = "characterType") String characterType,
+                                  @RequestParam(required = false, name = "challengeRating") Byte challengeRating) {
 
-        List<Character> characters;
-
-        if(keyword.isBlank()){
-            characters = characterService.findAll();
-        }else{
-            characters = characterService.findAllByNameContains(keyword);
-        }
-
-        model.addAttribute("characters",characters);
-        model.addAttribute("charactersCart",encounterService.getAllCharacter());
+        List<Character> characterList = characterService.filterBy(characterName,characterType, challengeRating);
+        model.addAttribute("characters",characterList);
 
         return "encounter/builder";
     }
@@ -133,5 +124,11 @@ public class EncounterController {
         model.addAttribute("character", encounterService.findCharacterById(id));
 
         return "encounter/encounter";
+    }
+
+    @GetMapping("/encounter/builder/new")
+    public String newEncounter(){
+        encounterService.resetEncounter();
+        return "redirect:/encounter/builder";
     }
 }
