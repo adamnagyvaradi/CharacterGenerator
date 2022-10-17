@@ -176,50 +176,62 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-6">
-                                    <table th:if="${character.isCaster()}" class="table table-striped">
+                                <div class="row">
+                                    <table th:if="${character.hasArmor()}" class="table table-striped">
                                         <thead>
                                         <tr>
                                             <th>Chosen Armor</th>
+                                            <th>Armor Value</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td th:text="${character.casterLevel}"></td>
-                                            <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
-                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
+                                            <div class="row pb-2" th:if="${character.hasArmor()}">
+                                                <div class="col">
+                                                    <td th:text="${character.armor.name}">Armor</td>
+                                                    <td th:text="${character.armor.armorValue}"></td>)
+                                                </div>
+                                            </div>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-6">
-                                    <table th:if="${character.isCaster()}" class="table table-striped">
+                                <div class="row">
+                                    <table th:if="${character.hasMeleeWeapon()}" class="table table-striped">
                                         <thead>
                                         <tr>
                                             <th>Chosen Melee Weapon</th>
+                                            <th>Damage</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td th:text="${character.casterLevel}"></td>
-                                            <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
-                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
+                                            <div class="row pb-2" th:if="${character.hasMeleeWeapon()}">
+                                                <div class="col">
+                                                    <td th:text="${character.meleeWeapon.name}"></td>
+                                                    <td th:text="${character.meleeWeapon.damage}"></td>)
+                                                </div>
+                                            </div>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-6">
-                                    <table th:if="${character.isCaster()}" class="table table-striped">
+                                <div class="row">
+                                    <table th:if="${character.hasRangedWeapon()}" class="table table-striped">
                                         <thead>
                                         <tr>
                                             <th>Chosen Ranged Weapon</th>
+                                            <th>Damage</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td th:text="${character.casterLevel}"></td>
-                                            <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
-                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
+                                            <div class="row pb-2" th:if="${character.hasRangedWeapon()}">
+                                                <div class="col">
+                                                    <td th:text="${character.rangedWeapon.name}"></td>
+                                                    <td th:text="${character.rangedWeapon.damage}"></td>)
+                                                </div>
+                                            </div>
                                         </tr>
                                         </tbody>
                                     </table>
