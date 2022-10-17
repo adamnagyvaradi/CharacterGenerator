@@ -20,15 +20,5 @@ public class SearchController {
     private CharacterService characterService;
 
 
-    @GetMapping("/search")
-    public String searchCharacter(Model model,
-       @RequestParam(required = false, name = "characterName",defaultValue ="") String characterName,
-       @RequestParam(required = false, name = "characterType") String characterType,
-       @RequestParam(required = false, name = "challengeRating") Byte challengeRating) {
 
-        List<Character> characterList = searchService.filterBy(characterName,characterType, challengeRating);
-        model.addAttribute("characters",characterList);
-
-       return "search";
-    }
 }
