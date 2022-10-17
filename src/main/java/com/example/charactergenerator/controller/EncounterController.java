@@ -133,4 +133,10 @@ public class EncounterController {
         encounterService.resetEncounter();
         return "redirect:/encounter/builder";
     }
+
+    @PostMapping("/encounter/character/{id}/hp/update")
+    public String updateHitPoints(@PathVariable long id, short hp){
+        encounterService.modifyHitPoints(id,hp);
+        return "redirect:/encounter/character/" + id;
+    }
 }
