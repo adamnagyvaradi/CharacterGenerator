@@ -1,8 +1,7 @@
 package com.example.charactergenerator.helper;
 
-import com.example.charactergenerator.model.*;
 import com.example.charactergenerator.model.Character;
-import com.example.charactergenerator.repository.ArmorRepository;
+import com.example.charactergenerator.model.*;
 import com.example.charactergenerator.service.ArmorService;
 import com.example.charactergenerator.service.CharacterService;
 import com.example.charactergenerator.service.MeleeWeaponService;
