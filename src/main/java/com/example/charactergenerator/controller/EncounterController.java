@@ -12,7 +12,8 @@ import java.util.List;
 
 @Controller
 public class EncounterController {
-    private static final List<Integer> CASTER_LEVELS = List.of(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+    private static final List<Integer> CASTER_LEVELS =
+            List.of(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
     private static final List<String> CHALLENGE_RATINGS =
             List.of("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15",
                     "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30");
@@ -101,19 +102,15 @@ public class EncounterController {
     @PostMapping("/encounter/builder/character/add/{id}")
     public String addCharacterIntoBuilder(@PathVariable long id, @RequestHeader(value = "referer", required = false) String referer){
         encounterService.addCharacter(id);
-        int startIndex = referer.indexOf("?");
-        if (startIndex == -1){
-            return "redirect:/encounter/builder";
-        } else{
-            return "redirect:/encounter/builder" + referer.substring(startIndex);
-        }
+
+        return getEncounterBuilderRedirect(referer);
     }
 
     @PostMapping("/encounter/builder/character/remove/{id}")
-    public String removeCharacterFromCart(@PathVariable long id){
+    public String removeCharacterFromCart(@PathVariable long id, @RequestHeader(value = "referer", required = false) String referer){
         encounterService.removeCharacterById(id);
 
-        return "redirect:/encounter/builder";
+        return getEncounterBuilderRedirect(referer);
     }
 
     @PostMapping("/encounter/builder/save")
@@ -144,5 +141,14 @@ public class EncounterController {
     public String updateHitPoints(@PathVariable long id, short hp){
         encounterService.modifyHitPoints(id,hp);
         return "redirect:/encounter/character/" + id;
+    }
+
+    private String getEncounterBuilderRedirect(String url){
+        int startIndex = url.indexOf("?");
+        if (startIndex == -1){
+            return "redirect:/encounter/builder";
+        } else{
+            return "redirect:/encounter/builder" + url.substring(startIndex);
+        }
     }
 }
