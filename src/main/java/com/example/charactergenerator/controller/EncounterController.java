@@ -6,15 +6,16 @@ import com.example.charactergenerator.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 public class EncounterController {
+    private static final List<Integer> CASTER_LEVELS = List.of(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+    private static final List<String> CHALLENGE_RATINGS =
+            List.of("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15",
+                    "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30");
     private CharacterService characterService;
     private EncounterService encounterService;
     private ArmorService armorService;
@@ -56,6 +57,7 @@ public class EncounterController {
         List<Character> charactersCart = encounterService.getAllCharacter();
         model.addAttribute("characters",characters);
         model.addAttribute("charactersCart", charactersCart);
+        model.addAttribute("challengeRatings",CHALLENGE_RATINGS);
 
         return "encounter/builder";
     }
@@ -83,7 +85,7 @@ public class EncounterController {
         model.addAttribute("armors", armorService.findAll());
         model.addAttribute("meleeWeapons", meleeWeaponService.findAll());
         model.addAttribute("rangedWeapons", rangedWeaponService.findAll());
-        model.addAttribute("casterLevels", List.of(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20));
+        model.addAttribute("casterLevels", CASTER_LEVELS);
 
 
         return "encounter/character-edit";
@@ -97,10 +99,14 @@ public class EncounterController {
     }
 
     @PostMapping("/encounter/builder/character/add/{id}")
-    public String addCharacterIntoBuilder(@PathVariable long id){
+    public String addCharacterIntoBuilder(@PathVariable long id, @RequestHeader(value = "referer", required = false) String referer){
         encounterService.addCharacter(id);
-
-        return "redirect:/encounter/builder";
+        int startIndex = referer.indexOf("?");
+        if (startIndex == -1){
+            return "redirect:/encounter/builder";
+        } else{
+            return "redirect:/encounter/builder" + referer.substring(startIndex);
+        }
     }
 
     @PostMapping("/encounter/builder/character/remove/{id}")
