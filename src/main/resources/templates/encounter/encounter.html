@@ -161,7 +161,7 @@
                                     <table th:if="${character.isCaster()}" class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Caster Level</th>
+                                            <th>Caster lvl</th>
                                             <th>1th</th>
                                             <th>2th</th>
                                             <th>3th</th>
@@ -174,10 +174,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
+                                        <tr class="text-center">
                                             <td th:text="${character.casterLevel}"></td>
                                             <td th:each="slot: ${character.slots}" th:text="${slot}"></td>
-                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}"> - </td>
+                                            <td th:each="i:${#numbers.sequence(character.slots.length, 8)}" th:unless="${character.slots.length == 9}"> - </td>
                                         </tr>
                                         </tbody>
                                     </table>
