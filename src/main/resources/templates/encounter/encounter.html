@@ -252,13 +252,13 @@
                     <div class="card-header">
                         Characters
                     </div>
-                    <div class="card-body">
-                        <div class="btn-group-vertical" role="group">
-                            <div class="col" th:each="actualCharacter: ${characters}">
-                                <a href="#" class="btn btn-outline-secondary btn-block active" role="button"
+                    <div class="card-body p-1">
+                        <div class="row">
+                            <div class="col m-1" th:each="actualCharacter: ${characters}">
+                                <a href="#" class="btn btn-outline-dark active" role="button" style="width: 100%"
                                    th:if="${character.id == actualCharacter.id}"
                                    th:text="${actualCharacter.name}" th:href="@{/encounter/character/{id}(id=${actualCharacter.id})}"></a>
-                                <a href="#" class="btn btn-outline-secondary btn-block" role="button"
+                                <a href="#" class="btn btn-outline-dark" role="button" style="width: 100%"
                                    th:unless="${character.id == actualCharacter.id}"
                                    th:text="${actualCharacter.name}" th:href="@{/encounter/character/{id}(id=${actualCharacter.id})}"></a>
                             </div>
@@ -269,34 +269,32 @@
                     <div class="card-header">
                         Custom roll
                     </div>
-                    <div class="card-body">
-                        <div class="row input-group">
-                            <div class="row mb-2">
-                                <div class="col" >
-                                    <input type="text" class="form-control mx-2" style="width: 100%;" name="times" id="times" placeholder="Times">
-                                </div>
+                    <div class="card-body p-1">
+                        <div class="row">
+                            <div class="col m-1">
+                                <input type="text" class="form-control m-0" style="width: 100%;" name="times" id="times" placeholder="Times">
                             </div>
-                            <div class="row mb-2">
-                                <div class="col"><button class="btn btn-secondary" style="width: 100%;" onclick="getCustomRoll('d4')">d4</button></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d6')">d6</button></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d8')">d8</button></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d10')">d10</button></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d12')">d12</button></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d20')">d20</button></div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col"><button class="btn btn-secondary" style="width: 100px;" onclick="getCustomRoll('d100')">d100</button></div>
-                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m-1"><button class="btn btn-outline-dark" style="width: 100%;" onclick="getCustomRoll('d4')">d4</button></div>
+                        </div>
+                        <div class="row">
+                            <div class="col m-1"><button class="btn btn-outline-dark" style="width: 100%;" onclick="getCustomRoll('d6')">d6</button></div>
+                        </div>
+                        <div class="row">
+                            <div class="col m-1"><button class="btn btn-outline-dark" style="width: 100%;" onclick="getCustomRoll('d8')">d8</button></div>
+                        </div>
+                        <div class="row">
+                            <div class="col m-1"><button class="btn btn-outline-dark" style="width: 100%;" onclick="getCustomRoll('d10')">d10</button></div>
+                        </div>
+                        <div class="row">
+                            <div class="col m-1"><button class="btn btn-outline-dark" style="width: 100%;" onclick="getCustomRoll('d12')">d12</button></div>
+                        </div>
+                        <div class="row">
+                            <div class="col m-1"><button class="btn btn-outline-dark" style="width: 100%;" onclick="getCustomRoll('d20')">d20</button></div>
+                        </div>
+                        <div class="row">
+                            <div class="col m-1"><button class="btn btn-outline-dark" style="width: 100%;" onclick="getCustomRoll('d100')">d100</button></div>
                         </div>
                     </div>
                 </div>
