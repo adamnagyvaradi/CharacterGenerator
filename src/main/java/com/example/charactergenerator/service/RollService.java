@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class RollService {
 
+    private final RandomService randomService;
+
+    public RollService(RandomService diceService) {
+        this.randomService = diceService;
+    }
+
     public RollDto roll(String rollDefinition){
         int dIndex = rollDefinition.indexOf('d');
 
@@ -38,7 +44,7 @@ public class RollService {
         int sum = 0;
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < times; i++){
-            int actualRollValue = (int) ((Math.random() * sides + 1));
+            int actualRollValue = randomService.randomRoll(sides);
             stringBuilder.append(actualRollValue);
 
             if (i < times - 1){
