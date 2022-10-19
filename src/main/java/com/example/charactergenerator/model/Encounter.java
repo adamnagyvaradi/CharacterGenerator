@@ -41,4 +41,9 @@ public class Encounter {
     public void removeCharacterById(long id) {
         characters.remove(findById(id));
     }
+
+    public void resetEncounter(){
+        characters = new ArrayList<>();
+        editable = true;
+    }
 }

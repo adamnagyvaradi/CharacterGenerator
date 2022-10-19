@@ -28,4 +28,8 @@ public class MeleeWeaponService {
     public List<MeleeWeapon> findAll() {
         return (List<MeleeWeapon>) meleeWeaponRepository.findAll();
     }
+
+    public MeleeWeapon findById(String id) {
+        return meleeWeaponRepository.findById(Long.parseLong(id)).orElseThrow();
+    }
 }

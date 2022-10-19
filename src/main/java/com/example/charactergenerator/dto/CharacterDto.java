@@ -1,7 +1,8 @@
 package com.example.charactergenerator.dto;
 
-import com.example.charactergenerator.model.AttributeType;
-import com.example.charactergenerator.model.Character;
+import com.example.charactergenerator.model.SkillType;
+
+import java.util.Set;
 
 public class CharacterDto {
     private long id;
@@ -14,28 +15,15 @@ public class CharacterDto {
     private byte charisma;
     private byte armorClass;
     private short hitPoints;
-    private byte speed;
+    private String speed;
     private byte challengeRating;
     private String armor;
     private String meleeWeapon;
     private String rangedWeapon;
-
-    //private CharacterType CharacterType;
-
-    //private boolean isCaster;
+    private String casterLevel;
+    private Set<SkillType> proficiencies;
 
     public CharacterDto() {
-    }
-
-    public CharacterDto(Character character) {
-        id = character.getId();
-        name = character.getName();
-        strength = character.getAttributeValue(AttributeType.STR);
-        dexterity = character.getAttributeValue(AttributeType.DEX);
-        constitution = character.getAttributeValue(AttributeType.CON);
-        intelligence = character.getAttributeValue(AttributeType.INT);
-        wisdom = character.getAttributeValue(AttributeType.WIS);
-        charisma = character.getAttributeValue(AttributeType.CHA);
     }
 
     public long getId() {
@@ -118,11 +106,11 @@ public class CharacterDto {
         this.hitPoints = hitPoints;
     }
 
-    public byte getSpeed() {
+    public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(byte speed) {
+    public void setSpeed(String speed) {
         this.speed = speed;
     }
 
@@ -156,5 +144,21 @@ public class CharacterDto {
 
     public void setRangedWeapon(String rangedWeapon) {
         this.rangedWeapon = rangedWeapon;
+    }
+
+    public String getCasterLevel() {
+        return casterLevel;
+    }
+
+    public void setCasterLevel(String casterLevel) {
+        this.casterLevel = casterLevel;
+    }
+
+    public Set<SkillType> getProficiencies() {
+        return proficiencies;
+    }
+
+    public void setProficiencies(Set<SkillType> proficiencies) {
+        this.proficiencies = proficiencies;
     }
 }
