@@ -53,6 +53,9 @@ public class EncounterController {
                                   @RequestParam(required = false, name = "characterName",defaultValue ="") String characterName,
                                   @RequestParam(required = false, name = "characterType") String characterType,
                                   @RequestParam(required = false, name = "challengeRating") Byte challengeRating) {
+        if (!encounterService.isEncounterEditable()){
+            return "redirect:/encounter/character";
+        }
 
         List<Character> characters = characterService.filterBy(characterName,characterType, challengeRating);
         List<Character> charactersCart = encounterService.getAllCharacter();
