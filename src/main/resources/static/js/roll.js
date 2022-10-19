@@ -11,13 +11,13 @@ function getCustomRoll(diceDefinition){
 }
 
 function getRoll(rollDefinition){
-    getServerData("http://localhost:8080/api/roll/" + rollDefinition).then(
+    getServerData("https://rpgproject2022.herokuapp.com/api/roll/" + rollDefinition).then(
         roll => message(roll, rollDefinition)
     );
 }
 
 function characterEditRoll(rollDefinition, inputFieldId){
-    getServerData("http://localhost:8080/api/roll/" + rollDefinition).then(
+    getServerData("https://rpgproject2022.herokuapp.com/api/roll/" + rollDefinition).then(
         roll => messageAndUpdate(roll, rollDefinition, inputFieldId)
     );
 }
