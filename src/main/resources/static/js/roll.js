@@ -1,4 +1,6 @@
 //targetId ahova az eredményt akarom kiírni, messageId ahova a detailst akarom kiírni
+let counter = 1;
+
 function getCustomRoll(diceDefinition){
     const times = document.getElementById("times");
     if (times){
@@ -29,13 +31,13 @@ function messageAndUpdate(roll, rollDefinition, inputFieldId){
 
 const message = (roll, rollDefinition) => {
     const wrapper = document.querySelector(".toast-container");
-    const randomUUID = crypto.randomUUID();
+    const id = "roll-message-" + counter++;
 
     wrapper.innerHTML += [
-        `<div id="${randomUUID}" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">`,
+        `<div id="${id}" class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">`,
         `    <div class="toast-header">`,
         `        <strong class="me-auto">${rollDefinition}</strong>`,
-        `        <button type="button" class="btn-close" onclick="removeElement('${randomUUID}')" aria-label="Close"></button>`,
+        `        <button type="button" class="btn-close" onclick="removeElement('${id}')" aria-label="Close"></button>`,
         `    </div>`,
         `    <div class="toast-body">`,
         `       ${roll.details}`,
