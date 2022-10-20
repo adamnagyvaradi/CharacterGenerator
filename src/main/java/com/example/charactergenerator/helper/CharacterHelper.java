@@ -215,7 +215,7 @@ public class    CharacterHelper implements ApplicationRunner {
                 new Character("Scout", 13, 16, "3d8 + 3", "30 ft.", 1,
                         11, 14, 12, 11, 13, 11, CharacterType.HUMANOID,
                         Set.of(SkillType.NATURE, SkillType.PERCEPTION, SkillType.STEALTH, SkillType.SURVIVAL))
-                        .equipMeleeWeapon(getMeleeWeaponByID((17l))).equipRangedWeapon(getRangedWeaponByID((3l))),
+                        .equipMeleeWeapon(getMeleeWeaponByID((17l))).equipRangedWeapon(getRangedWeaponByID((3l))).equipArmor(getArmorByID((2l))),
                 new Character("Sea Hag", 14, 52, "7d8 + 21", "30 ft., swim 40 ft.", 2,
                         16, 13, 16, 12, 12, 13, CharacterType.FEY,
                         Set.of()),
