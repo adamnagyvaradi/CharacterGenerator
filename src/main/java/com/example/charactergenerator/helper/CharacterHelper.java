@@ -609,20 +609,22 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
                 new Character("Sahuagin", 12, 22, "4d8 + 4", "30 ft., swim 40 ft.", 1,
                         13, 11, 12, 12, 13, 9, CharacterType.HUMANOID,
-                        Set.of(SkillType.PERCEPTION)).equipMeleeWeapon(getMeleeWeaponByID((10l))),
+                        Set.of(SkillType.PERCEPTION)).
+                        equipMeleeWeapon(getMeleeWeaponByID(10L)),
                 new Character("Salamander", 15, 90, "12d10 + 24", "Speed 30 ft.", 5,
                         18, 14, 15, 11, 10, 12, CharacterType.ELEMENTAL,
                         Set.of()),
                 new Character("Satyr", 14, 31, "7d8", "40 ft.", 1,
                         12, 16, 11, 12, 10, 14, CharacterType.FEY,
-                        Set.of(SkillType.PERCEPTION, SkillType.PERFORMANCE,SkillType.STEALTH)).equipArmor(getArmorByID((2l))),
+                        Set.of(SkillType.PERCEPTION, SkillType.PERFORMANCE,SkillType.STEALTH)).
+                        equipArmor(getArmorByID(2L)),
                 new Character("Scorpion", 11, 1, "1d4 - 1", "10 ft.", 0,
                         2, 11, 8, 1, 8, 2, CharacterType.BEAST,
                         Set.of()),
                 new Character("Scout", 13, 16, "3d8 + 3", "30 ft.", 1,
                         11, 14, 12, 11, 13, 11, CharacterType.HUMANOID,
-                        Set.of(SkillType.NATURE, SkillType.PERCEPTION, SkillType.STEALTH, SkillType.SURVIVAL))
-                        .equipMeleeWeapon(getMeleeWeaponByID((17l))).equipRangedWeapon(getRangedWeaponByID((3l))).equipArmor(getArmorByID((2l))),
+                        Set.of(SkillType.NATURE, SkillType.PERCEPTION, SkillType.STEALTH, SkillType.SURVIVAL)).
+                        equipMeleeWeapon(getMeleeWeaponByID(17L)).equipRangedWeapon(getRangedWeaponByID(3L)).equipArmor(getArmorByID(2L)),
                 new Character("Sea Hag", 14, 52, "7d8 + 21", "30 ft., swim 40 ft.", 2,
                         16, 13, 16, 12, 12, 13, CharacterType.FEY,
                         Set.of()),
@@ -667,7 +669,7 @@ public class    CharacterHelper implements ApplicationRunner {
                 new Character("Spy", 12, 27, "6d8", "30ft.", 1 ,
                         10, 15, 10, 12, 14, 16, CharacterType.HUMANOID,
                         Set.of(SkillType.DECEPTION, SkillType.INSIGHT, SkillType.INVESTIGATION, SkillType.PERCEPTION, SkillType.PERSUASION,SkillType.SLEIGHT_OF_HAND, SkillType.STEALTH))
-                        .equipMeleeWeapon(getMeleeWeaponByID((17l))).equipRangedWeapon(getRangedWeaponByID((1l))),
+                        .equipMeleeWeapon(getMeleeWeaponByID(17L)).equipRangedWeapon(getRangedWeaponByID(1L)),
                 new Character("Steam Mephit", 10, 21, "6d6", "30 ft., fly 30ft.", 0,
                         5, 11, 10, 11, 10, 12, CharacterType.ELEMENTAL,
                         Set.of()),
@@ -683,7 +685,7 @@ public class    CharacterHelper implements ApplicationRunner {
                 new Character("Storm Giant", 16, 230, "20d12 + 100", "50 ft., swim 50 ft.", 13,
                         29, 14, 20, 16, 18, 18, CharacterType.GIANT,
                         Set.of(SkillType.ARCANA, SkillType.ATHLETICS, SkillType.HISTORY, SkillType.PERCEPTION))
-                        .equipArmor(getArmorByID((6l))),
+                        .equipArmor(getArmorByID(6L)),
                 new Character("Succubus", 15, 66, "12d8 + 12", "30 ft., fly 60 ft.", 4,
                         8, 17, 13, 15, 12, 20, CharacterType.FIEND,
                         Set.of(SkillType.DECEPTION, SkillType.INSIGHT,SkillType.PERCEPTION, SkillType.PERSUASION, SkillType.STEALTH)),
@@ -722,7 +724,8 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of()),
                 new Character("Thug", 11, 32, "5d8 + 10", "30 ft.", 1,
                         15, 11, 14, 10, 10, 11, CharacterType.HUMANOID,
-                        Set.of(SkillType.INTIMIDATION)).equipArmor(getArmorByID((2l))).equipMeleeWeapon(getMeleeWeaponByID((7l))).equipRangedWeapon(getRangedWeaponByID((7l))),
+                        Set.of(SkillType.INTIMIDATION)).
+                        equipArmor(getArmorByID(2L)).equipMeleeWeapon(getMeleeWeaponByID(7L)).equipRangedWeapon(getRangedWeaponByID(7L)),
                 new Character("Tiger", 12, 37, "5d10 + 10", "40 ft.", 1,
                         17, 15, 14, 3, 12, 8, CharacterType.BEAST,
                         Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
@@ -731,7 +734,7 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of()),
                 new Character("Tribal Warrior", 12, 11, "2d8 + 2", "30 ft.", 0,
                         13, 11, 12, 8, 11, 8, CharacterType.HUMANOID,
-                        Set.of()).equipArmor(getArmorByID((4l))).equipMeleeWeapon(getMeleeWeaponByID((10l))),
+                        Set.of()).equipArmor(getArmorByID(4L)).equipMeleeWeapon(getMeleeWeaponByID(10L)),
                 new Character("Triceratops", 13, 95, "10d12 + 30", "50 ft.", 5,
                         22, 9, 17, 2, 11, 5, CharacterType.BEAST,
                         Set.of()),
@@ -755,8 +758,8 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
                 new Character("Veteran", 17, 58, "9d8 + 18", "30 ft.", 3,
                         16, 13, 14, 10, 11, 10, CharacterType.HUMANOID,
-                        Set.of(SkillType.ATHLETICS, SkillType.PERCEPTION)).equipArmor(getArmorByID(11l)).equipRangedWeapon(getRangedWeaponByID(7l))
-                        .equipMeleeWeapon(getMeleeWeaponByID(14l))
+                        Set.of(SkillType.ATHLETICS, SkillType.PERCEPTION)).equipArmor(getArmorByID(11L)).equipRangedWeapon(getRangedWeaponByID(7L))
+                        .equipMeleeWeapon(getMeleeWeaponByID(14L))
         ));
     }
 
