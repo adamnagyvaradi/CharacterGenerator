@@ -312,7 +312,20 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of(SkillType.PERCEPTION)),
                 new Character("Tarrasque", 25, 676, "33d20 + 330", "40 ft.", 30,
                         30, 11, 30, 3, 11, 11, CharacterType.MONSTROSITY,
-                        Set.of())
+                        Set.of()),
+                new Character("Thug", 11, 32, "5d8 + 10", "30 ft.", 1,
+                        15, 11, 14, 10, 10, 11, CharacterType.HUMANOID,
+                        Set.of(SkillType.INTIMIDATION)).equipArmor(getArmorByID((2l))).equipMeleeWeapon(getMeleeWeaponByID((7l))).equipRangedWeapon(getRangedWeaponByID((7l))),
+                new Character("Tiger", 12, 37, "5d10 + 10", "40 ft.", 1,
+                        17, 15, 14, 3, 12, 8, CharacterType.BEAST,
+                        Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
+                new Character("Treant", 16, 138, "12d12 + 60", "30 ft", 9,
+                        23, 8, 21, 12, 16, 12, CharacterType.PLANT,
+                        Set.of()),
+                new Character("Tribal Warrior", 12, 11, "2d8 + 2", "30 ft.", 0,
+                        13, 11, 12, 8, 11, 8, CharacterType.HUMANOID,
+                        Set.of()).equipArmor(getArmorByID((4l))).equipMeleeWeapon(getMeleeWeaponByID((10l))),
+                new Character()
 
 
 
