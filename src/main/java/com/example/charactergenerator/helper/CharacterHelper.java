@@ -325,7 +325,27 @@ public class    CharacterHelper implements ApplicationRunner {
                 new Character("Tribal Warrior", 12, 11, "2d8 + 2", "30 ft.", 0,
                         13, 11, 12, 8, 11, 8, CharacterType.HUMANOID,
                         Set.of()).equipArmor(getArmorByID((4l))).equipMeleeWeapon(getMeleeWeaponByID((10l))),
-                new Character()
+                new Character("Triceratops", 13, 95, "10d12 + 30", "50 ft.", 5,
+                        22, 9, 17, 2, 11, 5, CharacterType.BEAST,
+                        Set.of()),
+                new Character("Troll", 15, 84, "8d10 + 40", "30 ft.", 5,
+                        18, 13, 20, 7, 9, 7, CharacterType.GIANT,
+                        Set.of(SkillType.PERCEPTION)),
+                new Character("Twig Blight", 13, 4, "1d6 + 1", "20 ft.", 0,
+                        6, 13, 12, 4, 8, 3, CharacterType.PLANT,
+                        Set.of(SkillType.STEALTH)),
+                new Character("Tyrannosaurus Rex", 13, 136, "13d12 + 52", "50 ft.", 8,
+                        25, 10, 19, 2, 12, 9, CharacterType.BEAST,
+                        Set.of(SkillType.PERCEPTION)),
+                new Character("Unicorn", 12, 67, "9d10 + 18", "50 ft.", 5,
+                        18, 14, 15, 11, 17, 16, CharacterType.CELESTIAL,
+                        Set.of()),
+                new Character("Vampire", 16, 144, "17d8 + 68", "30 ft.", 13,
+                        18, 18, 18, 17, 15, 18, CharacterType.UNDEAD,
+                        Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
+                new Character("Vampire Spawn", 15, 82, "11d8 + 33", "30 ft.", 5,
+                        16, 16, 16, 11, 10, 12, CharacterType.UNDEAD,
+                        Set.of(SkillType.PERCEPTION, SkillType.STEALTH))
 
 
 
