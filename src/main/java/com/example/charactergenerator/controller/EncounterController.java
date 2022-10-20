@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/encounter")
 public class EncounterController {
     private static final List<Integer> CASTER_LEVELS =
             List.of(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
@@ -48,7 +49,7 @@ public class EncounterController {
         this.rangedWeaponService = rangedWeaponService;
     }
 
-    @GetMapping("/encounter/builder")
+    @GetMapping("builder")
     public String searchCharacter(Model model,
                                   @RequestParam(required = false, name = "characterName",defaultValue ="") String characterName,
                                   @RequestParam(required = false, name = "characterType") String characterType,
@@ -66,7 +67,7 @@ public class EncounterController {
         return "encounter/builder";
     }
 
-    @GetMapping("/encounter/builder/character")
+    @GetMapping("builder/character")
     public String showCharacters(Model model){
         if (encounterService.getAllCharacter().isEmpty()){
             return "redirect:/encounter/builder";
@@ -82,7 +83,7 @@ public class EncounterController {
         return "encounter/encounter-edit";
     }
 
-    @GetMapping("/encounter/builder/character/edit/{id}")
+    @GetMapping("builder/character/edit/{id}")
     public String editCharacter(@PathVariable long id, Model model){
 
         model.addAttribute("character", encounterService.findCharacterById(id));
@@ -95,34 +96,34 @@ public class EncounterController {
         return "encounter/character-edit";
     }
 
-    @PostMapping("/encounter/character/update")
+    @PostMapping("character/update")
     public String updateCharacter(CharacterDto characterDto){
         encounterService.updateCharacter(characterDto);
 
         return "redirect:/encounter/builder/character";
     }
 
-    @PostMapping("/encounter/builder/character/add/{id}")
+    @PostMapping("/builder/character/add/{id}")
     public String addCharacterIntoBuilder(@PathVariable long id, @RequestHeader(value = "referer", required = false) String referer){
         encounterService.addCharacter(id);
 
         return getEncounterBuilderRedirect(referer);
     }
 
-    @PostMapping("/encounter/builder/character/remove/{id}")
+    @PostMapping("builder/character/remove/{id}")
     public String removeCharacterFromCart(@PathVariable long id, @RequestHeader(value = "referer", required = false) String referer){
         encounterService.removeCharacterById(id);
 
         return getEncounterBuilderRedirect(referer);
     }
 
-    @PostMapping("/encounter/builder/save")
+    @PostMapping("builder/save")
     public String saveEncounter(){
         encounterService.saveEncounter();
         return "redirect:/encounter/character";
     }
 
-    @GetMapping(value = {"/encounter/character", "/encounter/character/{id}"})
+    @GetMapping(value = {"/character", "/character/{id}"})
     public String showEncounter(@PathVariable(required = false) Long id,Model model){
         if (encounterService.isEncounterEditable()){
             return "redirect:/encounter/builder/character";
@@ -134,13 +135,13 @@ public class EncounterController {
         return "encounter/encounter";
     }
 
-    @GetMapping("/encounter/builder/new")
+    @GetMapping("/builder/new")
     public String newEncounter(){
         encounterService.resetEncounter();
         return "redirect:/encounter/builder";
     }
 
-    @PostMapping("/encounter/character/{id}/hp/update")
+    @PostMapping("/character/{id}/hp/update")
     public String updateHitPoints(@PathVariable long id, short hp){
         encounterService.modifyHitPoints(id,hp);
         return "redirect:/encounter/character/" + id;
