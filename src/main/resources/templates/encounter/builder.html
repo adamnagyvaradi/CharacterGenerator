@@ -55,11 +55,11 @@
                 <select class="form-select" id="characterType" name="characterType">
                   <option value="AllTypes"> All Charactertypes</option>
                   <option th:each="characterType: ${T(com.example.charactergenerator.model.CharacterType).values()}"
-                          th:value="${characterType}" th:text="${characterType.characterType}"
+                          th:value="${characterType}" th:text="${characterType.name}"
                           th:selected="${#lists.contains(param.characterType,characterType.name())}"
                           th:unless="${#lists.isEmpty(param.characterType)}"></option>
                   <option th:each="characterType: ${T(com.example.charactergenerator.model.CharacterType).values()}"
-                          th:value="${characterType}" th:text="${characterType.characterType}"
+                          th:value="${characterType}" th:text="${characterType.name}"
                           th:if="${#lists.isEmpty(param.characterType)}"></option>"
                 </select>
               </div>
@@ -90,7 +90,7 @@
                     <span th:text="${character.challengeRating}"></span> CR
                   </div>
                   <div class="col">
-                    <span th:text="${character.characterType}"></span>
+                    <span th:text="${character.characterType.name}"></span>
                   </div>
                   <div class="col-auto">
                     <form th:action="@{/encounter/builder/character/add/{id}(id=${character.id})}" method="post">

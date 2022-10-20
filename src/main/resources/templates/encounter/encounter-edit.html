@@ -48,7 +48,7 @@
                                 <span th:text="${character.challengeRating}"></span> CR
                             </div>
                             <div class="col">
-                                <span th:text="${character.characterType}"></span>
+                                <span th:text="${character.characterType.name}"></span>
                             </div>
                             <div class="col-auto">
                                 <a th:href="@{/encounter/builder/character/edit/{id}(id=${character.id})}" class="btn btn-dark btn-sm" role="button">
@@ -60,7 +60,6 @@
                              aria-labelledby="headingOne" th:aria-labelledby="${'heading-character-'+ character.id}"
                              data-bs-parent="#character-list">
                             <div class="accordion-body border-top">
-                                <!---ez itt a tartalom helye--->
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="row pb-2">
