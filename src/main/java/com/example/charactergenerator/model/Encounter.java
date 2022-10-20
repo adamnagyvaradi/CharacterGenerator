@@ -8,11 +8,11 @@ public class Encounter {
     private List<Character> characters = new ArrayList<>();
     private boolean editable = true;
 
-    public Encounter(){
+    public Encounter() {
 
     }
 
-    public void addCharacter(Character character){
+    public void addCharacter(Character character) {
         characters.add(character);
     }
 
@@ -28,9 +28,9 @@ public class Encounter {
         this.editable = editable;
     }
 
-    public Character findById(long id){
-        for (Character actualCharacter: characters){
-            if (actualCharacter.getId() == id){
+    public Character findById(long id) {
+        for (Character actualCharacter : characters) {
+            if (actualCharacter.getId() == id) {
                 return actualCharacter;
             }
         }
@@ -38,7 +38,7 @@ public class Encounter {
         throw new IllegalArgumentException("Character not found. Id: " + id);
     }
 
-    public void removeCharacterById(long id){
+    public void removeCharacterById(long id) {
         characters.remove(findById(id));
     }
 

@@ -7,7 +7,7 @@ public enum ArmorType {
 
     private final String name;
 
-    ArmorType(String name){
+    ArmorType(String name) {
         this.name = name;
     }
 
