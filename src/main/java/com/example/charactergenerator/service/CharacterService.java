@@ -46,6 +46,10 @@ public class CharacterService {
 
     public void save(Character character) {characterRepository.save(character);}
 
+    public void saveAll(List<Character> characters){
+        characterRepository.saveAll(characters);
+    }
+
     public void update(Character character, CharacterDto characterDto) {
         character.setName(characterDto.getName());
         character.setAttributeValue(AttributeType.STR, characterDto.getStrength());
