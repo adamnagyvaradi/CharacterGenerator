@@ -202,7 +202,7 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
                 new Character("Sahuagin", 12, 22, "4d8 + 4", "30 ft., swim 40 ft.", 1,
                         13, 11, 12, 12, 13, 9, CharacterType.HUMANOID,
-                        Set.of(SkillType.PERCEPTION)),
+                        Set.of(SkillType.PERCEPTION)).equipMeleeWeapon(getMeleeWeaponByID((10l))),
                 new Character("Salamander", 15, 90, "12d10 + 24", "Speed 30 ft.", 5,
                         18, 14, 15, 11, 10, 12, CharacterType.ELEMENTAL,
                         Set.of()),
@@ -214,7 +214,8 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of()),
                 new Character("Scout", 13, 16, "3d8 + 3", "30 ft.", 1,
                         11, 14, 12, 11, 13, 11, CharacterType.HUMANOID,
-                        Set.of(SkillType.NATURE, SkillType.PERCEPTION, SkillType.STEALTH, SkillType.SURVIVAL)),
+                        Set.of(SkillType.NATURE, SkillType.PERCEPTION, SkillType.STEALTH, SkillType.SURVIVAL))
+                        .equipMeleeWeapon(getMeleeWeaponByID((17l))).equipRangedWeapon(getRangedWeaponByID((3l))),
                 new Character("Sea Hag", 14, 52, "7d8 + 21", "30 ft., swim 40 ft.", 2,
                         16, 13, 16, 12, 12, 13, CharacterType.FEY,
                         Set.of()),
@@ -258,7 +259,8 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
                 new Character("Spy", 12, 27, "6d8", "30ft.", 1 ,
                         10, 15, 10, 12, 14, 16, CharacterType.HUMANOID,
-                        Set.of(SkillType.DECEPTION, SkillType.INSIGHT, SkillType.INVESTIGATION, SkillType.PERCEPTION, SkillType.PERSUASION,SkillType.SLEIGHT_OF_HAND, SkillType.STEALTH)),
+                        Set.of(SkillType.DECEPTION, SkillType.INSIGHT, SkillType.INVESTIGATION, SkillType.PERCEPTION, SkillType.PERSUASION,SkillType.SLEIGHT_OF_HAND, SkillType.STEALTH))
+                        .equipMeleeWeapon(getMeleeWeaponByID((17l))).equipRangedWeapon(getRangedWeaponByID((1l))),
                 new Character("Steam Mephit", 10, 21, "6d6", "30 ft., fly 30ft.", 0,
                         5, 11, 10, 11, 10, 12, CharacterType.ELEMENTAL,
                         Set.of()),
