@@ -52,7 +52,7 @@ public class    CharacterHelper implements ApplicationRunner {
     }
 
     private void saveCharacters(){
-        getCharacters().forEach(character -> characterService.save(character));
+        characterService.saveAll(getCharacters());
     }
 
     private void saveArmors(){
