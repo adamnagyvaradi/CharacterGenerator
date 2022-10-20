@@ -18,6 +18,9 @@ public class EncounterController {
     private static final List<String> CHALLENGE_RATINGS =
             List.of("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15",
                     "16","17","18","19","20","21","22","23","24","25","26","27","28","29","30");
+    private static final String REDIRECT_ENCOUNTER_CHARACTER = "redirect:/encounter/character";
+    private static final String REDIRECT_ENCOUNTER_BUILDER = "redirect:/encounter/builder";
+    private static final String REDIRECT_ENCOUNTER_BUILDER_CHARACTER = REDIRECT_ENCOUNTER_BUILDER + "/character";
     private CharacterService characterService;
     private EncounterService encounterService;
     private ArmorService armorService;
@@ -49,13 +52,13 @@ public class EncounterController {
         this.rangedWeaponService = rangedWeaponService;
     }
 
-    @GetMapping("builder")
+    @GetMapping("/builder")
     public String searchCharacter(Model model,
                                   @RequestParam(required = false, name = "characterName",defaultValue ="") String characterName,
                                   @RequestParam(required = false, name = "characterType") String characterType,
                                   @RequestParam(required = false, name = "challengeRating") Byte challengeRating) {
         if (!encounterService.isEncounterEditable()){
-            return "redirect:/encounter/character";
+            return REDIRECT_ENCOUNTER_CHARACTER;
         }
 
         List<Character> characters = characterService.filterBy(characterName,characterType, challengeRating);
@@ -67,13 +70,13 @@ public class EncounterController {
         return "encounter/builder";
     }
 
-    @GetMapping("builder/character")
+    @GetMapping("/builder/character")
     public String showCharacters(Model model){
         if (encounterService.getAllCharacter().isEmpty()){
-            return "redirect:/encounter/builder";
+            return REDIRECT_ENCOUNTER_BUILDER;
         }
         if (!encounterService.isEncounterEditable()){
-            return "redirect:/encounter/character";
+            return REDIRECT_ENCOUNTER_CHARACTER;
         }
 
         List<Character> characters = encounterService.getAllCharacter();
@@ -83,7 +86,7 @@ public class EncounterController {
         return "encounter/encounter-edit";
     }
 
-    @GetMapping("builder/character/edit/{id}")
+    @GetMapping("/builder/character/edit/{id}")
     public String editCharacter(@PathVariable long id, Model model){
 
         model.addAttribute("character", encounterService.findCharacterById(id));
@@ -96,11 +99,11 @@ public class EncounterController {
         return "encounter/character-edit";
     }
 
-    @PostMapping("character/update")
+    @PostMapping("/character/update")
     public String updateCharacter(CharacterDto characterDto){
         encounterService.updateCharacter(characterDto);
 
-        return "redirect:/encounter/builder/character";
+        return REDIRECT_ENCOUNTER_BUILDER_CHARACTER;
     }
 
     @PostMapping("/builder/character/add/{id}")
@@ -110,23 +113,23 @@ public class EncounterController {
         return getEncounterBuilderRedirect(referer);
     }
 
-    @PostMapping("builder/character/remove/{id}")
+    @PostMapping("/builder/character/remove/{id}")
     public String removeCharacterFromCart(@PathVariable long id, @RequestHeader(value = "referer", required = false) String referer){
         encounterService.removeCharacterById(id);
 
         return getEncounterBuilderRedirect(referer);
     }
 
-    @PostMapping("builder/save")
+    @PostMapping("/builder/save")
     public String saveEncounter(){
         encounterService.saveEncounter();
-        return "redirect:/encounter/character";
+        return REDIRECT_ENCOUNTER_CHARACTER;
     }
 
     @GetMapping(value = {"/character", "/character/{id}"})
     public String showEncounter(@PathVariable(required = false) Long id,Model model){
         if (encounterService.isEncounterEditable()){
-            return "redirect:/encounter/builder/character";
+            return REDIRECT_ENCOUNTER_BUILDER_CHARACTER;
         }
 
         model.addAttribute("characters", encounterService.getAllCharacter());
@@ -138,21 +141,21 @@ public class EncounterController {
     @GetMapping("/builder/new")
     public String newEncounter(){
         encounterService.resetEncounter();
-        return "redirect:/encounter/builder";
+        return REDIRECT_ENCOUNTER_BUILDER;
     }
 
     @PostMapping("/character/{id}/hp/update")
     public String updateHitPoints(@PathVariable long id, short hp){
         encounterService.modifyHitPoints(id,hp);
-        return "redirect:/encounter/character/" + id;
+        return REDIRECT_ENCOUNTER_CHARACTER + "/" + id;
     }
 
     private String getEncounterBuilderRedirect(String url){
         int startIndex = url.indexOf("?");
         if (startIndex == -1){
-            return "redirect:/encounter/builder";
+            return REDIRECT_ENCOUNTER_BUILDER;
         } else{
-            return "redirect:/encounter/builder" + url.substring(startIndex);
+            return REDIRECT_ENCOUNTER_BUILDER + url.substring(startIndex);
         }
     }
 }
