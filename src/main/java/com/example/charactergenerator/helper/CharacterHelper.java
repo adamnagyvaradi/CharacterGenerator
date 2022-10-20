@@ -208,7 +208,7 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of()),
                 new Character("Satyr", 14, 31, "7d8", "40 ft.", 1,
                         12, 16, 11, 12, 10, 14, CharacterType.FEY,
-                        Set.of(SkillType.PERCEPTION, SkillType.PERFORMANCE,SkillType.STEALTH)),
+                        Set.of(SkillType.PERCEPTION, SkillType.PERFORMANCE,SkillType.STEALTH)).equipArmor(getArmorByID((2l))),
                 new Character("Scorpion", 11, 1, "1d4 - 1", "10 ft.", 0,
                         2, 11, 8, 1, 8, 2, CharacterType.BEAST,
                         Set.of()),
@@ -256,7 +256,7 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of()),
                 new Character("Sprite", 15, 2, "1d4", "10 ft., fly 40 ft.", 0,
                         3, 18, 10, 14, 13, 11, CharacterType.FEY,
-                        Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
+                        Set.of(SkillType.PERCEPTION, SkillType.STEALTH)).equipArmor(getArmorByID((2l))),
                 new Character("Spy", 12, 27, "6d8", "30ft.", 1 ,
                         10, 15, 10, 12, 14, 16, CharacterType.HUMANOID,
                         Set.of(SkillType.DECEPTION, SkillType.INSIGHT, SkillType.INVESTIGATION, SkillType.PERCEPTION, SkillType.PERSUASION,SkillType.SLEIGHT_OF_HAND, SkillType.STEALTH))
@@ -275,7 +275,8 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of()),
                 new Character("Storm Giant", 16, 230, "20d12 + 100", "50 ft., swim 50 ft.", 13,
                         29, 14, 20, 16, 18, 18, CharacterType.GIANT,
-                        Set.of(SkillType.ARCANA, SkillType.ATHLETICS, SkillType.HISTORY, SkillType.PERCEPTION)),
+                        Set.of(SkillType.ARCANA, SkillType.ATHLETICS, SkillType.HISTORY, SkillType.PERCEPTION))
+                        .equipArmor(getArmorByID((6l))),
                 new Character("Succubus", 15, 66, "12d8 + 12", "30 ft., fly 60 ft.", 4,
                         8, 17, 13, 15, 12, 20, CharacterType.FIEND,
                         Set.of(SkillType.DECEPTION, SkillType.INSIGHT,SkillType.PERCEPTION, SkillType.PERSUASION, SkillType.STEALTH)),
