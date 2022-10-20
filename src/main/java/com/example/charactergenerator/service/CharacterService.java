@@ -6,6 +6,7 @@ import com.example.charactergenerator.model.Character;
 import com.example.charactergenerator.model.CharacterType;
 import com.example.charactergenerator.repository.CharacterRepository;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -24,6 +25,7 @@ public class CharacterService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
     public CharacterService(CharacterRepository characterRepository) {
         this.characterRepository= characterRepository;
     }

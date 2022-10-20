@@ -1,6 +1,7 @@
 package com.example.charactergenerator.service;
 
 import com.example.charactergenerator.dto.RollDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,6 +9,7 @@ public class RollService {
 
     private final RandomService randomService;
 
+    @Autowired
     public RollService(RandomService diceService) {
         this.randomService = diceService;
     }

@@ -2,6 +2,7 @@ package com.example.charactergenerator.service;
 
 import com.example.charactergenerator.model.RangedWeapon;
 import com.example.charactergenerator.repository.RangedWeaponRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class RangedWeaponService {
 
     private RangedWeaponRepository rangedWeaponRepository;
 
+    @Autowired
     public RangedWeaponService(RangedWeaponRepository rangedWeaponRepository){
         this.rangedWeaponRepository = rangedWeaponRepository;
     }

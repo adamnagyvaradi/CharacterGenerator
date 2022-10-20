@@ -18,14 +18,10 @@ public class ArmorService {
 
     private ArmorRepository armorRepository;
 
+    @Autowired
     public ArmorService(ArmorRepository armorRepository) {
         this.armorRepository = armorRepository;
     }
-
-    /*@Autowired
-    public void setArmorRepository(ArmorRepository armorRepository) {
-        this.armorRepository = armorRepository;
-    }*/
 
     public void saveAll(List<Armor> armors) {
         armorRepository.saveAll(armors);

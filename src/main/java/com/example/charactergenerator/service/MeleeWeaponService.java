@@ -12,14 +12,10 @@ public class MeleeWeaponService {
 
     private MeleeWeaponRepository meleeWeaponRepository;
 
+    @Autowired
     public MeleeWeaponService(MeleeWeaponRepository meleeWeaponRepository) {
         this.meleeWeaponRepository = meleeWeaponRepository;
     }
-
-    /*@Autowired
-    public void setMeleeWeaponRepository(MeleeWeaponRepository meleeWeaponRepository){
-        this.meleeWeaponRepository = meleeWeaponRepository;
-    }*/
 
     public void saveAll(List<MeleeWeapon> meleeWeapons) {
         meleeWeaponRepository.saveAll(meleeWeapons);

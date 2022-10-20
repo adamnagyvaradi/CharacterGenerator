@@ -8,7 +8,7 @@ public enum AttributeType {
     WIS("Wisdom"),
     CHA("Charisma");
 
-    private String name;
+    private final String name;
 
     AttributeType(String name) {
         this.name = name;

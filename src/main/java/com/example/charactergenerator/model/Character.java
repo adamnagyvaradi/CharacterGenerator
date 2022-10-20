@@ -192,7 +192,6 @@ public class Character {
 
     public void setCasterLevel(Integer casterLevel) {
         this.casterLevel = casterLevel;
-        assignSlots(casterLevel);
     }
     public Armor getArmor() {
         return armor;
@@ -246,7 +245,7 @@ public class Character {
         return skills;
     }
 
-    public com.example.charactergenerator.model.CharacterType getCharacterType() {
+    public CharacterType getCharacterType() {
         return characterType;
     }
 
@@ -281,6 +280,7 @@ public class Character {
     public void setProficiency(Set<SkillType> proficiencies) {
         this.proficiencies = proficiencies;
     }
+
     public void assignSlots(Integer casterLevel) {
         if (casterLevel != null && casterLevel > 0 && casterLevel <= 20) {
             switch (casterLevel) {
