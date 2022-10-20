@@ -18,16 +18,16 @@ public enum CharacterType {
     PLANT("Plant"),
     UNDEAD("Undead");
 
-    private String characterType;
+    private String name;
 
-    CharacterType (String characterType){this.characterType= characterType;}
+    CharacterType (String name){this.name = name;}
 
-    public String getCharacterType() {
-        return characterType;
+    public String getName() {
+        return name;
     }
 
-    public void setCharacterType(String characterType) {
-        this.characterType = characterType;
+    public void setName(String name) {
+        this.name = name;
     }
 
   }
