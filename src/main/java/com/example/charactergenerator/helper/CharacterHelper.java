@@ -345,8 +345,11 @@ public class    CharacterHelper implements ApplicationRunner {
                         Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
                 new Character("Vampire Spawn", 15, 82, "11d8 + 33", "30 ft.", 5,
                         16, 16, 16, 11, 10, 12, CharacterType.UNDEAD,
-                        Set.of(SkillType.PERCEPTION, SkillType.STEALTH))
-
+                        Set.of(SkillType.PERCEPTION, SkillType.STEALTH)),
+                new Character("Veteran", 17, 58, "9d8 + 18", "30 ft.", 3,
+                        16, 13, 14, 10, 11, 10, CharacterType.HUMANOID,
+                        Set.of(SkillType.ATHLETICS, SkillType.PERCEPTION)).equipArmor(getArmorByID((11l))).equipRangedWeapon(getRangedWeaponByID((7l)))
+                        .equipMeleeWeapon((getMeleeWeaponByID(((14l)))))
 
 
         ));
